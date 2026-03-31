@@ -1,55 +1,39 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0057)file:///C:/Users/nk0712/Downloads/enkou_app_latest_1.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>遠興 営業支援</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="./enkou_app_files/css2" rel="stylesheet">
 <style>
 :root {
   --bg:#f0ece4; --surface:#fff; --s2:#f5f2ed; --s3:#edeae3;
   --border:#e0dbd0; --border2:#ccc8be;
   --text:#1c1a16; --text2:#6b6760; --text3:#a8a49d;
   --gold:#f0ce6a;
-  --q1c:#c0392b; --q1bg:#fff1f0; --q1s:#fde0de;
-  --q2c:#b07010; --q2bg:#fffbee; --q2s:#fef3cc;
-  --q3c:#1a5fa0; --q3bg:#f0f7ff; --q3s:#d8ecff;
-  --q4c:#7f8c8d; --q4bg:#f4f4f4; --q4s:#e8e8e8;
   --blue:#1d5fa8; --bluebg:#e8f2fb;
   --green:#1a7a4a; --greenbg:#e4f5ed;
   --purple:#6b3fb5; --purplebg:#f0e8fb;
   --amber:#b07010; --amberbg:#fdf4e0;
+  --red:#c0392b; --redbg:#fff1f0; --reds:#fde0de;
   --sh:0 1px 4px rgba(0,0,0,.07),0 4px 14px rgba(0,0,0,.05);
   --sh2:0 3px 10px rgba(0,0,0,.1),0 8px 28px rgba(0,0,0,.08);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
-
-/* ── HEADER ── */
 header{background:var(--text);color:#fff;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;position:sticky;top:0;z-index:200;}
 .logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.12em;color:var(--gold);}
 .logo-sub{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.06em;margin-left:8px;}
-.h-right{display:flex;align-items:center;gap:8px;}
-.sync-btn{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:background .15s;}
-.sync-btn:hover{background:rgba(255,255,255,.25);}
-.auth-dot{width:8px;height:8px;border-radius:50%;background:#555;flex-shrink:0;}
-.auth-dot.ok{background:#2ecc71;}
-.auth-dot.ng{background:#e74c3c;}
-
-/* ── TABS ── */
+.hbtn{background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;}
 .tab-bar{background:var(--surface);border-bottom:1px solid var(--border);display:flex;flex-shrink:0;}
-.tab-btn{flex:1;padding:10px 4px;font-size:12px;font-weight:700;border:none;background:none;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;font-family:'Noto Sans JP',sans-serif;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.tab-btn{flex:1;padding:10px 4px;font-size:11px;font-weight:700;border:none;background:none;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;font-family:'Noto Sans JP',sans-serif;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:2px;}
 .tab-btn .ti{font-size:16px;}
 .tab-btn.active{color:var(--text);border-bottom-color:var(--text);}
 .tab-btn .badge{font-size:9px;background:#e74c3c;color:#fff;border-radius:8px;padding:1px 5px;font-weight:700;}
-
-/* ── PAGES ── */
-.page{display:none;flex:1;overflow-y:auto;flex-direction:column;}
+.page{display:none;flex:1;flex-direction:column;overflow:hidden;}
 .page.active{display:flex;}
 
-/* ════════════════════════════
-   TASK PAGE
-════════════════════════════ */
+/* TASK */
 .capture-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 12px;flex-shrink:0;}
 .capture-label{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.08em;margin-bottom:7px;}
 .src-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
@@ -63,74 +47,96 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .sb.ins{background:var(--amberbg);border-color:rgba(176,112,16,.2);}.sb.ins .sn{color:var(--amber);}
 .sb.self{background:var(--s3);border-color:rgba(107,103,96,.2);}.sb.self .sn{color:var(--text2);}
 
-.board{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:8px;flex:1;min-height:0;}
-.quad{border-radius:12px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh);}
-.quad.q1{background:var(--q1bg);}.quad.q2{background:var(--q2bg);}.quad.q3{background:var(--q3bg);}.quad.q4{background:var(--q4bg);}
-.qh{padding:8px 10px 5px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.qhl{display:flex;align-items:center;gap:5px;}
-.qdot{width:7px;height:7px;border-radius:50%;}
-.q1 .qdot{background:var(--q1c);}.q2 .qdot{background:var(--q2c);}.q3 .qdot{background:var(--q3c);}.q4 .qdot{background:var(--q4c);}
-.qname{font-size:11px;font-weight:700;}
-.q1 .qname{color:var(--q1c);}.q2 .qname{color:var(--q2c);}.q3 .qname{color:var(--q3c);}.q4 .qname{color:var(--q4c);}
-.qsub{font-size:8px;opacity:.65;margin-top:1px;}
-.q1 .qsub{color:var(--q1c);}.q2 .qsub{color:var(--q2c);}.q3 .qsub{color:var(--q3c);}.q4 .qsub{color:var(--q4c);}
-.qcnt{font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;background:rgba(0,0,0,.07);}
-.q1 .qcnt{color:var(--q1c);}.q2 .qcnt{color:var(--q2c);}.q3 .qcnt{color:var(--q3c);}.q4 .qcnt{color:var(--q4c);}
-.qbody{flex:1;overflow-y:auto;padding:0 6px 8px;display:flex;flex-direction:column;gap:4px;scrollbar-width:thin;}
-
-.tcard{background:var(--surface);border-radius:8px;padding:7px 8px;cursor:pointer;border:1px solid transparent;box-shadow:0 1px 3px rgba(0,0,0,.05);transition:box-shadow .15s,transform .12s;}
-.tcard:hover{box-shadow:var(--sh2);transform:translateY(-1px);border-color:var(--border);}
+/* KANBAN */
+.kanban-wrap{flex:1;overflow-x:auto;padding:10px;display:flex;gap:8px;min-height:0;}
+.kanban-col{flex-shrink:0;width:210px;display:flex;flex-direction:column;border-radius:12px;overflow:hidden;box-shadow:var(--sh);}
+.kcol-todo    {background:#fff8f6;}
+.kcol-doing   {background:#f0f7ff;}
+.kcol-maker   {background:#fffdf0;}
+.kcol-customer{background:#f0fff8;}
+.khead{padding:9px 11px 7px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.khead-left{display:flex;align-items:center;gap:6px;}
+.kdot{width:8px;height:8px;border-radius:50%;}
+.kcol-todo     .kdot{background:#e74c3c;}
+.kcol-doing    .kdot{background:#1d5fa8;}
+.kcol-maker    .kdot{background:#b07010;}
+.kcol-customer .kdot{background:#1a7a4a;}
+.kname{font-size:11px;font-weight:700;line-height:1.2;}
+.kcol-todo     .kname{color:#c0392b;}
+.kcol-doing    .kname{color:#1d5fa8;}
+.kcol-maker    .kname{color:#b07010;}
+.kcol-customer .kname{color:#1a7a4a;}
+.kcnt{font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;background:rgba(0,0,0,.07);}
+.kcol-todo     .kcnt{color:#c0392b;}
+.kcol-doing    .kcnt{color:#1d5fa8;}
+.kcol-maker    .kcnt{color:#b07010;}
+.kcol-customer .kcnt{color:#1a7a4a;}
+.kbody{flex:1;overflow-y:auto;padding:0 7px 10px;display:flex;flex-direction:column;gap:6px;scrollbar-width:thin;}
+.kempty{text-align:center;padding:16px;font-size:11px;color:var(--text3);border:1.5px dashed var(--border2);border-radius:8px;}
+.more-btn{width:100%;padding:7px;border-radius:8px;border:1.5px dashed var(--border2);background:transparent;font-size:11px;font-weight:700;color:var(--text2);cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:all .15s;margin-top:2px;}
+.more-btn:hover{background:var(--s2);border-color:var(--border2);}
+.done-toggle{width:100%;padding:7px 10px;border-radius:8px;border:1px solid var(--border);background:var(--s2);font-size:11px;font-weight:700;color:var(--text3);cursor:pointer;font-family:'Noto Sans JP',sans-serif;display:flex;align-items:center;justify-content:space-between;margin-top:6px;}
+.done-toggle:hover{background:var(--s3);}
+.done-section{display:none;margin-top:4px;padding-top:4px;border-top:1px dashed var(--border);}
+.done-section.open{display:flex;flex-direction:column;gap:6px;}
 .tcard.done{opacity:.45;}
 .tcard.done .tct{text-decoration:line-through;color:var(--text2);}
-.tr1{display:flex;align-items:flex-start;gap:5px;margin-bottom:4px;}
+.tcard[draggable="true"]{cursor:grab;}
+.tcard[draggable="true"]:active{cursor:grabbing;}
+.tcard.dragging{opacity:.4;transform:scale(.97);}
+.kanban-col.drag-over .kbody{background:rgba(0,0,0,.04);border-radius:8px;}
+
+/* TASK CARD */
+.tcard{background:var(--surface);border-radius:8px;padding:9px 10px;cursor:pointer;border:1px solid transparent;box-shadow:0 1px 3px rgba(0,0,0,.05);transition:all .15s;}
+.tcard:hover{box-shadow:var(--sh2);transform:translateY(-1px);border-color:var(--border);}
+.tcard.done{opacity:.4;}
+.tcard.done .tct{text-decoration:line-through;color:var(--text2);}
+.tr1{display:flex;align-items:flex-start;gap:6px;margin-bottom:5px;}
 .tbadge{font-size:12px;flex-shrink:0;margin-top:1px;width:16px;text-align:center;}
-.tct{font-size:11px;font-weight:500;line-height:1.4;flex:1;}
-.tchk{width:15px;height:15px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.tct{font-size:12px;font-weight:500;line-height:1.4;flex:1;}
+.tchk{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
 .tchk:hover{border-color:#2ecc71;}
 .tcard.done .tchk{background:#2ecc71;border-color:#2ecc71;}
-.chki{display:none;}
-.tcard.done .chki{display:block;}
-.tr2{display:flex;align-items:center;gap:3px;flex-wrap:wrap;}
+.chki{display:none;}.tcard.done .chki{display:block;}
+.tr2{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
 .ctag{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;}
 .ctag-tel{background:var(--bluebg);color:var(--blue);}
 .ctag-mail{background:var(--purplebg);color:var(--purple);}
 .ctag-visit{background:var(--greenbg);color:var(--green);}
 .ctag-ins{background:var(--amberbg);color:var(--amber);}
 .ctag-self{background:var(--s3);color:var(--text2);}
+.ccust{font-size:9px;color:var(--text3);background:rgba(0,0,0,.05);padding:1px 5px;border-radius:3px;}
 .cdue{font-size:9px;font-weight:700;padding:1px 5px;border-radius:6px;margin-left:auto;background:var(--s2);color:var(--text3);}
-.cdue.ov{background:var(--q1s);color:var(--q1c);}
-.cdue.td{background:var(--q2s);color:var(--q2c);}
-.spb{display:flex;align-items:center;gap:5px;margin-top:3px;}
+.cdue.ov{background:var(--reds);color:var(--red);}
+.cdue.td{background:var(--amberbg);color:var(--amber);}
+.spb{display:flex;align-items:center;gap:5px;margin-top:4px;}
 .spbw{flex:1;height:2px;background:var(--border);border-radius:1px;overflow:hidden;}
 .spbf{height:100%;border-radius:1px;background:#2ecc71;transition:width .3s;}
-.spbf.pt{background:var(--q2c);}
+.spbf.pt{background:var(--amber);}
 .spbc{font-size:9px;font-weight:700;color:var(--text3);}
 .spbc.al{color:#2ecc71;}
-.qempty{text-align:center;padding:12px;font-size:11px;color:var(--text3);border:1.5px dashed var(--border2);border-radius:8px;}
+.status-move{display:flex;gap:3px;margin-top:6px;flex-wrap:wrap;}
+.smv{font-size:9px;font-weight:700;padding:3px 5px;border-radius:5px;border:1px solid var(--border);cursor:pointer;font-family:'Noto Sans JP',sans-serif;background:var(--s2);color:var(--text2);transition:all .15s;}
+.smv:hover{opacity:.8;}
+.smv.active-st{opacity:.35;cursor:default;pointer-events:none;}
 
-/* ════════════════════════════
-   SCHEDULE PAGE
-════════════════════════════ */
-.sched-page{padding:0;flex:1;display:flex;flex-direction:column;overflow:hidden;}
+/* SCHEDULE */
+.sched-page{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 .week-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .week-label{font-size:13px;font-weight:700;}
-.nav-btns{display:flex;gap:6px;}
 .nav-btn{background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-weight:700;}
-.nav-btn:hover{background:var(--s3);}
 .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);flex-shrink:0;}
-.wday{background:var(--surface);padding:6px 4px;}
+.wday{background:var(--surface);padding:6px 4px;cursor:pointer;}
 .wday-name{font-size:9px;font-weight:700;text-align:center;color:var(--text3);margin-bottom:2px;}
 .wday-num{font-size:14px;font-weight:700;text-align:center;margin-bottom:4px;}
 .wday.today .wday-num{color:var(--blue);}
-.wday.today .wday-circle{background:var(--blue);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;}
+.wday-circle{background:var(--blue);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;font-size:13px;font-weight:700;}
 .wday-events{display:flex;flex-direction:column;gap:2px;}
-.wday-evt{font-size:9px;padding:1px 4px;border-radius:3px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
-.wday-evt.gcal{background:var(--bluebg);color:var(--blue);}
-.wday-evt.task{background:var(--q1s);color:var(--q1c);}
+.wday-evt{font-size:9px;padding:1px 4px;border-radius:3px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .wday-evt.visit{background:var(--greenbg);color:var(--green);}
 .wday-evt.tel{background:var(--purplebg);color:var(--purple);}
+.wday-evt.gcal{background:var(--bluebg);color:var(--blue);}
 .wday-evt.more{background:var(--s3);color:var(--text2);}
-
 .day-detail{flex:1;overflow-y:auto;padding:12px;}
 .day-detail-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text2);}
 .apo-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
@@ -143,28 +149,21 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .add-apo-btn{background:var(--text);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;width:100%;margin-bottom:10px;}
 .todo-day-list{display:flex;flex-direction:column;gap:5px;}
 .todo-item{display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:7px;padding:8px 10px;border:1px solid var(--border);}
-.todo-chk{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.todo-item.done-t .todo-chk{background:#2ecc71;border-color:#2ecc71;}
-.todo-item.done-t .todo-txt{text-decoration:line-through;color:var(--text2);}
 .todo-txt{flex:1;font-size:12px;}
-.gcal-badge{font-size:9px;background:var(--bluebg);color:var(--blue);padding:1px 5px;border-radius:3px;font-weight:700;}
+.todo-st{font-size:9px;padding:1px 5px;border-radius:4px;}
 
-/* ════════════════════════════
-   MAIL PAGE
-════════════════════════════ */
+/* MAIL */
 .mail-toolbar{background:var(--surface);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .mail-filter{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none;}
 .mf-btn{flex-shrink:0;padding:4px 10px;border-radius:16px;font-size:11px;font-weight:700;border:1px solid var(--border);background:transparent;cursor:pointer;color:var(--text2);font-family:'Noto Sans JP',sans-serif;}
 .mf-btn.on{background:var(--text);color:#fff;border-color:var(--text);}
-.mail-refresh{background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;white-space:nowrap;}
 .mail-list{flex:1;overflow-y:auto;padding:8px;}
-.mail-card{background:var(--surface);border-radius:10px;padding:11px 12px;margin-bottom:7px;box-shadow:var(--sh);cursor:pointer;border:1px solid transparent;border-left:3px solid transparent;transition:all .15s;}
-.mail-card:hover{box-shadow:var(--sh2);border-color:var(--border);}
+.mail-card{background:var(--surface);border-radius:10px;padding:11px 12px;margin-bottom:7px;box-shadow:var(--sh);cursor:pointer;border:1px solid transparent;border-left:3px solid var(--border2);transition:all .15s;}
+.mail-card:hover{box-shadow:var(--sh2);}
 .mail-card.unread{border-left-color:var(--blue);}
-.mail-card.cat-task{border-left-color:var(--q1c);}
+.mail-card.cat-task{border-left-color:var(--red);}
 .mail-card.cat-apo{border-left-color:var(--green);}
 .mail-card.cat-info{border-left-color:var(--amber);}
-.mail-card.cat-other{border-left-color:var(--border2);}
 .mc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px;}
 .mc-from{font-size:12px;font-weight:700;flex:1;}
 .mc-time{font-size:10px;color:var(--text3);white-space:nowrap;}
@@ -172,26 +171,81 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .mc-snippet{font-size:11px;color:var(--text2);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .mc-tags{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap;}
 .mc-tag{font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;}
-.mc-tag.tsk{background:var(--q1s);color:var(--q1c);}
+.mc-tag.tsk{background:var(--reds);color:var(--red);}
 .mc-tag.apo{background:var(--greenbg);color:var(--green);}
 .mc-tag.inf{background:var(--amberbg);color:var(--amber);}
 .mc-tag.oth{background:var(--s3);color:var(--text2);}
 .mc-tag.unr{background:var(--bluebg);color:var(--blue);}
 .mc-actions{display:flex;gap:4px;margin-top:7px;}
-.mc-act{flex:1;padding:5px;border-radius:6px;border:none;font-size:10px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:opacity .15s;}
-.mc-act:hover{opacity:.8;}
-.mc-act.a-task{background:var(--q1s);color:var(--q1c);}
+.mc-act{flex:1;padding:5px;border-radius:6px;border:none;font-size:10px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;}
+.mc-act.a-task{background:var(--reds);color:var(--red);}
 .mc-act.a-apo{background:var(--greenbg);color:var(--green);}
 .mc-act.a-read{background:var(--s2);color:var(--text2);}
-.mail-loading{text-align:center;padding:40px;color:var(--text3);font-size:13px;}
 .mail-empty{text-align:center;padding:48px 20px;color:var(--text3);}
-.mail-empty-icon{font-size:36px;margin-bottom:10px;}
 .mail-empty p{font-size:13px;line-height:1.7;margin-bottom:16px;}
 .mail-empty button{background:var(--text);color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;}
-.mc-cat-btn{padding:6px 4px;border-radius:7px;border:1.5px solid var(--border);background:var(--s2);font-size:10px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;color:var(--text2);transition:all .15s;}
+.mc-cat-btn{padding:6px 4px;border-radius:7px;border:1.5px solid var(--border);background:var(--s2);font-size:10px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;color:var(--text2);}
 .mc-cat-btn.on{border-color:var(--text);background:var(--text);color:#fff;}
 
-/* ── OVERLAYS ── */
+/* DEV */
+.dev-header{background:var(--text);padding:14px 16px;flex-shrink:0;}
+.dev-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.dev-title{font-size:15px;font-weight:700;color:#fff;}
+.dev-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px;}
+.dev-add-btn{background:var(--gold);color:var(--text);border:none;border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;}
+.dev-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.dev-stat{background:rgba(255,255,255,.1);border-radius:8px;padding:8px;text-align:center;}
+.dev-stat-num{font-size:18px;font-weight:700;color:#fff;line-height:1;}
+.dev-stat-num.done-c{color:#2ecc71;}
+.dev-stat-label{font-size:9px;color:rgba(255,255,255,.5);margin-top:3px;}
+.dev-filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;gap:6px;flex-shrink:0;}
+.dev-filter{padding:4px 12px;border-radius:16px;font-size:11px;font-weight:700;border:1px solid var(--border);background:transparent;cursor:pointer;color:var(--text2);font-family:'Noto Sans JP',sans-serif;}
+.dev-filter.on{background:var(--text);color:#fff;border-color:var(--text);}
+.dev-list{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:8px;}
+.dev-card{background:var(--surface);border-radius:10px;box-shadow:var(--sh);overflow:hidden;border:1px solid transparent;transition:border-color .15s;}
+.dev-card:hover{border-color:var(--border);}
+.dev-card.dev-done{opacity:.55;}
+.dev-card-head{padding:11px 12px;display:flex;align-items:flex-start;gap:9px;}
+.dev-card-chk{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.dev-card-chk:hover{border-color:#2ecc71;}
+.dev-card.dev-done .dev-card-chk{background:#2ecc71;border-color:#2ecc71;}
+.dev-chki{display:none;}.dev-card.dev-done .dev-chki{display:block;}
+.dev-card-body{flex:1;}
+.dev-card-title{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:4px;}
+.dev-card.dev-done .dev-card-title{text-decoration:line-through;color:var(--text2);}
+.dev-card-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.dev-priority{font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;}
+.dev-p-now{background:var(--reds);color:var(--red);}
+.dev-p-plan{background:var(--amberbg);color:var(--amber);}
+.dev-p-later{background:var(--s3);color:var(--text2);}
+.dev-due{font-size:9px;color:var(--text3);}
+.dev-due.ov{color:var(--red);font-weight:700;}
+.dev-due.td{color:var(--amber);font-weight:700;}
+.dev-memo{font-size:11px;color:var(--text2);line-height:1.5;margin-top:4px;}
+.dev-expand-btn{font-size:11px;color:var(--text3);cursor:pointer;border:none;background:none;padding:0;margin-left:auto;flex-shrink:0;}
+.dev-subs{border-top:1px solid var(--border);padding:8px 12px 10px 39px;display:flex;flex-direction:column;gap:5px;background:var(--s2);}
+.dev-sub-item{display:flex;align-items:center;gap:7px;}
+.dev-sub-chk{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.dev-sub-item.sdone .dev-sub-chk{background:#2ecc71;border-color:#2ecc71;}
+.dev-sub-chki{display:none;}.dev-sub-item.sdone .dev-sub-chki{display:block;}
+.dev-sub-txt{font-size:12px;color:var(--text);}
+.dev-sub-item.sdone .dev-sub-txt{text-decoration:line-through;color:var(--text2);}
+.dev-sub-add{display:flex;gap:5px;margin-top:4px;}
+.dev-sub-add input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 9px;font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--text);outline:none;}
+.dev-sub-add button{background:var(--text);color:#fff;border:none;border-radius:6px;padding:0 10px;font-size:13px;cursor:pointer;}
+.dev-progress{height:3px;background:var(--border);margin:0 12px 8px;}
+.dev-progress-fill{height:100%;background:#2ecc71;border-radius:1px;transition:width .3s;}
+.dev-progress-fill.partial{background:var(--amber);}
+.dev-empty{text-align:center;padding:40px 20px;color:var(--text3);font-size:13px;}
+
+/* SETTINGS */
+.settings-page{padding:16px;flex:1;overflow-y:auto;}
+.settings-section{background:var(--surface);border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:var(--sh);}
+.settings-title{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:10px;}
+.status-ok{color:var(--green);font-weight:700;}
+.status-ng{color:var(--red);font-weight:700;}
+
+/* OVERLAYS */
 .overlay{display:none;position:fixed;inset:0;background:rgba(20,18,14,.55);backdrop-filter:blur(3px);z-index:300;align-items:flex-end;justify-content:center;}
 .overlay.open{display:flex;}
 .sheet{background:var(--surface);border-radius:18px 18px 0 0;width:100%;max-width:520px;padding:18px 18px 44px;animation:up .2s ease;max-height:92vh;overflow-y:auto;}
@@ -204,14 +258,10 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .finp::placeholder{color:var(--text3);}
 .frow2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
 .frow2 .finp{margin-bottom:0;}
-.qsel-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
-.qsel{padding:8px;border-radius:8px;border:1.5px solid var(--border);background:var(--s2);cursor:pointer;text-align:center;font-family:'Noto Sans JP',sans-serif;transition:all .15s;}
-.qsel .qn{font-size:11px;font-weight:700;display:block;}
-.qsel .qs{font-size:9px;color:var(--text3);display:block;margin-top:1px;}
-.qsel.on.q1{background:var(--q1s);border-color:var(--q1c);}.qsel.on.q1 .qn{color:var(--q1c);}
-.qsel.on.q2{background:var(--q2s);border-color:var(--q2c);}.qsel.on.q2 .qn{color:var(--q2c);}
-.qsel.on.q3{background:var(--q3s);border-color:var(--q3c);}.qsel.on.q3 .qn{color:var(--q3c);}
-.qsel.on.q4{background:var(--q4s);border-color:var(--q4c);}.qsel.on.q4 .qn{color:var(--q4c);}
+.st-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
+.stsel{padding:9px 8px;border-radius:8px;border:1.5px solid var(--border);background:var(--s2);cursor:pointer;text-align:center;font-family:'Noto Sans JP',sans-serif;transition:all .15s;}
+.stsel .stn{font-size:11px;font-weight:700;display:block;}
+.stsel.on{border-color:var(--blue);background:var(--bluebg);}.stsel.on .stn{color:var(--blue);}
 .sub-row{display:flex;gap:6px;margin-bottom:6px;}
 .sub-fi{flex:1;background:var(--s2);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--text);outline:none;}
 .sub-fi::placeholder{color:var(--text3);}
@@ -220,23 +270,20 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .sub-fi-item{display:flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 9px;}
 .sub-fi-item span{flex:1;font-size:12px;}
 .sub-del{font-size:15px;color:var(--text3);cursor:pointer;border:none;background:none;}
-.btn-row{display:flex;gap:7px;margin-top:6px;}
+.btn-row{display:flex;gap:7px;margin-top:8px;}
 .btn{flex:1;padding:10px;border-radius:8px;border:none;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;}
 .btn:hover{opacity:.88;}
 .btn-p{background:var(--text);color:#fff;}
 .btn-g{background:var(--s2);color:var(--text2);border:1px solid var(--border);}
-.btn-d{background:var(--q1s);color:var(--q1c);border:1px solid #f5c5c2;}
-
-/* 詳細共通 */
+.btn-d{background:var(--reds);color:var(--red);border:1px solid #f5c5c2;}
 .dbadge{display:inline-block;padding:2px 10px;border-radius:6px;font-size:11px;font-weight:700;margin-bottom:10px;}
 .drow{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
 .drow:last-of-type{border-bottom:none;}
-.dkey{font-size:10px;font-weight:700;color:var(--text3);width:64px;flex-shrink:0;padding-top:1px;}
+.dkey{font-size:10px;font-weight:700;color:var(--text3);width:72px;flex-shrink:0;padding-top:1px;}
 .dval{color:var(--text);line-height:1.5;flex:1;}
 .sub-det-list{display:flex;flex-direction:column;gap:4px;margin:8px 0;}
 .sdi{display:flex;align-items:center;gap:7px;background:var(--s2);border-radius:7px;padding:7px 9px;border:1px solid var(--border);}
-.sdi.dsd{opacity:.5;}
-.sdi.dsd .sdit{text-decoration:line-through;color:var(--text2);}
+.sdi.dsd{opacity:.5;}.sdi.dsd .sdit{text-decoration:line-through;color:var(--text2);}
 .sdc{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;}
 .sdi.dsd .sdc{background:#2ecc71;border-color:#2ecc71;}
 .sdci{display:none;}.sdi.dsd .sdci{display:block;}
@@ -245,217 +292,294 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .sub-add-row{display:flex;gap:6px;}
 .sub-add-row input{flex:1;background:var(--s2);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Noto Sans JP',sans-serif;font-size:12px;color:var(--text);outline:none;}
 .sub-add-row button{background:var(--text);color:#fff;border:none;border-radius:7px;padding:0 13px;font-size:14px;cursor:pointer;}
-.move-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:8px 0;}
-.mv-btn{padding:6px;border-radius:6px;border:1px solid var(--border);background:var(--s2);font-size:10px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;color:var(--text2);}
-
-/* メール詳細 */
-.mail-detail-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px;}
-.mail-detail-subj{font-size:15px;font-weight:700;flex:1;line-height:1.4;}
-.mail-detail-meta{font-size:11px;color:var(--text2);margin-bottom:10px;line-height:1.6;}
-.mail-detail-body{font-size:13px;line-height:1.7;color:var(--text);background:var(--s2);border-radius:8px;padding:12px;margin-bottom:12px;white-space:pre-wrap;max-height:260px;overflow-y:auto;}
+.move-st-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:8px 0;}
+.mv-btn{padding:8px;border-radius:7px;border:1px solid var(--border);background:var(--s2);font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;color:var(--text2);}
+.mv-btn.cur{opacity:.4;cursor:default;}
+.mail-det-subj{font-size:15px;font-weight:700;margin-bottom:12px;line-height:1.4;}
+.mail-det-meta{font-size:11px;color:var(--text2);margin-bottom:10px;line-height:1.6;}
+.mail-det-body{font-size:13px;line-height:1.7;color:var(--text);background:var(--s2);border-radius:8px;padding:12px;margin-bottom:12px;white-space:pre-wrap;max-height:260px;overflow-y:auto;}
 .mail-ai-tag{display:flex;align-items:center;gap:6px;background:var(--purplebg);border-radius:8px;padding:8px 10px;margin-bottom:10px;}
 .mail-ai-tag span{font-size:12px;color:var(--purple);}
-
-/* アポ登録 */
-.step-hd{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-.step-icon{font-size:24px;}
-
-/* 設定 */
-.settings-page{padding:16px;flex:1;overflow-y:auto;}
-.settings-section{background:var(--surface);border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:var(--sh);}
-.settings-title{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:10px;}
-.settings-status{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:8px;}
-.status-ok{color:var(--green);font-weight:700;}
-.status-ng{color:var(--q1c);font-weight:700;}
-
-@media(max-width:480px){.sb .si{font-size:15px;}.sb .sn{font-size:8px;}}
-
-/* ── AI秘書 ── */
-.ai-hero{background:var(--text);color:#fff;padding:20px 18px 16px;flex-shrink:0;}
-.ai-date{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.07em;margin-bottom:4px;}
-.ai-greeting{font-size:17px;font-weight:700;margin-bottom:2px;line-height:1.4;}
-.ai-sub{font-size:12px;color:rgba(255,255,255,.5);}
-.ai-gen-btn{margin:14px 14px 0;background:var(--gold);color:var(--text);border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;width:calc(100% - 28px);transition:opacity .15s;}
-.ai-gen-btn:hover{opacity:.88;}
-.ai-gen-btn:disabled{opacity:.5;cursor:not-allowed;}
-.ai-body{padding:14px;}
-.ai-section{margin-bottom:16px;}
-.ai-section-title{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.1em;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.ai-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
-.ai-briefing-box{background:var(--surface);border-radius:10px;padding:14px;box-shadow:var(--sh);border-left:3px solid var(--gold);}
-.ai-briefing-text{font-size:13px;line-height:1.8;color:var(--text);white-space:pre-wrap;}
-.ai-thinking{display:flex;align-items:center;gap:10px;padding:14px;color:var(--text2);font-size:13px;}
-.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--text3);animation:pulse 1s ease-in-out infinite;}
-.ai-dot:nth-child(2){animation-delay:.2s;}
-.ai-dot:nth-child(3){animation-delay:.4s;}
-@keyframes pulse{0%,100%{opacity:.3;transform:scale(.8);}50%{opacity:1;transform:scale(1.1);}}
-.ai-action-card{background:var(--surface);border-radius:10px;padding:11px 12px;box-shadow:var(--sh);display:flex;align-items:flex-start;gap:10px;cursor:pointer;border:1px solid transparent;transition:all .15s;}
-.ai-action-card:hover{border-color:var(--border);box-shadow:var(--sh2);}
-.ai-action-num{width:22px;height:22px;border-radius:50%;background:var(--text);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.ai-action-num.urgent{background:var(--q1c);}
-.ai-action-num.plan{background:var(--q2c);}
-.ai-action-body{flex:1;}
-.ai-action-title{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:3px;}
-.ai-action-meta{font-size:11px;color:var(--text2);}
-.ai-action-tag{font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:6px;}
-.ai-tag-now{background:var(--q1s);color:var(--q1c);}
-.ai-tag-today{background:var(--q2s);color:var(--q2c);}
-.ai-tag-mail{background:var(--purplebg);color:var(--purple);}
-.ai-tag-apo{background:var(--greenbg);color:var(--green);}
-.ai-chat-area{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px;}
-.ai-chat-input-row{display:flex;gap:6px;}
-.ai-chat-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:9px 14px;font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--text);outline:none;transition:border-color .15s;}
-.ai-chat-input:focus{border-color:var(--blue);}
-.ai-chat-send{background:var(--text);color:#fff;border:none;border-radius:20px;padding:0 16px;font-size:13px;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-weight:700;}
-.ai-msg{display:flex;gap:8px;align-items:flex-start;}
-.ai-msg.user{flex-direction:row-reverse;}
-.ai-msg-bubble{max-width:85%;padding:9px 13px;border-radius:14px;font-size:13px;line-height:1.6;}
-.ai-msg.bot  .ai-msg-bubble{background:var(--surface);color:var(--text);border-radius:4px 14px 14px 14px;box-shadow:var(--sh);}
-.ai-msg.user .ai-msg-bubble{background:var(--text);color:#fff;border-radius:14px 14px 4px 14px;}
-.ai-avatar{width:26px;height:26px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px;}
 </style>
 </head>
 <body>
 
 <header>
   <div><span class="logo">ENKOU</span><span class="logo-sub">営業支援</span></div>
-  <div class="h-right">
-    <div class="auth-dot" id="authDot" title="Google認証状態"></div>
-    <button class="sync-btn" onclick="syncAll()">↻ 同期</button>
-    <button class="sync-btn" onclick="showTab('settings')" style="background:rgba(255,255,255,.08)">⚙</button>
-  </div>
+  <div><button class="hbtn" onclick="showTab(&#39;settings&#39;)">⚙</button></div>
 </header>
 
-<!-- タブバー -->
 <div class="tab-bar">
-  <button class="tab-btn" onclick="showTab('ai')" id="tab-ai">
-    <span class="ti">🤖</span><span>今日の指示</span>
+  <button class="tab-btn active" onclick="showTab(&#39;task&#39;)" id="tab-task">
+    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="">2</span>
   </button>
-  <button class="tab-btn active" onclick="showTab('task')" id="tab-task">
-    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="display:none">0</span>
+  <button class="tab-btn" onclick="showTab(&#39;dev&#39;)" id="tab-dev">
+    <span class="ti">🛠</span><span>開発</span><span class="badge" id="dev-badge" style="display:none">0</span>
   </button>
-  <button class="tab-btn" onclick="showTab('sched')" id="tab-sched">
-    <span class="ti">📅</span><span>スケジュール</span>
+  <button class="tab-btn" onclick="showTab(&#39;sched&#39;)" id="tab-sched">
+    <span class="ti">📅</span><span>予定</span>
   </button>
-  <button class="tab-btn" onclick="showTab('mail')" id="tab-mail">
+  <button class="tab-btn" onclick="showTab(&#39;mail&#39;)" id="tab-mail">
     <span class="ti">✉️</span><span>メール</span><span class="badge" id="mail-badge" style="display:none">0</span>
   </button>
 </div>
 
-<!-- ══ AI秘書 PAGE ══ -->
-<div class="page" id="page-ai">
-  <div id="ai-page-inner" style="flex:1;display:flex;flex-direction:column;overflow-y:auto;"></div>
-</div>
-
-<!-- ══ TASK PAGE ══ -->
+<!-- TASK PAGE -->
 <div class="page active" id="page-task">
   <div class="capture-bar">
-    <div class="capture-label">発生源を選んで即記録</div>
-    <div class="src-buttons">
-      <button class="sb tel"   onclick="openCapture('tel')">  <span class="si">📞</span><span class="sn">電話</span></button>
-      <button class="sb mail"  onclick="openCapture('mail')"> <span class="si">✉️</span><span class="sn">メール</span></button>
-      <button class="sb visit" onclick="openCapture('visit')"><span class="si">🚗</span><span class="sn">商談/訪問</span></button>
-      <button class="sb ins"   onclick="openCapture('ins')">  <span class="si">📋</span><span class="sn">社内指示</span></button>
-      <button class="sb self"  onclick="openCapture('self')"> <span class="si">💡</span><span class="sn">自分発</span></button>
+    <div class="capture-label">タスクを即記録</div>
+    <div class="src-buttons" style="grid-template-columns:1fr 1fr;">
+      <button class="sb ins" onclick="openCaptureType(&#39;見積&#39;)">  <span class="si">📋</span><span class="sn">見積</span></button>
+      <button class="sb tel" onclick="openCaptureType(&#39;問い合わせ&#39;)"><span class="si">📞</span><span class="sn">問い合わせ</span></button>
     </div>
   </div>
-  <div class="board">
-    <div class="quad q1"><div class="qh"><div class="qhl"><span class="qdot"></span><div><div class="qname">今すぐやる</div><div class="qsub">緊急×重要</div></div></div><span class="qcnt" id="cnt1">0</span></div><div class="qbody" id="body1"></div></div>
-    <div class="quad q2"><div class="qh"><div class="qhl"><span class="qdot"></span><div><div class="qname">計画してやる</div><div class="qsub">重要×時間あり</div></div></div><span class="qcnt" id="cnt2">0</span></div><div class="qbody" id="body2"></div></div>
-    <div class="quad q3"><div class="qh"><div class="qhl"><span class="qdot"></span><div><div class="qname">誰かに任せる</div><div class="qsub">緊急×非重要</div></div></div><span class="qcnt" id="cnt3">0</span></div><div class="qbody" id="body3"></div></div>
-    <div class="quad q4"><div class="qh"><div class="qhl"><span class="qdot"></span><div><div class="qname">後回し/削除</div><div class="qsub">非重要×時間あり</div></div></div><span class="qcnt" id="cnt4">0</span></div><div class="qbody" id="body4"></div></div>
+  <div class="kanban-wrap">
+    <div class="kanban-col kcol-todo" id="col-todo">
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">2</span></div>
+      <div class="kbody" id="body-todo"><div class="tcard" id="tc_mne9qqhi9o8o" draggable="true" onclick="openTaskDet(&#39;mne9qqhi9o8o&#39;)" data-id="mne9qqhi9o8o" ondragstart="onDragStart(event,&#39;mne9qqhi9o8o&#39;)" ondragend="onDragEnd(event)">
+    <div class="tr1">
+      <span class="tbadge">✉️</span>
+      <div class="tct">さくら苑へ見積書を送付</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhi9o8o&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div class="tr2">
+      <span class="ctag ctag-mail">メール</span>
+      <span class="ccust">さくら苑</span>
+      <span class="cdue td">本日</span>
+    </div>
+    <div class="spb"><div class="spbw"><div class="spbf pt" style="width:67%"></div></div><span class="spbc">2/3</span></div>
+    <div class="status-move"><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi9o8o&#39;,&#39;todo&#39;)" style="">未対応</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi9o8o&#39;,&#39;doing&#39;)" style="background:#e8f2fb;color:#1d5fa8;border-color:#1d5fa8;">対応中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi9o8o&#39;,&#39;maker&#39;)" style="background:#fdf4e0;color:#b07010;border-color:#b07010;">メーカー確認中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi9o8o&#39;,&#39;customer&#39;)" style="background:#e4f5ed;color:#1a7a4a;border-color:#1a7a4a;">お客様確認中</button></div>
+  </div><div class="tcard" id="tc_mne9qqhixyu1" draggable="true" onclick="openTaskDet(&#39;mne9qqhixyu1&#39;)" data-id="mne9qqhixyu1" ondragstart="onDragStart(event,&#39;mne9qqhixyu1&#39;)" ondragend="onDragEnd(event)">
+    <div class="tr1">
+      <span class="tbadge">💡</span>
+      <div class="tct">PVCグローブ価格をメーカーに確認</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhixyu1&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div class="tr2">
+      <span class="ctag ctag-self">自分発</span>
+      <span class="ccust">信越化学</span>
+      
+    </div>
+    
+    <div class="status-move"><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhixyu1&#39;,&#39;todo&#39;)" style="">未対応</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhixyu1&#39;,&#39;doing&#39;)" style="background:#e8f2fb;color:#1d5fa8;border-color:#1d5fa8;">対応中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhixyu1&#39;,&#39;maker&#39;)" style="background:#fdf4e0;color:#b07010;border-color:#b07010;">メーカー確認中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhixyu1&#39;,&#39;customer&#39;)" style="background:#e4f5ed;color:#1a7a4a;border-color:#1a7a4a;">お客様確認中</button></div>
+  </div></div>
+    </div>
+    <div class="kanban-col kcol-doing" id="col-doing">
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">対応中</div></div></div><span class="kcnt" id="cnt-doing">1</span></div>
+      <div class="kbody" id="body-doing"><div class="tcard" id="tc_mne9qqhii2pu" draggable="true" onclick="openTaskDet(&#39;mne9qqhii2pu&#39;)" data-id="mne9qqhii2pu" ondragstart="onDragStart(event,&#39;mne9qqhii2pu&#39;)" ondragend="onDragEnd(event)">
+    <div class="tr1">
+      <span class="tbadge">📞</span>
+      <div class="tct">〇〇老健への折り返し電話</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhii2pu&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div class="tr2">
+      <span class="ctag ctag-tel">電話</span>
+      <span class="ccust">〇〇老健</span>
+      <span class="cdue td">本日</span>
+    </div>
+    
+    <div class="status-move"><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhii2pu&#39;,&#39;todo&#39;)" style="background:#fff1f0;color:#c0392b;border-color:#c0392b;">未対応</button><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhii2pu&#39;,&#39;doing&#39;)" style="">対応中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhii2pu&#39;,&#39;maker&#39;)" style="background:#fdf4e0;color:#b07010;border-color:#b07010;">メーカー確認中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhii2pu&#39;,&#39;customer&#39;)" style="background:#e4f5ed;color:#1a7a4a;border-color:#1a7a4a;">お客様確認中</button></div>
+  </div></div>
+    </div>
+    <div class="kanban-col kcol-maker" id="col-maker">
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">メーカー<br>確認中</div></div></div><span class="kcnt" id="cnt-maker">1</span></div>
+      <div class="kbody" id="body-maker"><div class="tcard" id="tc_mne9qqhij3bg" draggable="true" onclick="openTaskDet(&#39;mne9qqhij3bg&#39;)" data-id="mne9qqhij3bg" ondragstart="onDragStart(event,&#39;mne9qqhij3bg&#39;)" ondragend="onDragEnd(event)">
+    <div class="tr1">
+      <span class="tbadge">📋</span>
+      <div class="tct">週報を渡邉さんに提出</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhij3bg&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div class="tr2">
+      <span class="ctag ctag-ins">社内指示</span>
+      <span class="ccust">社内</span>
+      <span class="cdue">4/1</span>
+    </div>
+    
+    <div class="status-move"><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhij3bg&#39;,&#39;todo&#39;)" style="background:#fff1f0;color:#c0392b;border-color:#c0392b;">未対応</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhij3bg&#39;,&#39;doing&#39;)" style="background:#e8f2fb;color:#1d5fa8;border-color:#1d5fa8;">対応中</button><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhij3bg&#39;,&#39;maker&#39;)" style="">メーカー確認中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhij3bg&#39;,&#39;customer&#39;)" style="background:#e4f5ed;color:#1a7a4a;border-color:#1a7a4a;">お客様確認中</button></div>
+  </div></div>
+    </div>
+    <div class="kanban-col kcol-customer" id="col-customer">
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">お客様<br>確認中</div></div></div><span class="kcnt" id="cnt-customer">1</span></div>
+      <div class="kbody" id="body-customer"><div class="tcard" id="tc_mne9qqhi6t8o" draggable="true" onclick="openTaskDet(&#39;mne9qqhi6t8o&#39;)" data-id="mne9qqhi6t8o" ondragstart="onDragStart(event,&#39;mne9qqhi6t8o&#39;)" ondragend="onDragEnd(event)">
+    <div class="tr1">
+      <span class="tbadge">🚗</span>
+      <div class="tct">△△特養 補助金申請書類の確認待ち</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhi6t8o&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div class="tr2">
+      <span class="ctag ctag-visit">商談/訪問</span>
+      <span class="ccust">△△特養</span>
+      <span class="cdue">4/3</span>
+    </div>
+    
+    <div class="status-move"><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi6t8o&#39;,&#39;todo&#39;)" style="background:#fff1f0;color:#c0392b;border-color:#c0392b;">未対応</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi6t8o&#39;,&#39;doing&#39;)" style="background:#e8f2fb;color:#1d5fa8;border-color:#1d5fa8;">対応中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi6t8o&#39;,&#39;maker&#39;)" style="background:#fdf4e0;color:#b07010;border-color:#b07010;">メーカー確認中</button><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi6t8o&#39;,&#39;customer&#39;)" style="">お客様確認中</button></div>
+  </div></div>
+    </div>
   </div>
 </div>
 
-<!-- ══ SCHEDULE PAGE ══ -->
+<!-- DEV PAGE -->
+<div class="page" id="page-dev">
+  <div class="dev-header">
+    <div class="dev-header-top">
+      <div><div class="dev-title">🛠 アプリ開発タスク</div><div class="dev-sub">このトーク内の未完了タスク</div></div>
+      <button class="dev-add-btn" onclick="openDevCapture()">＋ 追加</button>
+    </div>
+    <div class="dev-stats" id="devStats"></div>
+  </div>
+  <div class="dev-filter-bar">
+    <button class="dev-filter on" data-f="all" onclick="setDevFilter(&#39;all&#39;,this)">すべて</button>
+    <button class="dev-filter" data-f="todo" onclick="setDevFilter(&#39;todo&#39;,this)">未完了</button>
+    <button class="dev-filter" data-f="done" onclick="setDevFilter(&#39;done&#39;,this)">完了済</button>
+  </div>
+  <div class="dev-list" id="devList"></div>
+</div>
+
+<!-- SCHEDULE PAGE -->
 <div class="page" id="page-sched">
   <div class="sched-page">
     <div class="week-nav">
       <button class="nav-btn" onclick="moveWeek(-1)">◀</button>
-      <span class="week-label" id="weekLabel"></span>
+      <span class="week-label" id="weekLabel">2026年3月</span>
       <div style="display:flex;gap:6px;">
         <button class="nav-btn" onclick="moveWeek(0)">今週</button>
         <button class="nav-btn" onclick="moveWeek(1)">▶</button>
       </div>
     </div>
-    <div class="week-grid" id="weekGrid"></div>
-    <div class="day-detail" id="dayDetail"></div>
+    <div class="week-grid" id="weekGrid"><div class="wday" onclick="selectDay(&#39;2026-03-30&#39;)" style="">
+      <div class="wday-name">月</div><div class="wday-num">30</div>
+      <div class="wday-events"></div>
+    </div><div class="wday today" onclick="selectDay(&#39;2026-03-31&#39;)" style="">
+      <div class="wday-circle">31</div>
+      <div class="wday-events"><div class="wday-evt" style="background:#fff1f0;color:#c0392b;">🔴 さくら苑へ見積書を送付</div></div>
+    </div><div class="wday" onclick="selectDay(&#39;2026-04-01&#39;)" style="">
+      <div class="wday-name">水</div><div class="wday-num">1</div>
+      <div class="wday-events"></div>
+    </div><div class="wday" onclick="selectDay(&#39;2026-04-02&#39;)" style="">
+      <div class="wday-name">木</div><div class="wday-num">2</div>
+      <div class="wday-events"></div>
+    </div><div class="wday" onclick="selectDay(&#39;2026-04-03&#39;)" style="">
+      <div class="wday-name">金</div><div class="wday-num">3</div>
+      <div class="wday-events"></div>
+    </div><div class="wday" onclick="selectDay(&#39;2026-04-04&#39;)" style="">
+      <div class="wday-name">土</div><div class="wday-num">4</div>
+      <div class="wday-events"></div>
+    </div><div class="wday" onclick="selectDay(&#39;2026-04-05&#39;)" style="">
+      <div class="wday-name">日</div><div class="wday-num">5</div>
+      <div class="wday-events"></div>
+    </div></div>
+    <div class="day-detail" id="dayDetail"><div class="day-detail-title">2026年3月31日（火）</div><div class="apo-list"><div style="font-size:12px;color:var(--text3);margin-bottom:10px;">予定なし</div></div><button class="add-apo-btn" onclick="openApo(&#39;2026-03-31&#39;)">＋ アポ・予定を追加</button><div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:6px;">本日のタスク</div><div class="todo-day-list"><div class="todo-item"><span class="todo-txt">✉️ さくら苑へ見積書を送付</span><span class="todo-st" style="background:#fff1f0;color:#c0392b;">未対応</span></div><div class="todo-item"><span class="todo-txt">📞 〇〇老健への折り返し電話</span><span class="todo-st" style="background:#e8f2fb;color:#1d5fa8;">対応中</span></div></div></div>
   </div>
 </div>
 
-<!-- ══ MAIL PAGE ══ -->
+<!-- MAIL PAGE -->
 <div class="page" id="page-mail">
   <div class="mail-toolbar">
     <div class="mail-filter">
-      <button class="mf-btn on" onclick="setMailFilter('all',this)">すべて</button>
-      <button class="mf-btn" onclick="setMailFilter('unread',this)">未読</button>
-      <button class="mf-btn" onclick="setMailFilter('task',this)">要対応</button>
-      <button class="mf-btn" onclick="setMailFilter('apo',this)">アポ関連</button>
-      <button class="mf-btn" onclick="setMailFilter('info',this)">情報</button>
+      <button class="mf-btn on" onclick="setMailFilter(&#39;all&#39;,this)">すべて</button>
+      <button class="mf-btn" onclick="setMailFilter(&#39;unread&#39;,this)">未読</button>
+      <button class="mf-btn" onclick="setMailFilter(&#39;task&#39;,this)">要対応</button>
+      <button class="mf-btn" onclick="setMailFilter(&#39;apo&#39;,this)">アポ関連</button>
+      <button class="mf-btn" onclick="setMailFilter(&#39;info&#39;,this)">情報</button>
     </div>
-    <button class="mail-refresh" onclick="openAddMail()" style="background:var(--text);color:#fff;border-color:var(--text);">＋ 追加</button>
+    <button class="mf-btn" onclick="openAddMail()" style="background:var(--text);color:#fff;border-color:var(--text);flex-shrink:0;">＋</button>
   </div>
   <div class="mail-list" id="mailList"></div>
 </div>
 
-<!-- ══ SETTINGS PAGE ══ -->
-<div class="page" id="page-settings" style="flex:1;overflow-y:auto;">
+<!-- SETTINGS PAGE -->
+<div class="page" id="page-settings" style="overflow-y:auto;">
   <div class="settings-page">
-
     <div class="settings-section" style="border:1.5px solid var(--gold);">
-      <div class="settings-title" style="color:var(--amber);">🤖 AI秘書 — Anthropic APIキー</div>
-      <div class="settings-status">
-        <span id="apiKeyStatus" class="status-ng">未設定</span>
-      </div>
+      <div class="settings-title" style="color:var(--amber);">🤖 Anthropic APIキー（AI機能用）</div>
+      <div style="margin-bottom:8px;"><span id="apiKeyStatus" class="status-ng">未設定</span></div>
       <p style="font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px;">
-        AI秘書のチャット・ブリーフィング機能を使うために必要です。<br>
-        ① <a href="https://console.anthropic.com/" target="_blank" style="color:var(--blue);">console.anthropic.com</a> にログイン<br>
-        ② 左メニュー「API Keys」→「Create Key」<br>
-        ③ 発行されたキー（<code style="background:var(--s2);padding:1px 4px;border-radius:3px;">sk-ant-...</code>）を下に入力<br>
-        ④ アプリは <code style="background:var(--s2);padding:1px 4px;border-radius:3px;">http://localhost:8080</code> で開くこと（file://では動作しません）
+        ① <a href="https://console.anthropic.com/" target="_blank" style="color:var(--blue);">console.anthropic.com</a> → API Keys → Create Key<br>
+        ② 発行されたキーを入力（<code style="background:var(--s2);padding:1px 4px;border-radius:3px;">http://localhost:8080</code> で起動のこと）
       </p>
       <label class="flbl">Anthropic APIキー</label>
       <input class="finp" id="apiKeyInput" type="password" placeholder="sk-ant-api03-..." style="margin-bottom:8px;">
       <button class="btn btn-p" style="flex:unset;width:100%;padding:10px;" onclick="saveApiKey()">保存する</button>
     </div>
-
-    <div class="settings-section">
-      <div class="settings-title">GOOGLE 認証設定</div>
-      <div class="settings-status">
-        <span id="authStatus" class="status-ng">未接続</span>
-      </div>
-      <p style="font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px;">
-        Gmail・Google カレンダーを使うには、Google Cloud Console で OAuth2 クライアントID が必要です。<br>
-        ① <a href="https://console.cloud.google.com/" target="_blank" style="color:var(--blue);">console.cloud.google.com</a> でプロジェクト作成<br>
-        ② 「認証情報」→「OAuth 2.0 クライアントID」作成（種類：ウェブアプリ）<br>
-        ③ 承認済みJSオリジンに <code style="background:var(--s2);padding:1px 4px;border-radius:3px;">http://localhost</code> または使用URLを追加<br>
-        ④ 発行されたクライアントIDを下に入力
-      </p>
-      <label class="flbl">Google OAuth クライアントID</label>
-      <input class="finp" id="clientIdInput" type="text" placeholder="xxxx.apps.googleusercontent.com" style="margin-bottom:8px;">
-      <button class="btn btn-p" style="flex:unset;width:100%;padding:10px;" onclick="saveClientId()">保存してGoogleでサインイン</button>
-    </div>
-    <div class="settings-section">
-      <div class="settings-title">メール AI 振り分け設定</div>
-      <p style="font-size:12px;color:var(--text2);line-height:1.7;">受信メールを自動でカテゴリ分けします。</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;"><span>🔴 要対応（タスク化候補）</span><span style="font-size:10px;color:var(--text3)">「見積」「依頼」「確認」含むメール</span></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;"><span>🟢 アポ関連</span><span style="font-size:10px;color:var(--text3)">「訪問」「打合せ」「日程」含むメール</span></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;"><span>🟡 情報</span><span style="font-size:10px;color:var(--text3)">ニュースレター・お知らせ系</span></div>
-      </div>
-    </div>
     <div class="settings-section">
       <div class="settings-title">データ管理</div>
-      <div style="display:flex;gap:8px;flex-direction:column;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
         <button class="btn btn-g" onclick="exportData()">データをエクスポート</button>
-        <button class="btn" style="background:var(--bluebg);color:var(--blue);border:1px solid var(--blue);" onclick="addDevTasks()">🛠 開発未完了タスクを追加する</button>
+        <button class="btn" style="background:var(--bluebg);color:var(--blue);border:1px solid var(--blue);" onclick="addDevTasks()">🛠 開発タスクを一括登録</button>
         <button class="btn btn-d" onclick="clearData()">全データ削除（初期化）</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ ADD MAIL OVERLAY ══ -->
+<!-- CAPTURE OVERLAY -->
+<div class="overlay" id="captureOv">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:24px;" id="cs_icon"></span>
+      <div><div style="font-size:13px;font-weight:700;" id="cs_label"></div><div style="font-size:11px;color:var(--text2);">からのタスク</div></div>
+    </div>
+    <label class="flbl">① やること</label>
+    <input class="finp" id="cs_title" type="text" placeholder="一言でOK">
+    <label class="flbl">② ステータス</label>
+    <div class="st-grid">
+      <button class="stsel on" data-st="todo" onclick="pickSt(&#39;todo&#39;,this)">    <span class="stn" style="color:#c0392b;">🔴 未対応</span></button>
+      <button class="stsel" data-st="doing" onclick="pickSt(&#39;doing&#39;,this)">   <span class="stn" style="color:#1d5fa8;">🔵 対応中</span></button>
+      <button class="stsel" data-st="maker" onclick="pickSt(&#39;maker&#39;,this)">   <span class="stn" style="color:#b07010;">🟡 メーカー確認</span></button>
+      <button class="stsel" data-st="customer" onclick="pickSt(&#39;customer&#39;,this)"><span class="stn" style="color:#1a7a4a;">🟢 お客様確認</span></button>
+    </div>
+    <label class="flbl">③ サブタスク（任意）</label>
+    <div class="sub-row"><input class="sub-fi" id="sub_inp" type="text" placeholder="例：見積依頼・作成・送信"><button class="sub-ab" onclick="addFormSub()">＋</button></div>
+    <div class="sub-list" id="sub_list"></div>
+    <details><summary style="font-size:11px;font-weight:700;color:var(--text2);cursor:pointer;margin-bottom:8px;">▶ 追加情報（任意）</summary>
+      <div style="margin-top:8px;">
+        <div class="frow2"><div><label class="flbl">顧客名</label><input class="finp" id="cs_cust" type="text" placeholder="施設名" style="margin-bottom:0;"></div><div><label class="flbl">期限</label><input class="finp" id="cs_due" type="date" style="margin-bottom:0;"></div></div>
+        <label class="flbl" style="margin-top:8px;">メモ</label>
+        <input class="finp" id="cs_memo" type="text" placeholder="補足">
+      </div>
+    </details>
+    <div class="btn-row"><button class="btn btn-g" onclick="closeOv(&#39;captureOv&#39;)">キャンセル</button><button class="btn btn-p" onclick="saveCapture()">記録 ✓</button></div>
+  </div>
+</div>
+
+<!-- TASK DETAIL OVERLAY -->
+<div class="overlay" id="taskDetOv"><div class="sheet" id="taskDetSheet"></div></div>
+
+<!-- APO OVERLAY -->
+<div class="overlay" id="apoOv">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div class="stitle">アポ・予定を登録</div>
+    <div class="frow2">
+      <div><label class="flbl">種別</label><select class="finp" id="apo_type" style="margin-bottom:0;"><option value="visit">🚗 訪問</option><option value="tel">📞 電話</option><option value="gcal">📅 その他</option></select></div>
+      <div><label class="flbl">日付</label><input class="finp" id="apo_date" type="date" style="margin-bottom:0;"></div>
+    </div>
+    <div class="frow2" style="margin-top:8px;">
+      <div><label class="flbl">開始</label><input class="finp" id="apo_start" type="time" style="margin-bottom:0;"></div>
+      <div><label class="flbl">終了</label><input class="finp" id="apo_end" type="time" style="margin-bottom:0;"></div>
+    </div>
+    <label class="flbl" style="margin-top:8px;">タイトル</label>
+    <input class="finp" id="apo_title" type="text" placeholder="例：さくら苑 訪問">
+    <label class="flbl">顧客名／場所</label>
+    <input class="finp" id="apo_place" type="text" placeholder="施設名・住所など">
+    <label class="flbl">メモ</label>
+    <input class="finp" id="apo_memo" type="text" placeholder="持ち物・目的など">
+    <div class="btn-row"><button class="btn btn-g" onclick="closeOv(&#39;apoOv&#39;)">キャンセル</button><button class="btn btn-p" onclick="saveApo()">登録 ✓</button></div>
+  </div>
+</div>
+
+<!-- ADD MAIL OVERLAY -->
 <div class="overlay" id="addMailOv">
   <div class="sheet">
     <div class="handle"></div>
@@ -464,418 +588,112 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     <input class="finp" id="am_from" type="text" placeholder="例：田中様（さくら苑）">
     <label class="flbl">件名</label>
     <input class="finp" id="am_subj" type="text" placeholder="例：見積書のご確認について">
-    <label class="flbl">内容（要点のみでOK）</label>
-    <textarea class="finp" id="am_body" rows="4" placeholder="例：補助金申請の件で、来週訪問したいとのこと。日程調整を依頼された。" style="resize:none;line-height:1.6;"></textarea>
-    <label class="flbl">分類（自動判定 or 手動選択）</label>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px;" id="am_cat_sel">
-      <button class="mc-cat-btn on" data-c="task"  onclick="pickMailCat('task',this)" >🔴 要対応</button>
-      <button class="mc-cat-btn"    data-c="apo"   onclick="pickMailCat('apo',this)"  >🟢 アポ</button>
-      <button class="mc-cat-btn"    data-c="info"  onclick="pickMailCat('info',this)" >🟡 情報</button>
-      <button class="mc-cat-btn"    data-c="other" onclick="pickMailCat('other',this)">⚪ その他</button>
+    <label class="flbl">内容（要点のみ）</label>
+    <textarea class="finp" id="am_body" rows="3" placeholder="補足・経緯など" style="resize:none;line-height:1.6;"></textarea>
+    <label class="flbl">分類</label>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px;">
+      <button class="mc-cat-btn on" data-c="task" onclick="pickMailCat(&#39;task&#39;,this)">🔴 要対応</button>
+      <button class="mc-cat-btn" data-c="apo" onclick="pickMailCat(&#39;apo&#39;,this)">🟢 アポ</button>
+      <button class="mc-cat-btn" data-c="info" onclick="pickMailCat(&#39;info&#39;,this)">🟡 情報</button>
+      <button class="mc-cat-btn" data-c="other" onclick="pickMailCat(&#39;other&#39;,this)">⚪ その他</button>
     </div>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-      <input type="checkbox" id="am_unread" checked style="width:16px;height:16px;cursor:pointer;">
-      <label for="am_unread" style="font-size:12px;font-weight:700;color:var(--text2);cursor:pointer;">未読としてマーク</label>
+      <input type="checkbox" id="am_unread" checked="" style="width:16px;height:16px;">
+      <label for="am_unread" style="font-size:12px;font-weight:700;color:var(--text2);">未読としてマーク</label>
     </div>
-    <div class="btn-row">
-      <button class="btn btn-g" onclick="closeOv('addMailOv')">キャンセル</button>
-      <button class="btn btn-p" onclick="saveManualMail()">登録 ✓</button>
-    </div>
+    <div class="btn-row"><button class="btn btn-g" onclick="closeOv(&#39;addMailOv&#39;)">キャンセル</button><button class="btn btn-p" onclick="saveManualMail()">登録 ✓</button></div>
   </div>
 </div>
 
-<!-- ══ CAPTURE OVERLAY ══ -->
-<div class="overlay" id="captureOv">
-  <div class="sheet">
-    <div class="handle"></div>
-    <div class="step-hd">
-      <span class="step-icon" id="cs_icon"></span>
-      <div><div style="font-size:13px;font-weight:700;" id="cs_label"></div><div style="font-size:11px;color:var(--text2);">からのタスク</div></div>
-    </div>
-    <label class="flbl">① やること</label>
-    <input class="finp" id="cs_title" type="text" placeholder="一言でOK">
-    <label class="flbl">② 象限</label>
-    <div class="qsel-grid">
-      <button class="qsel q1 on" data-q="1" onclick="pickQ(1)"><span class="qn">🔴 今すぐやる</span><span class="qs">緊急×重要</span></button>
-      <button class="qsel q2"    data-q="2" onclick="pickQ(2)"><span class="qn">🟡 計画してやる</span><span class="qs">重要×時間あり</span></button>
-      <button class="qsel q3"    data-q="3" onclick="pickQ(3)"><span class="qn">🔵 誰かに任せる</span><span class="qs">緊急×非重要</span></button>
-      <button class="qsel q4"    data-q="4" onclick="pickQ(4)"><span class="qn">⚪ 後回し/削除</span><span class="qs">非重要×時間あり</span></button>
-    </div>
-    <label class="flbl">③ サブタスク（任意）</label>
-    <div class="sub-row"><input class="sub-fi" id="sub_inp" type="text" placeholder="例：見積依頼・作成・送信"><button class="sub-ab" onclick="addFormSub()">＋</button></div>
-    <div class="sub-list" id="sub_list"></div>
-    <details><summary style="font-size:11px;font-weight:700;color:var(--text2);cursor:pointer;margin-bottom:8px;">▶ 追加情報（任意）</summary>
-      <div style="margin-top:8px;"><div class="frow2"><div><label class="flbl">顧客名</label><input class="finp" id="cs_cust" type="text" placeholder="施設名" style="margin-bottom:0;"></div><div><label class="flbl">期限</label><input class="finp" id="cs_due" type="date" style="margin-bottom:0;"></div></div>
-      <label class="flbl" style="margin-top:8px;">メモ</label><input class="finp" id="cs_memo" type="text" placeholder="補足"></div>
-    </details>
-    <div class="btn-row"><button class="btn btn-g" onclick="closeOv('captureOv')">キャンセル</button><button class="btn btn-p" onclick="saveCapture()">記録 ✓</button></div>
-  </div>
-</div>
-
-<!-- ══ TASK DETAIL OVERLAY ══ -->
-<div class="overlay" id="taskDetOv">
-  <div class="sheet" id="taskDetSheet"></div>
-</div>
-
-<!-- ══ APO OVERLAY ══ -->
-<div class="overlay" id="apoOv">
-  <div class="sheet">
-    <div class="handle"></div>
-    <div class="stitle">アポ・予定を登録</div>
-    <div class="frow2">
-      <div><label class="flbl">種別</label>
-        <select class="finp" id="apo_type" style="margin-bottom:0;">
-          <option value="visit">🚗 訪問</option>
-          <option value="tel">📞 電話</option>
-          <option value="gcal">📅 その他</option>
-        </select>
-      </div>
-      <div><label class="flbl">日付</label><input class="finp" id="apo_date" type="date" style="margin-bottom:0;"></div>
-    </div>
-    <div class="frow2" style="margin-top:8px;">
-      <div><label class="flbl">開始時刻</label><input class="finp" id="apo_start" type="time" style="margin-bottom:0;"></div>
-      <div><label class="flbl">終了時刻</label><input class="finp" id="apo_end" type="time" style="margin-bottom:0;"></div>
-    </div>
-    <label class="flbl" style="margin-top:8px;">タイトル</label>
-    <input class="finp" id="apo_title" type="text" placeholder="例：さくら苑 訪問">
-    <label class="flbl">顧客名／場所</label>
-    <input class="finp" id="apo_place" type="text" placeholder="施設名・住所など">
-    <label class="flbl">メモ</label>
-    <input class="finp" id="apo_memo" type="text" placeholder="持ち物・目的など">
-    <div class="btn-row"><button class="btn btn-g" onclick="closeOv('apoOv')">キャンセル</button><button class="btn btn-p" onclick="saveApo()">登録 ✓</button></div>
-  </div>
-</div>
-
-<!-- ══ MAIL DETAIL OVERLAY ══ -->
-<div class="overlay" id="mailDetOv">
-  <div class="sheet" id="mailDetSheet"></div>
-</div>
+<!-- MAIL DETAIL OVERLAY -->
+<div class="overlay" id="mailDetOv"><div class="sheet" id="mailDetSheet"></div></div>
 
 <script>
-/* ════ CONSTANTS ════ */
-const SK='enkou_all_v1';
+const SK='enkou_v4';
 const SRC={tel:{icon:'📞',label:'電話',tc:'ctag-tel'},mail:{icon:'✉️',label:'メール',tc:'ctag-mail'},visit:{icon:'🚗',label:'商談/訪問',tc:'ctag-visit'},ins:{icon:'📋',label:'社内指示',tc:'ctag-ins'},self:{icon:'💡',label:'自分発',tc:'ctag-self'}};
-const QI={1:{name:'今すぐやる',sub:'緊急×重要',bg:'var(--q1s)',c:'var(--q1c)'},2:{name:'計画してやる',sub:'重要×時間あり',bg:'var(--q2s)',c:'var(--q2c)'},3:{name:'誰かに任せる',sub:'緊急×非重要',bg:'var(--q3s)',c:'var(--q3c)'},4:{name:'後回し/削除',sub:'非重要×時間あり',bg:'var(--q4s)',c:'var(--q4c)'}};
+const STATUSES={todo:{label:'未対応',color:'#c0392b',bg:'#fff1f0'},doing:{label:'対応中',color:'#1d5fa8',bg:'#e8f2fb'},maker:{label:'メーカー確認中',color:'#b07010',bg:'#fdf4e0'},customer:{label:'お客様確認中',color:'#1a7a4a',bg:'#e4f5ed'}};
+const DEV_KW=['開発','アプリ','API','Flask','SQLite','Gmail','GitHub','Supabase','Claude','Anthropic'];
 
-/* ════ STATE ════ */
-let tasks=[], apos=[], mails=[], formSubs=[], curSrc='tel', curQ=1, selTaskId=null, selMailId=null;
-let mailFilter='all', weekOffset=0, selDay=null;
-let gToken=null, clientId=null;
-const SCOPES='https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/calendar.readonly';
+let tasks=[],apos=[],mails=[],formSubs=[];
+let curSrc='tel',curSt='todo',selTaskId=null,selMailId=null;
+let mailFilter='all',weekOffset=0,selDay_=null;
+let devFilter='all',expandedDevIds=new Set();
+let anthropicApiKey='',curMailCat='task';
 
-/* ════ UTILS ════ */
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
 function todayStr(){return new Date().toISOString().slice(0,10);}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function offsetDate(n){const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);}
 function fmtDate(s){if(!s)return'—';const[,m,d]=s.split('-');return`${+m}/${+d}`;}
 function fmtTime(s){if(!s)return'';return s.slice(0,5);}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-/* ════ STORAGE ════ */
 function save(){localStorage.setItem(SK,JSON.stringify({tasks,apos}));}
-function load(){
-  try{const d=JSON.parse(localStorage.getItem(SK)||'{}');tasks=d.tasks||[];apos=d.apos||[];}catch{tasks=[];apos=[];}
-  clientId=localStorage.getItem('enkou_client_id')||'';
-  if(clientId)document.getElementById('clientIdInput').value=clientId;
-  if(!tasks.length) initSampleData();
-}
-function initSampleData(){
-  const td=todayStr(); const od=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);};
-  tasks=[
-    /* ── 営業タスク（サンプル） ── */
-    {id:uid(),src:'mail',title:'さくら苑へ見積書を送付',cust:'さくら苑',due:td,q:1,memo:'田中様',done:false,
-      subs:[{id:uid(),text:'見積依頼の確認',done:true},{id:uid(),text:'見積書作成',done:true},{id:uid(),text:'メール送信',done:false}]},
-    {id:uid(),src:'tel',title:'〇〇老健への折り返し',cust:'〇〇老健',due:td,q:1,memo:'午後2時以降',done:false,subs:[]},
-    {id:uid(),src:'ins',title:'週報を渡邉さんに提出',cust:'社内',due:od(1),q:2,memo:'',done:false,subs:[]},
-    {id:uid(),src:'self',title:'名刺の整理',cust:'',due:'',q:4,memo:'',done:false,subs:[]},
-
-    /* ── アプリ開発（このトーク内の未完了） ── */
-    {id:uid(),src:'self',title:'Anthropic APIキーを取得・設定する',cust:'開発',due:td,q:1,memo:'console.anthropic.com → API Keys → Create Key → ⚙設定タブに貼り付け',done:false,
-      subs:[
-        {id:uid(),text:'console.anthropic.com にログイン',done:false},
-        {id:uid(),text:'API Keys → Create Key でキー発行',done:false},
-        {id:uid(),text:'アプリ ⚙設定 → APIキー欄に貼り付けて保存',done:false},
-      ]},
-    {id:uid(),src:'self',title:'Gmail API 連携を完成させる',cust:'開発',due:od(3),q:2,memo:'Google Cloud Console でOAuth同意画面設定→クライアントID取得→アプリに入力',done:false,
-      subs:[
-        {id:uid(),text:'OAuth同意画面を「開始」から設定',done:false},
-        {id:uid(),text:'Gmail API・Calendar API を有効化',done:false},
-        {id:uid(),text:'OAuthクライアントID を作成',done:false},
-        {id:uid(),text:'アプリ ⚙設定 → Google連携欄に入力',done:false},
-      ]},
-    {id:uid(),src:'self',title:'顧客リスト管理機能を追加する',cust:'開発',due:od(7),q:2,memo:'施設名・担当者名・最終接触日・メモを管理するタブ',done:false,
-      subs:[
-        {id:uid(),text:'顧客リストのデータ構造設計',done:false},
-        {id:uid(),text:'顧客タブのUI実装',done:false},
-        {id:uid(),text:'タスクとの紐付け機能',done:false},
-      ]},
-    {id:uid(),src:'self',title:'電話・訪問の活動ログ機能を追加する',cust:'開発',due:od(7),q:2,memo:'いつ・誰に・何を話したか記録する機能',done:false,subs:[]},
-    {id:uid(),src:'self',title:'日報自動生成機能を追加する',cust:'開発',due:od(14),q:2,memo:'その日の活動記録をAIが日報に変換して出力',done:false,
-      subs:[
-        {id:uid(),text:'活動ログの蓄積UIを作成',done:false},
-        {id:uid(),text:'AI日報生成プロンプト設計',done:false},
-        {id:uid(),text:'日報テンプレートHTML出力',done:false},
-      ]},
-    {id:uid(),src:'self',title:'Flask + SQLite でバックエンド化する',cust:'開発',due:'',q:4,memo:'PC・スマホ間のデータ同期。90名規模での複数人利用を想定',done:false,
-      subs:[
-        {id:uid(),text:'Flask APIサーバー設計',done:false},
-        {id:uid(),text:'SQLiteスキーマ設計',done:false},
-        {id:uid(),text:'フロントをAPI呼び出し式に改修',done:false},
-        {id:uid(),text:'社内サーバーまたはクラウドにデプロイ',done:false},
-      ]},
-  ];
-  apos=[
-    {id:uid(),type:'visit',date:td,start:'14:00',end:'15:00',title:'さくら苑 訪問',place:'さくら苑',memo:'補助金資料持参'},
-    {id:uid(),type:'tel',date:od(1),start:'10:00',end:'10:30',title:'〇〇老健 電話フォロー',place:'',memo:''},
-  ];
-  save();
-}
-function addDevTasks(){
-  const od=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);};
-  const devTasks=[
-    {id:uid(),src:'self',title:'Anthropic APIキーを取得・設定する',cust:'開発',due:todayStr(),q:1,memo:'console.anthropic.com → API Keys → Create Key → ⚙設定タブに貼り付け',done:false,
-      subs:[{id:uid(),text:'console.anthropic.com にログイン',done:false},{id:uid(),text:'API Keys → Create Key でキー発行',done:false},{id:uid(),text:'アプリ ⚙設定 → APIキー欄に貼り付けて保存',done:false}]},
-    {id:uid(),src:'self',title:'Gmail API 連携を完成させる',cust:'開発',due:od(3),q:2,memo:'Google Cloud Console でOAuth設定→クライアントID取得→アプリに入力',done:false,
-      subs:[{id:uid(),text:'OAuth同意画面を「開始」から設定',done:false},{id:uid(),text:'Gmail API・Calendar API を有効化',done:false},{id:uid(),text:'OAuthクライアントID を作成',done:false},{id:uid(),text:'アプリ ⚙設定 → Google連携欄に入力',done:false}]},
-    {id:uid(),src:'self',title:'顧客リスト管理機能を追加する',cust:'開発',due:od(7),q:2,memo:'施設名・担当者名・最終接触日・メモを管理するタブ',done:false,
-      subs:[{id:uid(),text:'顧客リストのデータ構造設計',done:false},{id:uid(),text:'顧客タブのUI実装',done:false},{id:uid(),text:'タスクとの紐付け機能',done:false}]},
-    {id:uid(),src:'self',title:'電話・訪問の活動ログ機能を追加する',cust:'開発',due:od(7),q:2,memo:'いつ・誰に・何を話したか記録する機能',done:false,subs:[]},
-    {id:uid(),src:'self',title:'日報自動生成機能を追加する',cust:'開発',due:od(14),q:2,memo:'その日の活動記録をAIが日報に変換して出力',done:false,
-      subs:[{id:uid(),text:'活動ログの蓄積UIを作成',done:false},{id:uid(),text:'AI日報生成プロンプト設計',done:false},{id:uid(),text:'日報テンプレートHTML出力',done:false}]},
-    {id:uid(),src:'self',title:'Flask + SQLite でバックエンド化する',cust:'開発',due:'',q:4,memo:'PC・スマホ間のデータ同期。複数人利用を想定',done:false,
-      subs:[{id:uid(),text:'Flask APIサーバー設計',done:false},{id:uid(),text:'SQLiteスキーマ設計',done:false},{id:uid(),text:'フロントをAPI呼び出し式に改修',done:false},{id:uid(),text:'社内サーバーまたはクラウドにデプロイ',done:false}]},
-  ];
-  // 重複チェック（タイトルが同じものは追加しない）
-  const existTitles=new Set(tasks.map(t=>t.title));
-  const toAdd=devTasks.filter(t=>!existTitles.has(t.title));
-  if(!toAdd.length){showToast('開発タスクはすでに登録済みです');return;}
-  tasks.unshift(...toAdd);
-  save();renderTasks();showTab('task');
-  showToast(`開発タスクを${toAdd.length}件追加しました`);
-}
+function load(){try{const d=JSON.parse(localStorage.getItem(SK)||'{}');tasks=d.tasks||[];apos=d.apos||[];}catch{tasks=[];apos=[];}if(!tasks.length)initSampleData();}
+function saveMails(){localStorage.setItem('enkou_mails_v1',JSON.stringify(mails));}
+function loadMailsFromStorage(){try{mails=JSON.parse(localStorage.getItem('enkou_mails_v1')||'[]');}catch{mails=[];}}
 function exportData(){const d=JSON.stringify({tasks,apos,exported:new Date().toISOString()},null,2);const a=document.createElement('a');a.href='data:application/json,'+encodeURIComponent(d);a.download='enkou_backup.json';a.click();}
 function clearData(){if(confirm('全データを削除しますか？')){localStorage.removeItem(SK);load();renderTasks();renderSched();}}
 
-/* ════ TABS ════ */
+function initSampleData(){
+  const td=todayStr();
+  tasks=[
+    {id:uid(),src:'mail',title:'さくら苑へ見積書を送付',cust:'さくら苑',due:td,st:'todo',memo:'田中様',done:false,subs:[{id:uid(),text:'見積依頼の確認',done:true},{id:uid(),text:'見積書作成',done:true},{id:uid(),text:'メール送信',done:false}]},
+    {id:uid(),src:'tel',title:'〇〇老健への折り返し電話',cust:'〇〇老健',due:td,st:'doing',memo:'午後2時以降',done:false,subs:[]},
+    {id:uid(),src:'ins',title:'週報を渡邉さんに提出',cust:'社内',due:offsetDate(1),st:'todo',memo:'',done:false,subs:[]},
+    {id:uid(),src:'self',title:'PVCグローブ価格をメーカーに確認',cust:'信越化学',due:'',st:'maker',memo:'4月値上げ分の確認',done:false,subs:[]},
+    {id:uid(),src:'visit',title:'△△特養 補助金申請書類の確認待ち',cust:'△△特養',due:offsetDate(3),st:'customer',memo:'田中施設長に送付済み',done:false,subs:[]},
+  ];
+  save();
+}
+
+function addDevTasks(){
+  const devTasks=[
+    {id:uid(),src:'self',title:'Anthropic APIキーを取得・設定する',cust:'開発',due:todayStr(),st:'todo',memo:'console.anthropic.com → API Keys → Create Key',done:false,subs:[{id:uid(),text:'console.anthropic.com にログイン',done:false},{id:uid(),text:'API Keys → Create Key でキー発行',done:false},{id:uid(),text:'アプリ ⚙設定 → APIキー欄に保存',done:false}]},
+    {id:uid(),src:'self',title:'GitHub Pagesのスマホアクセスを確認する',cust:'開発',due:todayStr(),st:'todo',memo:'oratkei.github.io/sales-app/enkou_app.html',done:false,subs:[]},
+    {id:uid(),src:'self',title:'Gmail API 連携を完成させる',cust:'開発',due:offsetDate(3),st:'todo',memo:'Google Cloud Console でOAuth設定',done:false,subs:[{id:uid(),text:'OAuth同意画面を設定',done:false},{id:uid(),text:'Gmail API・Calendar API を有効化',done:false},{id:uid(),text:'OAuthクライアントID を作成',done:false},{id:uid(),text:'⚙設定 → Google連携欄に入力',done:false}]},
+    {id:uid(),src:'self',title:'顧客リスト管理機能を追加する',cust:'開発',due:offsetDate(7),st:'todo',memo:'施設名・担当者名・最終接触日を管理',done:false,subs:[{id:uid(),text:'データ構造設計',done:false},{id:uid(),text:'顧客タブのUI実装',done:false},{id:uid(),text:'タスクとの紐付け',done:false}]},
+    {id:uid(),src:'self',title:'電話・訪問の活動ログ機能を追加する',cust:'開発',due:offsetDate(7),st:'todo',memo:'いつ・誰に・何を話したか記録',done:false,subs:[]},
+    {id:uid(),src:'self',title:'日報自動生成機能を追加する',cust:'開発',due:offsetDate(14),st:'todo',memo:'活動記録をAIが日報に変換',done:false,subs:[{id:uid(),text:'活動ログUIを作成',done:false},{id:uid(),text:'AI日報生成プロンプト設計',done:false},{id:uid(),text:'日報HTML出力',done:false}]},
+    {id:uid(),src:'self',title:'Supabaseでデータ同期を実装する',cust:'開発',due:'',st:'todo',memo:'PC・スマホ間のデータ同期（無料）',done:false,subs:[{id:uid(),text:'Supabaseアカウント作成',done:false},{id:uid(),text:'テーブル設計',done:false},{id:uid(),text:'アプリをAPI呼び出し式に改修',done:false}]},
+  ];
+  const existTitles=new Set(tasks.map(t=>t.title));
+  const toAdd=devTasks.filter(t=>!existTitles.has(t.title));
+  if(!toAdd.length){showToast('開発タスクはすでに登録済みです');return;}
+  tasks.unshift(...toAdd);save();renderTasks();showTab('dev');
+  showToast(`開発タスクを${toAdd.length}件追加しました`);
+}
+
 function showTab(t){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+t).classList.add('active');
-  const tb=document.getElementById('tab-'+t);
-  if(tb)tb.classList.add('active');
+  const tb=document.getElementById('tab-'+t);if(tb)tb.classList.add('active');
   if(t==='sched')renderSched();
-  if(t==='mail')loadMails();
-  if(t==='ai')renderAiPage();
+  if(t==='mail')renderMailList();
+  if(t==='dev')renderDev();
 }
 
-/* ════════ AI秘書 ════════ */
-let aiChatHistory=[];
-let aiGenerated=false;
-
-function renderAiPage(){
-  const inner=document.getElementById('ai-page-inner');
-  const now=new Date();
-  const DOW=['日','月','火','水','木','金','土'];
-  const dateStr=`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日（${DOW[now.getDay()]}）`;
-  const hour=now.getHours();
-  const greet=hour<12?'おはようございます':'こんにちは';
-
-  // 今日の統計
-  const td=todayStr();
-  const urgentTasks=tasks.filter(t=>!t.done&&t.q===1);
-  const todayTasks=tasks.filter(t=>!t.done&&t.due===td);
-  const overdueTasks=tasks.filter(t=>!t.done&&t.due&&t.due<td);
-  const todayApos=apos.filter(a=>a.date===td).sort((a,b)=>a.start.localeCompare(b.start));
-  const unreadMails=mails.filter(m=>m.unread);
-  const taskMails=mails.filter(m=>m.cat==='task'&&m.unread);
-
-  inner.innerHTML=`
-    <div class="ai-hero">
-      <div class="ai-date">${dateStr}</div>
-      <div class="ai-greeting">${greet}、今日もよろしくお願いします 🤝</div>
-      <div class="ai-sub">緊急 ${urgentTasks.length}件 ／ 期限切れ ${overdueTasks.length}件 ／ 未読メール ${unreadMails.length}件</div>
-    </div>
-    <button class="ai-gen-btn" id="aiBriefBtn" onclick="generateBriefing()">🤖 今日のブリーフィングを生成</button>
-    <div class="ai-body">
-      <div id="ai-briefing-area"></div>
-      <div class="ai-section">
-        <div class="ai-section-title">今日の優先アクション</div>
-        <div style="display:flex;flex-direction:column;gap:6px;" id="ai-action-list">
-          ${buildActionList(urgentTasks,todayTasks,overdueTasks,todayApos,taskMails)}
-        </div>
-      </div>
-    </div>
-    <div class="ai-section" style="padding:0 14px;">
-      <div class="ai-section-title">秘書に相談する</div>
-    </div>
-    <div class="ai-chat-area" id="aiChatArea">
-      <div class="ai-msg bot">
-        <div class="ai-avatar">🤖</div>
-        <div class="ai-msg-bubble">今日のタスクやスケジュールについて何でも聞いてください。「今日何から始めればいい？」「〇〇のタスクをどう進める？」など気軽にどうぞ。</div>
-      </div>
-    </div>
-    <div style="padding:0 14px 24px;">
-      <div class="ai-chat-input-row">
-        <input class="ai-chat-input" id="aiChatInput" type="text" placeholder="例：今日何から始めればいい？">
-        <button class="ai-chat-send" onclick="sendAiChat()">送信</button>
-      </div>
-    </div>`;
-
-  document.getElementById('aiChatInput').addEventListener('keydown',e=>{
-    if(e.key==='Enter')sendAiChat();
-  });
+function loadApiKey(){
+  anthropicApiKey=localStorage.getItem('enkou_api_key')||'';
+  if(anthropicApiKey){document.getElementById('apiKeyInput').value=anthropicApiKey;document.getElementById('apiKeyStatus').textContent='設定済み ✓';document.getElementById('apiKeyStatus').className='status-ok';}
+}
+function saveApiKey(){
+  const v=document.getElementById('apiKeyInput').value.trim();
+  if(!v){alert('APIキーを入力してください');return;}
+  anthropicApiKey=v;localStorage.setItem('enkou_api_key',v);
+  document.getElementById('apiKeyStatus').textContent='設定済み ✓';document.getElementById('apiKeyStatus').className='status-ok';
+  showToast('APIキーを保存しました');
 }
 
-function buildActionList(urgent,todayT,overdue,todayApos,taskMails){
-  const items=[];
-  // アポ（時刻順）
-  todayApos.forEach(a=>{
-    items.push({icon:a.type==='visit'?'🚗':'📞',title:a.title,meta:`${a.start}〜 ${a.place||''}`,tag:'apo',tagLabel:'アポ',q:'plan'});
-  });
-  // 期限切れタスク（最大3件）
-  overdue.slice(0,3).forEach(t=>{
-    items.push({icon:'🔴',title:t.title,meta:`期限切れ・${(SRC[t.src]||SRC.self).label}`,tag:'now',tagLabel:'期限超過',q:'urgent'});
-  });
-  // 今すぐやるタスク（最大4件）
-  urgent.slice(0,4).forEach(t=>{
-    items.push({icon:'⚡',title:t.title,meta:(SRC[t.src]||SRC.self).label+(t.cust?` · ${t.cust}`:''),tag:'now',tagLabel:'今すぐ',q:'urgent'});
-  });
-  // 要対応メール
-  taskMails.slice(0,2).forEach(m=>{
-    items.push({icon:'✉️',title:m.subject,meta:`差出人：${m.from}`,tag:'mail',tagLabel:'要対応メール',q:'plan'});
-  });
-  // 今日期限タスク（urgent以外）
-  todayT.filter(t=>t.q!==1).slice(0,3).forEach(t=>{
-    items.push({icon:'📌',title:t.title,meta:`本日期限 · ${(SRC[t.src]||SRC.self).label}`,tag:'today',tagLabel:'本日',q:'plan'});
-  });
+/* TASK */
+function isDevTask(t){return t.cust==='開発'||DEV_KW.some(k=>t.title.includes(k)||(t.memo||'').includes(k));}
+function getSalesTasks(){return tasks.filter(t=>!isDevTask(t));}
+function getDevTasks(){return tasks.filter(t=>isDevTask(t));}
 
-  if(!items.length) return`<div style="text-align:center;padding:20px;font-size:12px;color:var(--text3);">🎉 今日の緊急タスクはありません</div>`;
-  return items.map((item,i)=>`
-    <div class="ai-action-card">
-      <div class="ai-action-num ${item.q}">${i+1}</div>
-      <div class="ai-action-body">
-        <div class="ai-action-title">${item.icon} ${esc(item.title)}<span class="ai-action-tag ai-tag-${item.tag}">${item.tagLabel}</span></div>
-        <div class="ai-action-meta">${esc(item.meta)}</div>
-      </div>
-    </div>`).join('');
-}
+const SHOW_LIMIT=5;
+const expandedCols={todo:false,doing:false,maker:false,customer:false};
+const expandedDone={todo:false,doing:false,maker:false,customer:false};
 
-async function generateBriefing(){
-  if(!checkApiKey())return;
-  const btn=document.getElementById('aiBriefBtn');
-  btn.disabled=true;btn.textContent='🤖 生成中…';
-  const area=document.getElementById('ai-briefing-area');
-  area.innerHTML=`<div class="ai-thinking"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div><span>分析中です…</span></div>`;
-
-  const context=buildContextPrompt();
-
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:getApiHeaders(),
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:`あなたは営業マン専属の敏腕AI秘書です。毎朝、その日にやるべきことを端的・具体的に伝えます。
-話し方：・敬語だが親しみやすい ・箇条書きより文章で ・優先度を明確に ・300文字前後で簡潔に
-絶対にやること：最も重要な1件を「今すぐこれをやってください」と断言すること。`,
-        messages:[{role:'user',content:`今日の状況を分析してブリーフィングをお願いします。\n\n${context}`}]
-      })
-    });
-    const data=await res.json();
-    const text=data.content?.[0]?.text||'ブリーフィングを生成できませんでした。';
-    area.innerHTML=`
-      <div class="ai-section">
-        <div class="ai-section-title">AI秘書からのブリーフィング</div>
-        <div class="ai-briefing-box"><div class="ai-briefing-text">${esc(text)}</div></div>
-      </div>`;
-    btn.textContent='🤖 再生成';btn.disabled=false;
-  }catch(e){
-    area.innerHTML=`<div style="padding:12px;font-size:12px;color:var(--q1c);">生成エラー：${esc(e.message)}</div>`;
-    btn.textContent='🤖 再試行';btn.disabled=false;
-  }
-}
-
-async function sendAiChat(){
-  const input=document.getElementById('aiChatInput');
-  const msg=input.value.trim();
-  if(!msg)return;
-  if(!checkApiKey())return;
-  input.value='';
-
-  const chatArea=document.getElementById('aiChatArea');
-  // ユーザーメッセージ
-  chatArea.innerHTML+=`<div class="ai-msg user"><div class="ai-msg-bubble">${esc(msg)}</div></div>`;
-  // 考え中
-  const thinkId='think_'+Date.now();
-  chatArea.innerHTML+=`<div class="ai-msg bot" id="${thinkId}"><div class="ai-avatar">🤖</div><div class="ai-msg-bubble"><div class="ai-thinking" style="padding:0;"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div></div></div></div>`;
-  chatArea.scrollTop=chatArea.scrollHeight;
-
-  aiChatHistory.push({role:'user',content:msg});
-
-  try{
-    const context=buildContextPrompt();
-    const systemPrompt=`あなたは営業マン専属のAI秘書です。以下が今日の状況です：\n\n${context}\n\n話し方：親しみやすい敬語、具体的・簡潔に、200文字以内を目安に。`;
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:getApiHeaders(),
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:600,
-        system:systemPrompt,
-        messages:aiChatHistory
-      })
-    });
-    const data=await res.json();
-    const reply=data.content?.[0]?.text||'うまく回答できませんでした。';
-    aiChatHistory.push({role:'assistant',content:reply});
-    document.getElementById(thinkId).outerHTML=`<div class="ai-msg bot"><div class="ai-avatar">🤖</div><div class="ai-msg-bubble">${esc(reply).replace(/\n/g,'<br>')}</div></div>`;
-  }catch(e){
-    document.getElementById(thinkId).outerHTML=`<div class="ai-msg bot"><div class="ai-avatar">🤖</div><div class="ai-msg-bubble" style="color:var(--q1c);">エラーが発生しました。</div></div>`;
-  }
-  chatArea.scrollTop=chatArea.scrollHeight;
-}
-
-function buildContextPrompt(){
-  const td=todayStr();
-  const urgent=tasks.filter(t=>!t.done&&t.q===1);
-  const overdue=tasks.filter(t=>!t.done&&t.due&&t.due<td);
-  const todayT=tasks.filter(t=>!t.done&&t.due===td);
-  const todayApos=apos.filter(a=>a.date===td).sort((a,b)=>a.start.localeCompare(b.start));
-  const unreadM=mails.filter(m=>m.unread);
-  const taskM=mails.filter(m=>m.cat==='task'&&m.unread);
-
-  const lines=[];
-  lines.push(`【今日の日付】${td}`);
-  if(todayApos.length){
-    lines.push(`\n【今日のアポ・訪問】`);
-    todayApos.forEach(a=>lines.push(`・${a.start} ${a.title}（${a.place||'場所未定'}）`));
-  }
-  if(overdue.length){
-    lines.push(`\n【期限切れタスク（${overdue.length}件）】`);
-    overdue.slice(0,5).forEach(t=>lines.push(`・[${t.due}] ${t.title}（${t.cust||'顧客未設定'}）`));
-  }
-  if(urgent.length){
-    lines.push(`\n【今すぐやるタスク（${urgent.length}件）】`);
-    urgent.slice(0,5).forEach(t=>lines.push(`・${t.title}（${t.cust||''}、発生源:${(SRC[t.src]||SRC.self).label}）`));
-  }
-  if(todayT.length){
-    lines.push(`\n【本日期限タスク（${todayT.length}件）】`);
-    todayT.slice(0,5).forEach(t=>lines.push(`・${t.title}`));
-  }
-  if(taskM.length){
-    lines.push(`\n【要対応メール（${taskM.length}件）】`);
-    taskM.slice(0,3).forEach(m=>lines.push(`・「${m.subject}」from ${m.from}`));
-  }
-  if(unreadM.length>taskM.length){
-    lines.push(`\n【その他未読メール】${unreadM.length-taskM.length}件`);
-  }
-  if(!urgent.length&&!overdue.length&&!todayT.length&&!todayApos.length){
-    lines.push('\n【状況】今日の緊急タスク・期限タスクはなし。余裕がある日です。');
-  }
-  return lines.join('\n');
-}
-
-/* ════════ TASK ════════ */
 function dueChip(t){
   if(!t.due)return'';const td=todayStr();
   if(t.done)return`<span class="cdue">${fmtDate(t.due)}</span>`;
@@ -884,118 +702,296 @@ function dueChip(t){
   return`<span class="cdue">${fmtDate(t.due)}</span>`;
 }
 function subStats(t){if(!t.subs||!t.subs.length)return null;const done=t.subs.filter(s=>s.done).length;return{done,total:t.subs.length};}
-function taskCardHtml(t){
+
+function taskCardHtml(t,isDragEnabled=true){
   const s=SRC[t.src]||SRC.self;
-  const st=subStats(t);
+  const ss=subStats(t);
   let bar='';
-  if(st){const pct=Math.round(st.done/st.total*100);const al=st.done===st.total;bar=`<div class="spb"><div class="spbw"><div class="spbf${al?'':' pt'}" style="width:${pct}%"></div></div><span class="spbc${al?' al':''}">${st.done}/${st.total}</span></div>`;}
-  return`<div class="tcard${t.done?' done':''}" onclick="openTaskDet('${t.id}')">
-    <div class="tr1"><span class="tbadge">${s.icon}</span><div class="tct">${esc(t.title)}</div><div class="tchk" onclick="event.stopPropagation();toggleTask('${t.id}')"><svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
-    <div class="tr2"><span class="ctag ${s.tc}">${esc(s.label)}</span>${t.cust?`<span style="font-size:9px;color:var(--text3);background:rgba(0,0,0,.05);padding:1px 5px;border-radius:3px;">${esc(t.cust)}</span>`:''} ${dueChip(t)}</div>${bar}
+  if(ss){const pct=Math.round(ss.done/ss.total*100);const al=ss.done===ss.total;bar=`<div class="spb"><div class="spbw"><div class="spbf${al?'':' pt'}" style="width:${pct}%"></div></div><span class="spbc${al?' al':''}">${ss.done}/${ss.total}</span></div>`;}
+  const stBtns=Object.entries(STATUSES).map(([k,v])=>`<button class="smv${t.st===k?' active-st':''}" ${t.st===k?'disabled':''} onclick="event.stopPropagation();moveStatus('${t.id}','${k}')" style="${t.st!==k?`background:${v.bg};color:${v.color};border-color:${v.color};`:''}">${v.label}</button>`).join('');
+  return`<div class="tcard${t.done?' done':''}" id="tc_${t.id}" draggable="${isDragEnabled&&!t.done}" onclick="openTaskDet('${t.id}')"
+    data-id="${t.id}"
+    ondragstart="onDragStart(event,'${t.id}')"
+    ondragend="onDragEnd(event)">
+    <div class="tr1">
+      <span class="tbadge">${s.icon}</span>
+      <div class="tct">${esc(t.title)}</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask('${t.id}')">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <div class="tr2">
+      <span class="ctag ${s.tc}">${esc(s.label)}</span>
+      ${t.cust?`<span class="ccust">${esc(t.cust)}</span>`:''}
+      ${dueChip(t)}
+    </div>
+    ${bar}
+    ${t.done?'':`<div class="status-move">${stBtns}</div>`}
   </div>`;
 }
+
 function renderTasks(){
-  const g={1:[],2:[],3:[],4:[]};
-  tasks.forEach(t=>g[t.q].push(t));
-  for(let q=1;q<=4;q++){
-    const items=g[q];
-    document.getElementById('cnt'+q).textContent=items.length;
-    const b=document.getElementById('body'+q);
-    if(!items.length){b.innerHTML=`<div class="qempty">タスクなし</div>`;continue;}
-    b.innerHTML=[...items.filter(t=>!t.done),...items.filter(t=>t.done)].map(taskCardHtml).join('');
-  }
-  const urgent=tasks.filter(t=>!t.done&&(t.q===1||(t.due&&t.due<todayStr()))).length;
-  const badge=document.getElementById('task-badge');
-  badge.textContent=urgent;badge.style.display=urgent>0?'':'none';
+  const sales=getSalesTasks();
+  const col={todo:[],doing:[],maker:[],customer:[]};
+  sales.forEach(t=>{const k=t.st&&col[t.st]!==undefined?t.st:'todo';col[k].push(t);});
+
+  Object.keys(col).forEach(k=>{
+    const all=col[k];
+    const active=all.filter(t=>!t.done);
+    const done=all.filter(t=>t.done);
+    const isExpanded=expandedCols[k];
+    const isDoneOpen=expandedDone[k];
+
+    document.getElementById('cnt-'+k).textContent=active.length;
+    const b=document.getElementById('body-'+k);
+
+    let html='';
+    if(!active.length&&!done.length){
+      html=`<div class="kempty">なし</div>`;
+    } else {
+      // 未完了：5件まで、残りは＋ボタン
+      const shown=isExpanded?active:active.slice(0,SHOW_LIMIT);
+      html+=shown.map(t=>taskCardHtml(t)).join('');
+      if(active.length>SHOW_LIMIT&&!isExpanded){
+        html+=`<button class="more-btn" onclick="expandCol('${k}')">＋ あと${active.length-SHOW_LIMIT}件を表示</button>`;
+      } else if(isExpanded&&active.length>SHOW_LIMIT){
+        html+=`<button class="more-btn" onclick="collapseCol('${k}')">▲ 折りたたむ</button>`;
+      }
+      // 完了済み
+      if(done.length){
+        html+=`<button class="done-toggle" onclick="toggleDoneSection('${k}')">
+          <span>✓ 完了済み ${done.length}件</span>
+          <span>${isDoneOpen?'▲':'▼'}</span>
+        </button>
+        <div class="done-section${isDoneOpen?' open':''}" id="done-${k}">
+          ${done.map(t=>taskCardHtml(t,false)).join('')}
+        </div>`;
+      }
+    }
+    b.innerHTML=html;
+  });
+
+  const urg=sales.filter(t=>!t.done&&t.st==='todo').length;
+  const badge=document.getElementById('task-badge');badge.textContent=urg;badge.style.display=urg>0?'':'none';
+
+  // ドロップゾーン設定
+  setupDropZones();
 }
+
+function expandCol(k){expandedCols[k]=true;renderTasks();}
+function collapseCol(k){expandedCols[k]=false;renderTasks();}
+function toggleDoneSection(k){expandedDone[k]=!expandedDone[k];renderTasks();}
+
 function toggleTask(id){const t=tasks.find(t=>t.id===id);if(t){t.done=!t.done;save();renderTasks();}}
+function moveStatus(id,st){const t=tasks.find(t=>t.id===id);if(t){t.st=st;save();renderTasks();showToast(`→ ${STATUSES[st].label}`);}}
+
+/* ドラッグ＆ドロップ */
+let dragId=null,longPressTimer=null;
+
+function onDragStart(e,id){
+  dragId=id;
+  e.dataTransfer.effectAllowed='move';
+  setTimeout(()=>{const el=document.getElementById('tc_'+id);if(el)el.classList.add('dragging');},0);
+}
+function onDragEnd(e){
+  dragId=null;
+  document.querySelectorAll('.tcard.dragging').forEach(el=>el.classList.remove('dragging'));
+  document.querySelectorAll('.kanban-col.drag-over').forEach(el=>el.classList.remove('drag-over'));
+}
+
+function setupDropZones(){
+  document.querySelectorAll('.kanban-col').forEach(col=>{
+    const st=col.id.replace('col-','');
+    col.addEventListener('dragover',e=>{e.preventDefault();col.classList.add('drag-over');});
+    col.addEventListener('dragleave',e=>{if(!col.contains(e.relatedTarget))col.classList.remove('drag-over');});
+    col.addEventListener('drop',e=>{
+      e.preventDefault();col.classList.remove('drag-over');
+      if(dragId&&st){moveStatus(dragId,st);dragId=null;}
+    });
+  });
+
+  // スマホ長押しドラッグ（Touch Events）
+  document.querySelectorAll('.tcard[draggable="true"]').forEach(card=>{
+    card.addEventListener('touchstart',e=>{
+      const id=card.dataset.id;
+      longPressTimer=setTimeout(()=>{
+        card.classList.add('dragging');
+        setupTouchDrag(card,id);
+      },500);
+    },{passive:true});
+    card.addEventListener('touchend',()=>{clearTimeout(longPressTimer);card.classList.remove('dragging');});
+    card.addEventListener('touchmove',()=>{clearTimeout(longPressTimer);},{passive:true});
+  });
+}
+
+function setupTouchDrag(card,id){
+  let clone=null;
+  function onMove(e){
+    e.preventDefault();
+    const touch=e.touches[0];
+    if(!clone){
+      clone=card.cloneNode(true);
+      clone.style.cssText=`position:fixed;width:${card.offsetWidth}px;opacity:.8;z-index:9999;pointer-events:none;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.2);`;
+      document.body.appendChild(clone);
+    }
+    clone.style.left=(touch.clientX-card.offsetWidth/2)+'px';
+    clone.style.top=(touch.clientY-30)+'px';
+    // ドロップ先を探す
+    clone.style.display='none';
+    const el=document.elementFromPoint(touch.clientX,touch.clientY);
+    clone.style.display='';
+    if(el){
+      document.querySelectorAll('.kanban-col.drag-over').forEach(c=>c.classList.remove('drag-over'));
+      const col=el.closest('.kanban-col');
+      if(col)col.classList.add('drag-over');
+    }
+  }
+  function onEnd(e){
+    clearTimeout(longPressTimer);
+    if(clone){clone.remove();clone=null;}
+    card.classList.remove('dragging');
+    document.querySelectorAll('.kanban-col.drag-over').forEach(col=>{
+      col.classList.remove('drag-over');
+      const st=col.id.replace('col-','');
+      moveStatus(id,st);
+    });
+    document.removeEventListener('touchmove',onMove);
+    document.removeEventListener('touchend',onEnd);
+  }
+  document.addEventListener('touchmove',onMove,{passive:false});
+  document.addEventListener('touchend',onEnd);
+}
+
+/* 即記録：見積・問い合わせ専用 */
+function openCaptureType(type){
+  curSrc=type==='見積'?'ins':'tel';
+  curSt='todo';formSubs=[];
+  document.getElementById('cs_icon').textContent=type==='見積'?'📋':'📞';
+  document.getElementById('cs_label').textContent=type;
+  ['cs_title','cs_cust','cs_memo'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cs_due').value=todayStr();
+  document.getElementById('sub_inp').value='';
+  document.getElementById('sub_list').innerHTML='';
+  document.querySelectorAll('.stsel').forEach(b=>b.classList.toggle('on',b.dataset.st==='todo'));
+  openOv('captureOv');setTimeout(()=>document.getElementById('cs_title').focus(),250);
+}
+function openCapture(src){openCaptureType(src==='ins'?'見積':'問い合わせ');}
+
 function openCapture(src){
-  curSrc=src;curQ=1;formSubs=[];
+  curSrc=src;curSt='todo';formSubs=[];
   const s=SRC[src];
   document.getElementById('cs_icon').textContent=s.icon;
   document.getElementById('cs_label').textContent=s.label;
-  document.getElementById('cs_title').value='';
-  document.getElementById('cs_cust').value='';
+  ['cs_title','cs_cust','cs_memo'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('cs_due').value=todayStr();
-  document.getElementById('cs_memo').value='';
   document.getElementById('sub_inp').value='';
   document.getElementById('sub_list').innerHTML='';
-  document.querySelectorAll('.qsel').forEach(b=>b.classList.toggle('on',+b.dataset.q===1));
-  openOv('captureOv');
-  setTimeout(()=>document.getElementById('cs_title').focus(),250);
+  document.querySelectorAll('.stsel').forEach(b=>b.classList.toggle('on',b.dataset.st==='todo'));
+  openOv('captureOv');setTimeout(()=>document.getElementById('cs_title').focus(),250);
 }
-function pickQ(q){curQ=q;document.querySelectorAll('.qsel').forEach(b=>b.classList.toggle('on',+b.dataset.q===q));}
+function pickSt(st,btn){curSt=st;document.querySelectorAll('.stsel').forEach(b=>b.classList.toggle('on',b===btn));}
 function addFormSub(){const i=document.getElementById('sub_inp');const v=i.value.trim();if(!v)return;formSubs.push({id:uid(),text:v,done:false});i.value='';renderFormSubList();i.focus();}
-function renderFormSubList(){
-  document.getElementById('sub_list').innerHTML=formSubs.map((s,i)=>`<div class="sub-fi-item"><span>· ${esc(s.text)}</span><button class="sub-del" onclick="formSubs.splice(${i},1);renderFormSubList()">×</button></div>`).join('');
-}
+function renderFormSubList(){document.getElementById('sub_list').innerHTML=formSubs.map((s,i)=>`<div class="sub-fi-item"><span>· ${esc(s.text)}</span><button class="sub-del" onclick="formSubs.splice(${i},1);renderFormSubList()">×</button></div>`).join('');}
 function saveCapture(){
-  const t=document.getElementById('cs_title').value.trim();
-  if(!t){document.getElementById('cs_title').focus();return;}
-  tasks.unshift({id:uid(),src:curSrc,title:t,cust:document.getElementById('cs_cust').value.trim(),due:document.getElementById('cs_due').value,memo:document.getElementById('cs_memo').value.trim(),q:curQ,done:false,created:Date.now(),subs:[...formSubs]});
+  const title=document.getElementById('cs_title').value.trim();
+  if(!title){document.getElementById('cs_title').focus();return;}
+  tasks.unshift({id:uid(),src:curSrc,title,cust:document.getElementById('cs_cust').value.trim(),due:document.getElementById('cs_due').value,memo:document.getElementById('cs_memo').value.trim(),st:curSt,done:false,created:Date.now(),subs:[...formSubs]});
   save();renderTasks();closeOv('captureOv');
 }
-function openTaskDet(id){
-  selTaskId=id;renderTaskDet();openOv('taskDetOv');
-}
+
+function openTaskDet(id){selTaskId=id;renderTaskDet();openOv('taskDetOv');}
 function renderTaskDet(){
   const t=tasks.find(t=>t.id===selTaskId);if(!t)return;
-  const qi=QI[t.q];const s=SRC[t.src]||SRC.self;
-  const subs=(t.subs||[]);
-  const dc=subs.filter(s=>s.done).length;
-  const subItems=subs.map(sub=>`<div class="sdi${sub.done?' dsd':''}" id="sdi_${sub.id}"><div class="sdc" onclick="toggleSub('${t.id}','${sub.id}')"><svg class="sdci" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sdit">${esc(sub.text)}</span><button class="sdd" onclick="delSub('${t.id}','${sub.id}')">×</button></div>`).join('');
+  const s=SRC[t.src]||SRC.self;const st=STATUSES[t.st||'todo'];
+  const subs=t.subs||[];const dc=subs.filter(s=>s.done).length;
+  const subItems=subs.map(sub=>`<div class="sdi${sub.done?' dsd':''}"><div class="sdc" onclick="toggleSub('${t.id}','${sub.id}')"><svg class="sdci" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="sdit">${esc(sub.text)}</span><button class="sdd" onclick="delSub('${t.id}','${sub.id}')">×</button></div>`).join('');
+  const stBtns=Object.entries(STATUSES).map(([k,v])=>`<button class="mv-btn${t.st===k?' cur':''}" ${t.st===k?'disabled':''} style="${t.st!==k?`background:${v.bg};color:${v.color};border-color:${v.color}`:''}" onclick="moveStatus('${t.id}','${k}');renderTaskDet()">${v.label}</button>`).join('');
   document.getElementById('taskDetSheet').innerHTML=`
     <div class="handle"></div>
-    <span class="dbadge" style="background:${qi.bg};color:${qi.c}">${qi.name}</span>
+    <span class="dbadge" style="background:${st.bg};color:${st.color}">${st.label}</span>
     <div style="font-size:15px;font-weight:700;margin-bottom:12px;line-height:1.4">${esc(t.title)}</div>
     <div class="drow"><span class="dkey">発生源</span><span class="dval">${s.icon} ${esc(s.label)}</span></div>
     <div class="drow"><span class="dkey">顧客</span><span class="dval">${esc(t.cust||'—')}</span></div>
     <div class="drow"><span class="dkey">期限</span><span class="dval">${fmtDate(t.due)}</span></div>
     ${t.memo?`<div class="drow"><span class="dkey">メモ</span><span class="dval">${esc(t.memo)}</span></div>`:''}
-    <div style="font-size:10px;font-weight:700;color:var(--text2);letter-spacing:.05em;margin:12px 0 6px;">サブタスク ${subs.length?`(${dc}/${subs.length})`:''}
-    </div>
-    <div class="sub-det-list" id="subDetList">${subItems||'<div style="font-size:12px;color:var(--text3);">まだありません</div>'}</div>
+    <div style="font-size:10px;font-weight:700;color:var(--text2);margin:12px 0 6px;">サブタスク ${subs.length?`(${dc}/${subs.length})`:''}</div>
+    <div class="sub-det-list">${subItems||'<div style="font-size:12px;color:var(--text3)">まだありません</div>'}</div>
     <div class="sub-add-row"><input id="det_sub_inp" type="text" placeholder="サブタスクを追加…"><button onclick="addDetSub()">＋</button></div>
-    <div style="font-size:10px;font-weight:700;color:var(--text2);letter-spacing:.05em;margin:12px 0 6px;">象限を移動</div>
-    <div class="move-grid">${[1,2,3,4].map(q=>`<button class="mv-btn" style="${t.q===q?`background:${QI[q].bg};color:${QI[q].c};border-color:${QI[q].c}`:''}" onclick="moveTask(${q})">${QI[q].name}</button>`).join('')}</div>
+    <div style="font-size:10px;font-weight:700;color:var(--text2);margin:12px 0 6px;">ステータスを変更</div>
+    <div class="move-st-grid">${stBtns}</div>
     <div class="btn-row" style="margin-top:12px;">
       <button class="btn btn-p" onclick="toggleDetTask()">${t.done?'未完了に戻す':'完了にする'}</button>
       <button class="btn btn-d" onclick="deleteTask()">削除</button>
       <button class="btn btn-g" onclick="closeOv('taskDetOv')">閉じる</button>
     </div>`;
 }
-function toggleSub(tid,sid){const t=tasks.find(t=>t.id===tid);if(!t)return;const s=t.subs.find(s=>s.id===sid);if(s){s.done=!s.done;save();renderTasks();renderTaskDet();}}
+function toggleSub(tid,sid){const t=tasks.find(t=>t.id===tid);if(!t)return;const s=(t.subs||[]).find(s=>s.id===sid);if(s){s.done=!s.done;save();renderTasks();renderTaskDet();}}
 function delSub(tid,sid){const t=tasks.find(t=>t.id===tid);if(!t)return;t.subs=t.subs.filter(s=>s.id!==sid);save();renderTasks();renderTaskDet();}
 function addDetSub(){const i=document.getElementById('det_sub_inp');if(!i)return;const v=i.value.trim();if(!v)return;const t=tasks.find(t=>t.id===selTaskId);if(!t)return;if(!t.subs)t.subs=[];t.subs.push({id:uid(),text:v,done:false});i.value='';save();renderTasks();renderTaskDet();setTimeout(()=>{const ni=document.getElementById('det_sub_inp');if(ni)ni.focus();},50);}
 function toggleDetTask(){toggleTask(selTaskId);renderTaskDet();}
-function moveTask(q){const t=tasks.find(t=>t.id===selTaskId);if(t){t.q=q;save();renderTasks();renderTaskDet();}}
 function deleteTask(){if(!confirm('削除しますか？'))return;tasks=tasks.filter(t=>t.id!==selTaskId);save();renderTasks();closeOv('taskDetOv');}
 
-/* ════════ SCHEDULE ════════ */
-let selDay_=null;
-function getWeekDates(offset=0){
-  const d=new Date();d.setDate(d.getDate()-d.getDay()+1+offset*7);
-  return Array.from({length:7},(_,i)=>{const dd=new Date(d);dd.setDate(d.getDate()+i);return dd.toISOString().slice(0,10);});
+/* DEV */
+function renderDev(){
+  const devTasks=getDevTasks();
+  const total=devTasks.length,done=devTasks.filter(t=>t.done).length,urg=devTasks.filter(t=>!t.done&&t.st==='todo').length,plan=devTasks.filter(t=>!t.done&&t.st==='doing').length;
+  document.getElementById('devStats').innerHTML=`<div class="dev-stat"><div class="dev-stat-num">${total}</div><div class="dev-stat-label">合計</div></div><div class="dev-stat"><div class="dev-stat-num done-c">${done}</div><div class="dev-stat-label">完了</div></div><div class="dev-stat"><div class="dev-stat-num" style="color:#f87171">${urg}</div><div class="dev-stat-label">未着手</div></div><div class="dev-stat"><div class="dev-stat-num" style="color:#fcd34d">${plan}</div><div class="dev-stat-label">作業中</div></div>`;
+  const rem=devTasks.filter(t=>!t.done).length;const badge=document.getElementById('dev-badge');badge.textContent=rem;badge.style.display=rem>0?'':'none';
+  let filtered=devTasks;
+  if(devFilter==='todo')filtered=devTasks.filter(t=>!t.done);
+  if(devFilter==='done')filtered=devTasks.filter(t=>t.done);
+  const list=document.getElementById('devList');
+  if(!filtered.length){list.innerHTML=`<div class="dev-empty">タスクなし<br><br><button style="background:var(--text);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;" onclick="addDevTasks()">🛠 開発タスクを一括登録</button></div>`;return;}
+  list.innerHTML=[...filtered.filter(t=>!t.done),...filtered.filter(t=>t.done)].map(devCardHtml).join('');
 }
+function devCardHtml(t){
+  const subs=t.subs||[],dc=subs.filter(s=>s.done).length;
+  const pct=subs.length?Math.round(dc/subs.length*100):0,allDone=subs.length>0&&dc===subs.length;
+  const pCls=t.q===1?'dev-p-now':t.q===2?'dev-p-plan':'dev-p-later';
+  const pLbl=t.q===1?'今すぐ':t.q===2?'計画':'後回し';
+  const td=todayStr();
+  let dueHtml='';if(t.due){const cls=t.due<td?'ov':t.due===td?'td':'';const lbl=t.due<td?`期限切れ`:t.due===td?'本日':fmtDate(t.due);dueHtml=`<span class="dev-due ${cls}">📅 ${lbl}</span>`;}
+  const expanded=expandedDevIds.has(t.id);
+  const subItems=subs.map(sub=>`<div class="dev-sub-item${sub.done?' sdone':''}"><div class="dev-sub-chk" onclick="toggleDevSub('${t.id}','${sub.id}')"><svg class="dev-sub-chki" width="7" height="5" viewBox="0 0 7 5" fill="none"><path d="M1 2.5L2.8 4.5L6 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="dev-sub-txt">${esc(sub.text)}</span></div>`).join('');
+  return`<div class="dev-card${t.done?' dev-done':''}" id="dc_${t.id}">
+    <div class="dev-card-head">
+      <div class="dev-card-chk" onclick="event.stopPropagation();toggleTask('${t.id}');renderDev();">
+        <svg class="dev-chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="dev-card-body">
+        <div class="dev-card-title">${esc(t.title)}</div>
+        <div class="dev-card-meta"><span class="dev-priority ${pCls}">${pLbl}</span>${dueHtml}${subs.length?`<span style="font-size:9px;color:${allDone?'#2ecc71':'var(--text3)'};">${dc}/${subs.length}</span>`:''}</div>
+        ${t.memo?`<div class="dev-memo">${esc(t.memo)}</div>`:''}
+      </div>
+      ${subs.length?`<button class="dev-expand-btn" onclick="toggleDevExpand('${t.id}')">${expanded?'▲':'▼'}</button>`:''}
+    </div>
+    ${subs.length?`<div class="dev-progress"><div class="dev-progress-fill${allDone?'':' partial'}" style="width:${pct}%"></div></div>`:''}
+    ${expanded?`<div class="dev-subs">${subItems}<div class="dev-sub-add"><input id="dsa_${t.id}" type="text" placeholder="サブタスクを追加…"><button onclick="addDevSubTask('${t.id}')">＋</button></div></div>`:''}
+  </div>`;
+}
+function toggleDevExpand(id){if(expandedDevIds.has(id))expandedDevIds.delete(id);else expandedDevIds.add(id);renderDev();}
+function toggleDevSub(tid,sid){const t=tasks.find(t=>t.id===tid);if(!t)return;const s=(t.subs||[]).find(s=>s.id===sid);if(s){s.done=!s.done;save();renderDev();}}
+function addDevSubTask(tid){const inp=document.getElementById('dsa_'+tid);if(!inp)return;const v=inp.value.trim();if(!v)return;const t=tasks.find(t=>t.id===tid);if(!t)return;if(!t.subs)t.subs=[];t.subs.push({id:uid(),text:v,done:false});inp.value='';save();renderDev();expandedDevIds.add(tid);setTimeout(()=>{const ni=document.getElementById('dsa_'+tid);if(ni)ni.focus();},50);}
+function setDevFilter(f,btn){devFilter=f;document.querySelectorAll('.dev-filter').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderDev();}
+function openDevCapture(){openCapture('self');setTimeout(()=>{curSt='todo';document.querySelectorAll('.stsel').forEach(b=>b.classList.toggle('on',b.dataset.st==='todo'));},150);}
+
+/* SCHEDULE */
+function getWeekDates(offset=0){const d=new Date();d.setDate(d.getDate()-d.getDay()+1+offset*7);return Array.from({length:7},(_,i)=>{const dd=new Date(d);dd.setDate(d.getDate()+i);return dd.toISOString().slice(0,10);});}
 function moveWeek(dir){if(dir===0)weekOffset=0;else weekOffset+=dir;renderSched();}
 function renderSched(){
-  const days=getWeekDates(weekOffset);
-  const td=todayStr();
-  const [y,m]=days[0].split('-');
+  const days=getWeekDates(weekOffset),td=todayStr();
+  const[y,m]=days[0].split('-');
   document.getElementById('weekLabel').textContent=`${+y}年${+m}月`;
-  const DAY_NAMES=['月','火','水','木','金','土','日'];
-  const grid=document.getElementById('weekGrid');
-  grid.innerHTML=days.map((d,i)=>{
-    const isToday=d===td;
-    const num=+d.split('-')[2];
+  const DN=['月','火','水','木','金','土','日'];
+  document.getElementById('weekGrid').innerHTML=days.map((d,i)=>{
+    const isToday=d===td,num=+d.split('-')[2];
     const dayEvts=[
-      ...apos.filter(a=>a.date===d).map(a=>`<div class="wday-evt ${a.type}" onclick="event.stopPropagation();openApoDetail('${a.id}')" title="${esc(a.title)}">${fmtTime(a.start)} ${esc(a.title)}</div>`),
-      ...tasks.filter(t=>!t.done&&t.due===d&&t.q===1).map(t=>`<div class="wday-evt task" onclick="event.stopPropagation();openTaskDet('${t.id}')" title="${esc(t.title)}">🔴 ${esc(t.title)}</div>`),
+      ...apos.filter(a=>a.date===d).map(a=>`<div class="wday-evt ${a.type}" title="${esc(a.title)}">${fmtTime(a.start)} ${esc(a.title)}</div>`),
+      ...tasks.filter(t=>!t.done&&t.due===d&&t.st==='todo').map(t=>`<div class="wday-evt" style="background:#fff1f0;color:#c0392b;">🔴 ${esc(t.title)}</div>`),
     ];
-    const shown=dayEvts.slice(0,2);
-    if(dayEvts.length>2)shown.push(`<div class="wday-evt more">+${dayEvts.length-2}</div>`);
-    return`<div class="wday${isToday?' today':''}" onclick="selectDay('${d}')" style="cursor:pointer;${selDay_===d?'outline:2px solid var(--blue);':''}">
-      ${isToday?`<div class="wday-circle">${num}</div>`:`<div class="wday-name">${DAY_NAMES[i]}</div><div class="wday-num">${num}</div>`}
+    const shown=dayEvts.slice(0,2);if(dayEvts.length>2)shown.push(`<div class="wday-evt more">+${dayEvts.length-2}</div>`);
+    return`<div class="wday${isToday?' today':''}" onclick="selectDay('${d}')" style="${selDay_===d?'outline:2px solid var(--blue);':''}">
+      ${isToday?`<div class="wday-circle">${num}</div>`:`<div class="wday-name">${DN[i]}</div><div class="wday-num">${num}</div>`}
       <div class="wday-events">${shown.join('')}</div>
     </div>`;
   }).join('');
@@ -1005,281 +1001,89 @@ function renderSched(){
 function selectDay(d){selDay_=d;renderSched();}
 function renderDayDetail(d){
   const det=document.getElementById('dayDetail');
-  const [y,m,dd]=d.split('-');
-  const DAY_JP=['日','月','火','水','木','金','土'];
-  const dow=DAY_JP[new Date(d).getDay()];
+  const[y,m,dd]=d.split('-');
+  const dow=['日','月','火','水','木','金','土'][new Date(d).getDay()];
   const dayApos=apos.filter(a=>a.date===d).sort((a,b)=>a.start.localeCompare(b.start));
   const dayTasks=tasks.filter(t=>!t.done&&t.due===d);
-  const apoHtml=dayApos.length
-    ?dayApos.map(a=>`<div class="apo-item${a.type==='visit'?' visit-apo':a.type==='tel'?' tel-apo':''}">
-      <div class="apo-time">${fmtTime(a.start)}${a.end?` – ${fmtTime(a.end)}`:''}</div>
-      <div class="apo-title">${a.type==='visit'?'🚗':a.type==='tel'?'📞':'📅'} ${esc(a.title)}</div>
-      ${a.place?`<div class="apo-sub">📍 ${esc(a.place)}</div>`:''}
-      ${a.memo?`<div class="apo-sub">📝 ${esc(a.memo)}</div>`:''}
-    </div>`).join('')
-    :'<div style="font-size:12px;color:var(--text3);margin-bottom:10px;">予定なし</div>';
-  const todoHtml=dayTasks.length
-    ?dayTasks.map(t=>`<div class="todo-item${t.done?' done-t':''}">
-      <div class="todo-chk" onclick="toggleTask('${t.id}')"><svg style="display:${t.done?'block':'none'}" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <span class="todo-txt">${(SRC[t.src]||SRC.self).icon} ${esc(t.title)}</span>
-    </div>`).join('')
-    :'<div style="font-size:12px;color:var(--text3);">期限タスクなし</div>';
-  det.innerHTML=`
-    <div class="day-detail-title">${+y}年${+m}月${+dd}日（${dow}）</div>
-    <div class="apo-list">${apoHtml}</div>
-    <button class="add-apo-btn" onclick="openApo('${d}')">＋ アポ・予定を追加</button>
-    <div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:6px;">本日のタスク</div>
-    <div class="todo-day-list">${todoHtml}</div>`;
+  const apoHtml=dayApos.length?dayApos.map(a=>`<div class="apo-item${a.type==='visit'?' visit-apo':a.type==='tel'?' tel-apo':''}"><div class="apo-time">${fmtTime(a.start)}${a.end?` – ${fmtTime(a.end)}`:''}</div><div class="apo-title">${a.type==='visit'?'🚗':a.type==='tel'?'📞':'📅'} ${esc(a.title)}</div>${a.place?`<div class="apo-sub">📍 ${esc(a.place)}</div>`:''}${a.memo?`<div class="apo-sub">📝 ${esc(a.memo)}</div>`:''}</div>`).join(''):'<div style="font-size:12px;color:var(--text3);margin-bottom:10px;">予定なし</div>';
+  const todoHtml=dayTasks.length?dayTasks.map(t=>{const stInfo=STATUSES[t.st||'todo'];return`<div class="todo-item"><span class="todo-txt">${(SRC[t.src]||SRC.self).icon} ${esc(t.title)}</span><span class="todo-st" style="background:${stInfo.bg};color:${stInfo.color};">${stInfo.label}</span></div>`;}).join(''):'<div style="font-size:12px;color:var(--text3);">期限タスクなし</div>';
+  det.innerHTML=`<div class="day-detail-title">${+y}年${+m}月${+dd}日（${dow}）</div><div class="apo-list">${apoHtml}</div><button class="add-apo-btn" onclick="openApo('${d}')">＋ アポ・予定を追加</button><div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:6px;">本日のタスク</div><div class="todo-day-list">${todoHtml}</div>`;
 }
 function openApo(date=''){
+  ['apo_title','apo_place','apo_memo'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('apo_date').value=date||todayStr();
   document.getElementById('apo_type').value='visit';
   document.getElementById('apo_start').value='10:00';
   document.getElementById('apo_end').value='11:00';
-  document.getElementById('apo_title').value='';
-  document.getElementById('apo_place').value='';
-  document.getElementById('apo_memo').value='';
   openOv('apoOv');
 }
-function openApoDetail(id){/* 簡易実装：アポ詳細はタスク詳細と同じシートを使いまわす */
+function openApoDetail(id){
   const a=apos.find(a=>a.id===id);if(!a)return;
-  document.getElementById('taskDetSheet').innerHTML=`
-    <div class="handle"></div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">${a.type==='visit'?'🚗':a.type==='tel'?'📞':'📅'} ${esc(a.title)}</div>
-    <div class="drow"><span class="dkey">日付</span><span class="dval">${fmtDate(a.date)}</span></div>
-    <div class="drow"><span class="dkey">時刻</span><span class="dval">${fmtTime(a.start)}${a.end?` – ${fmtTime(a.end)}`:''}</span></div>
-    ${a.place?`<div class="drow"><span class="dkey">場所</span><span class="dval">${esc(a.place)}</span></div>`:''}
-    ${a.memo?`<div class="drow"><span class="dkey">メモ</span><span class="dval">${esc(a.memo)}</span></div>`:''}
-    <div class="btn-row" style="margin-top:14px;">
-      <button class="btn btn-d" onclick="deleteApo('${a.id}')">削除</button>
-      <button class="btn btn-g" onclick="closeOv('taskDetOv')">閉じる</button>
-    </div>`;
+  document.getElementById('taskDetSheet').innerHTML=`<div class="handle"></div><div style="font-size:15px;font-weight:700;margin-bottom:12px;">${a.type==='visit'?'🚗':a.type==='tel'?'📞':'📅'} ${esc(a.title)}</div><div class="drow"><span class="dkey">日付</span><span class="dval">${fmtDate(a.date)}</span></div><div class="drow"><span class="dkey">時刻</span><span class="dval">${fmtTime(a.start)}${a.end?` – ${fmtTime(a.end)}`:''}</span></div>${a.place?`<div class="drow"><span class="dkey">場所</span><span class="dval">${esc(a.place)}</span></div>`:''}${a.memo?`<div class="drow"><span class="dkey">メモ</span><span class="dval">${esc(a.memo)}</span></div>`:''}<div class="btn-row" style="margin-top:14px;"><button class="btn btn-d" onclick="deleteApo('${a.id}')">削除</button><button class="btn btn-g" onclick="closeOv('taskDetOv')">閉じる</button></div>`;
   openOv('taskDetOv');
 }
 function saveApo(){
-  const title=document.getElementById('apo_title').value.trim();
-  if(!title){document.getElementById('apo_title').focus();return;}
+  const title=document.getElementById('apo_title').value.trim();if(!title){document.getElementById('apo_title').focus();return;}
   apos.push({id:uid(),type:document.getElementById('apo_type').value,date:document.getElementById('apo_date').value,start:document.getElementById('apo_start').value,end:document.getElementById('apo_end').value,title,place:document.getElementById('apo_place').value.trim(),memo:document.getElementById('apo_memo').value.trim()});
   save();closeOv('apoOv');renderSched();
 }
 function deleteApo(id){if(!confirm('削除しますか？'))return;apos=apos.filter(a=>a.id!==id);save();closeOv('taskDetOv');renderSched();}
 
-/* ════════ MAIL ════════ */
-let curMailCat='task';
-function classifyMail(m){
-  const txt=(m.subject+' '+(m.snippet||'')).toLowerCase();
-  if(/見積|依頼|確認|お願い|ご検討|回答/.test(txt))return'task';
-  if(/訪問|打合|日程|アポ|スケジュール|面談/.test(txt))return'apo';
-  if(/お知らせ|ニュース|案内|info|newsletter/.test(txt))return'info';
-  return'other';
-}
-function catTag(cat){
-  const m={task:`<span class="mc-tag tsk">🔴 要対応</span>`,apo:`<span class="mc-tag apo">🟢 アポ関連</span>`,info:`<span class="mc-tag inf">🟡 情報</span>`,other:`<span class="mc-tag oth">その他</span>`};
-  return m[cat]||m.other;
-}
-function setMailFilter(f,btn){
-  mailFilter=f;
-  document.querySelectorAll('.mf-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  renderMailList();
-}
+/* MAIL */
+function classifyMail(m){const txt=(m.subject+' '+(m.snippet||'')).toLowerCase();if(/見積|依頼|確認|お願い|回答/.test(txt))return'task';if(/訪問|打合|日程|アポ|面談/.test(txt))return'apo';if(/お知らせ|ニュース|案内|newsletter/.test(txt))return'info';return'other';}
+function catTag(cat){const m={task:`<span class="mc-tag tsk">🔴 要対応</span>`,apo:`<span class="mc-tag apo">🟢 アポ関連</span>`,info:`<span class="mc-tag inf">🟡 情報</span>`,other:`<span class="mc-tag oth">その他</span>`};return m[cat]||m.other;}
+function setMailFilter(f,btn){mailFilter=f;document.querySelectorAll('.mf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderMailList();}
 function renderMailList(){
   const list=document.getElementById('mailList');
-  let filtered=mails.filter(m=>{
-    if(mailFilter==='all')return true;
-    if(mailFilter==='unread')return m.unread;
-    return m.cat===mailFilter;
-  });
-  if(!filtered.length){
-    list.innerHTML=`<div class="mail-empty"><div class="mail-empty-icon">✉️</div><p>メールがありません。<br>Gmailから届いたメールの要点を<br>手入力で管理できます。</p><button onclick="openAddMail()">＋ メールを追加</button></div>`;
-    return;
-  }
-  // 新しい順
-  const sorted=[...filtered].sort((a,b)=>b.created-(a.created||0));
-  list.innerHTML=sorted.map(m=>`
-    <div class="mail-card${m.unread?' unread':''} cat-${m.cat}" onclick="openMailDet('${m.id}')">
-      <div class="mc-top"><span class="mc-from">${esc(m.from)}</span><span class="mc-time">${esc(m.date_label)}</span></div>
-      <div class="mc-subject">${m.unread?'<b>':''}${esc(m.subject)}${m.unread?'</b>':''}</div>
-      <div class="mc-snippet">${esc(m.snippet)}</div>
-      <div class="mc-tags">${catTag(m.cat)}${m.unread?'<span class="mc-tag unr">未読</span>':''}</div>
-      <div class="mc-actions">
-        <button class="mc-act a-task" onclick="event.stopPropagation();mailToTask('${m.id}')">📋 タスク化</button>
-        <button class="mc-act a-apo"  onclick="event.stopPropagation();mailToApo('${m.id}')">📅 アポ化</button>
-        <button class="mc-act a-read" onclick="event.stopPropagation();markRead('${m.id}')">✓ 既読</button>
-      </div>
-    </div>`).join('');
-  const unread=mails.filter(m=>m.unread).length;
-  const badge=document.getElementById('mail-badge');
-  badge.textContent=unread;badge.style.display=unread>0?'':'none';
+  let filtered=mails.filter(m=>{if(mailFilter==='all')return true;if(mailFilter==='unread')return m.unread;return m.cat===mailFilter;});
+  if(!filtered.length){list.innerHTML=`<div class="mail-empty"><p>メールがありません。<br>Gmailで受け取ったメールの要点を<br>手入力で管理できます。</p><button onclick="openAddMail()">＋ メールを追加</button></div>`;return;}
+  list.innerHTML=[...filtered].sort((a,b)=>b.created-(a.created||0)).map(m=>`<div class="mail-card${m.unread?' unread':''} cat-${m.cat}" onclick="openMailDet('${m.id}')"><div class="mc-top"><span class="mc-from">${esc(m.from)}</span><span class="mc-time">${esc(m.date_label)}</span></div><div class="mc-subject">${m.unread?'<b>':''}${esc(m.subject)}${m.unread?'</b>':''}</div><div class="mc-snippet">${esc(m.snippet)}</div><div class="mc-tags">${catTag(m.cat)}${m.unread?'<span class="mc-tag unr">未読</span>':''}</div><div class="mc-actions"><button class="mc-act a-task" onclick="event.stopPropagation();mailToTask('${m.id}')">📋 タスク化</button><button class="mc-act a-apo" onclick="event.stopPropagation();mailToApo('${m.id}')">📅 アポ化</button><button class="mc-act a-read" onclick="event.stopPropagation();markRead('${m.id}')">✓ 既読</button></div></div>`).join('');
+  const unread=mails.filter(m=>m.unread).length;const badge=document.getElementById('mail-badge');badge.textContent=unread;badge.style.display=unread>0?'':'none';
 }
 function openAddMail(){
   curMailCat='task';
-  document.getElementById('am_from').value='';
-  document.getElementById('am_subj').value='';
-  document.getElementById('am_body').value='';
+  ['am_from','am_subj','am_body'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('am_unread').checked=true;
   document.querySelectorAll('.mc-cat-btn').forEach(b=>b.classList.toggle('on',b.dataset.c==='task'));
-  openOv('addMailOv');
-  setTimeout(()=>document.getElementById('am_from').focus(),250);
+  openOv('addMailOv');setTimeout(()=>document.getElementById('am_from').focus(),250);
 }
-function pickMailCat(c,btn){
-  curMailCat=c;
-  document.querySelectorAll('.mc-cat-btn').forEach(b=>b.classList.toggle('on',b===btn));
-}
-function autoClassify(){
-  const subj=document.getElementById('am_subj').value;
-  const body=document.getElementById('am_body').value;
-  const m={subject:subj,snippet:body};
-  const cat=classifyMail(m);
-  curMailCat=cat;
-  document.querySelectorAll('.mc-cat-btn').forEach(b=>b.classList.toggle('on',b.dataset.c===cat));
-}
+function pickMailCat(c,btn){curMailCat=c;document.querySelectorAll('.mc-cat-btn').forEach(b=>b.classList.toggle('on',b===btn));}
 function saveManualMail(){
-  const from=document.getElementById('am_from').value.trim();
-  const subj=document.getElementById('am_subj').value.trim();
+  const from=document.getElementById('am_from').value.trim(),subj=document.getElementById('am_subj').value.trim();
   if(!subj){document.getElementById('am_subj').focus();return;}
-  const now=new Date();
-  const label=`${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
-  const m={id:uid(),from:from||'（不明）',subject:subj,snippet:document.getElementById('am_body').value.trim(),body:document.getElementById('am_body').value.trim(),date_label:label,unread:document.getElementById('am_unread').checked,cat:curMailCat,created:Date.now()};
-  mails.unshift(m);
-  saveMails();renderMailList();closeOv('addMailOv');
-  showToast('メールを追加しました');
+  const now=new Date(),label=`${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const body=document.getElementById('am_body').value.trim();
+  mails.unshift({id:uid(),from:from||'（不明）',subject:subj,snippet:body,body,date_label:label,unread:document.getElementById('am_unread').checked,cat:curMailCat,created:Date.now()});
+  saveMails();renderMailList();closeOv('addMailOv');showToast('メールを追加しました');
 }
-function saveMails(){localStorage.setItem('enkou_mails_v1',JSON.stringify(mails));}
-function loadMailsFromStorage(){try{mails=JSON.parse(localStorage.getItem('enkou_mails_v1')||'[]');}catch{mails=[];}}
 function openMailDet(id){
-  selMailId=id;
-  const m=mails.find(m=>m.id===id);if(!m)return;
+  selMailId=id;const m=mails.find(m=>m.id===id);if(!m)return;
   m.unread=false;saveMails();renderMailList();
   const catLabel={task:'🔴 要対応',apo:'🟢 アポ関連',info:'🟡 情報',other:'その他'}[m.cat]||'その他';
-  document.getElementById('mailDetSheet').innerHTML=`
-    <div class="handle"></div>
-    <div class="mail-detail-hd"><div class="mail-detail-subj">${esc(m.subject)}</div></div>
-    <div class="mail-detail-meta">差出人: ${esc(m.from)}<br>日時: ${esc(m.date_label)}</div>
-    <div class="mail-ai-tag"><span>分類：${catLabel}</span></div>
-    ${m.body?`<div class="mail-detail-body">${esc(m.body)}</div>`:''}
-    <div class="btn-row">
-      <button class="btn btn-p" onclick="mailToTask('${m.id}');closeOv('mailDetOv')">📋 タスク化</button>
-      <button class="btn" style="background:var(--greenbg);color:var(--green);flex:1;" onclick="mailToApo('${m.id}');closeOv('mailDetOv')">📅 アポ化</button>
-      <button class="btn btn-d" onclick="deleteMail('${m.id}')">削除</button>
-    </div>
-    <div class="btn-row" style="margin-top:6px;"><button class="btn btn-g" onclick="closeOv('mailDetOv')">閉じる</button></div>`;
+  document.getElementById('mailDetSheet').innerHTML=`<div class="handle"></div><div class="mail-det-subj">${esc(m.subject)}</div><div class="mail-det-meta">差出人: ${esc(m.from)}<br>日時: ${esc(m.date_label)}</div><div class="mail-ai-tag"><span>分類：${catLabel}</span></div>${m.body?`<div class="mail-det-body">${esc(m.body)}</div>`:''}<div class="btn-row"><button class="btn btn-p" onclick="mailToTask('${m.id}');closeOv('mailDetOv')">📋 タスク化</button><button class="btn" style="background:var(--greenbg);color:var(--green);flex:1;" onclick="mailToApo('${m.id}');closeOv('mailDetOv')">📅 アポ化</button><button class="btn btn-d" onclick="deleteMail('${m.id}')">削除</button></div><div class="btn-row" style="margin-top:6px;"><button class="btn btn-g" onclick="closeOv('mailDetOv')">閉じる</button></div>`;
   openOv('mailDetOv');
 }
-function mailToTask(id){
-  const m=mails.find(m=>m.id===id);if(!m)return;
-  tasks.unshift({id:uid(),src:'mail',title:m.subject,cust:m.from,due:todayStr(),q:m.cat==='task'?1:2,memo:m.body?m.body.slice(0,80):'メールより',done:false,subs:[],created:Date.now()});
-  save();renderTasks();showToast('タスクに追加しました');
-}
-function mailToApo(id){
-  const m=mails.find(m=>m.id===id);if(!m)return;
-  document.getElementById('apo_title').value=m.subject;
-  document.getElementById('apo_place').value=m.from;
-  document.getElementById('apo_date').value=todayStr();
-  document.getElementById('apo_type').value='gcal';
-  document.getElementById('apo_start').value='10:00';
-  document.getElementById('apo_end').value='11:00';
-  document.getElementById('apo_memo').value=m.body?m.body.slice(0,100):'';
-  closeOv('mailDetOv');openOv('apoOv');
-}
+function mailToTask(id){const m=mails.find(m=>m.id===id);if(!m)return;tasks.unshift({id:uid(),src:'mail',title:m.subject,cust:m.from,due:todayStr(),st:'todo',memo:m.body?m.body.slice(0,80):'メールより',done:false,subs:[],created:Date.now()});save();renderTasks();showToast('タスクに追加しました');}
+function mailToApo(id){const m=mails.find(m=>m.id===id);if(!m)return;document.getElementById('apo_title').value=m.subject;document.getElementById('apo_place').value=m.from;document.getElementById('apo_date').value=todayStr();document.getElementById('apo_type').value='gcal';document.getElementById('apo_start').value='10:00';document.getElementById('apo_end').value='11:00';document.getElementById('apo_memo').value=m.body?m.body.slice(0,100):'';closeOv('mailDetOv');openOv('apoOv');}
 function markRead(id){const m=mails.find(m=>m.id===id);if(m){m.unread=false;saveMails();renderMailList();}}
-function deleteMail(id){if(!confirm('このメールを削除しますか？'))return;mails=mails.filter(m=>m.id!==id);saveMails();renderMailList();closeOv('mailDetOv');}
-function loadMails(){loadMailsFromStorage();renderMailList();}
+function deleteMail(id){if(!confirm('削除しますか？'))return;mails=mails.filter(m=>m.id!==id);saveMails();renderMailList();closeOv('mailDetOv');}
 
-/* ════════ GOOGLE AUTH ════════ */
-function saveClientId(){
-  const v=document.getElementById('clientIdInput').value.trim();
-  if(!v){alert('クライアントIDを入力してください');return;}
-  clientId=v;localStorage.setItem('enkou_client_id',v);
-  signInGoogle();
-}
-function signInGoogle(){
-  if(!clientId){showTab('settings');return;}
-  if(typeof google==='undefined'||!google.accounts){
-    const s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';
-    s.onload=()=>initGIS();document.head.appendChild(s);
-  } else {initGIS();}
-}
-function initGIS(){
-  google.accounts.oauth2.initTokenClient({
-    client_id:clientId,scope:SCOPES,
-    callback:(r)=>{if(r.access_token){gToken=r.access_token;setAuthStatus(true);loadMails();loadGCalEvents();}else{setAuthStatus(false);}},
-  }).requestAccessToken();
-}
-function setAuthStatus(ok){
-  document.getElementById('authDot').className='auth-dot '+(ok?'ok':'ng');
-  document.getElementById('authStatus').textContent=ok?'Google接続済み':'未接続';
-  document.getElementById('authStatus').className=ok?'status-ok':'status-ng';
-}
-function syncAll(){if(gToken){loadMails();loadGCalEvents();}else{signInGoogle();}}
-
-/* ════ API KEY ════ */
-let anthropicApiKey='';
-function loadApiKey(){
-  anthropicApiKey=localStorage.getItem('enkou_api_key')||'';
-  if(anthropicApiKey){
-    document.getElementById('apiKeyInput').value=anthropicApiKey;
-    document.getElementById('apiKeyStatus').textContent='設定済み ✓';
-    document.getElementById('apiKeyStatus').className='status-ok';
-  }
-}
-function saveApiKey(){
-  const v=document.getElementById('apiKeyInput').value.trim();
-  if(!v){alert('APIキーを入力してください');return;}
-  anthropicApiKey=v;
-  localStorage.setItem('enkou_api_key',v);
-  document.getElementById('apiKeyStatus').textContent='設定済み ✓';
-  document.getElementById('apiKeyStatus').className='status-ok';
-  showToast('APIキーを保存しました');
-}
-function getApiHeaders(){
-  return{
-    'Content-Type':'application/json',
-    'x-api-key': anthropicApiKey,
-    'anthropic-dangerous-allow-browser':'true'
-  };
-}
-function checkApiKey(){
-  if(!anthropicApiKey){
-    showToast('⚙ 設定タブでAPIキーを入力してください');
-    return false;
-  }
-  return true;
-}
-
-/* ════ TOAST ════ */
-function showToast(msg){
-  let t=document.getElementById('toast');
-  if(!t){t=document.createElement('div');t.id='toast';t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1c1a16;color:#fff;padding:8px 18px;border-radius:20px;font-size:12px;font-weight:700;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;';document.body.appendChild(t);}
-  t.textContent=msg;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',2000);
-}
-
-/* ════ OVERLAY ════ */
+/* OVERLAY */
 function openOv(id){document.getElementById(id).classList.add('open');}
 function closeOv(id){document.getElementById(id).classList.remove('open');}
-document.addEventListener('click',e=>{
-  document.querySelectorAll('.overlay.open').forEach(o=>{if(e.target===o)o.classList.remove('open');});
-});
+document.addEventListener('click',e=>{document.querySelectorAll('.overlay.open').forEach(o=>{if(e.target===o)o.classList.remove('open');});});
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape')document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));
   if(e.key==='Enter'){
-    if(document.getElementById('captureOv').classList.contains('open')){
-      if(document.activeElement===document.getElementById('sub_inp')){addFormSub();return;}
-      saveCapture();
-    }
-    if(document.getElementById('taskDetOv').classList.contains('open')){
-      if(document.activeElement===document.getElementById('det_sub_inp'))addDetSub();
-    }
+    if(document.getElementById('captureOv').classList.contains('open')){if(document.activeElement===document.getElementById('sub_inp')){addFormSub();return;}saveCapture();}
+    if(document.getElementById('taskDetOv').classList.contains('open')){if(document.activeElement===document.getElementById('det_sub_inp'))addDetSub();}
   }
 });
 
-/* ════ BOOT ════ */
-load();
-loadMailsFromStorage();
-loadApiKey();
-renderTasks();
-renderSched();
-showTab('ai');
+function showToast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1c1a16;color:#fff;padding:8px 18px;border-radius:20px;font-size:12px;font-weight:700;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;';document.body.appendChild(t);}t.textContent=msg;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',2000);}
+
+load();loadMailsFromStorage();loadApiKey();renderTasks();renderSched();showTab('task');
 </script>
-</body>
-</html>
+
+
+</body></html>
