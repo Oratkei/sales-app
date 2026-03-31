@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0057)file:///C:/Users/nk0712/Downloads/enkou_app_latest_1.html -->
+<!-- saved from url=(0050)file:///C:/Users/nk0712/Downloads/enkou_app_7.html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -300,6 +300,28 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .mail-det-body{font-size:13px;line-height:1.7;color:var(--text);background:var(--s2);border-radius:8px;padding:12px;margin-bottom:12px;white-space:pre-wrap;max-height:260px;overflow-y:auto;}
 .mail-ai-tag{display:flex;align-items:center;gap:6px;background:var(--purplebg);border-radius:8px;padding:8px 10px;margin-bottom:10px;}
 .mail-ai-tag span{font-size:12px;color:var(--purple);}
+
+/* ── スマホ用ステータスタブ ── */
+.st-tabs{display:none;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;}
+.st-tab-list{display:flex;}
+.st-tab{flex:1;padding:10px 4px 9px;font-size:10px;font-weight:700;border:none;background:none;cursor:pointer;color:var(--text2);border-bottom:3px solid transparent;font-family:'Noto Sans JP',sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .15s;}
+.st-tab .st-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.st-tab.t-todo    .st-dot{background:#e74c3c;}
+.st-tab.t-doing   .st-dot{background:#1d5fa8;}
+.st-tab.t-maker   .st-dot{background:#b07010;}
+.st-tab.t-customer .st-dot{background:#1a7a4a;}
+.st-tab.active.t-todo    {border-bottom-color:#c0392b;color:#c0392b;}
+.st-tab.active.t-doing   {border-bottom-color:#1d5fa8;color:#1d5fa8;}
+.st-tab.active.t-maker   {border-bottom-color:#b07010;color:#b07010;}
+.st-tab.active.t-customer{border-bottom-color:#1a7a4a;color:#1a7a4a;}
+.st-cnt{font-size:9px;background:#e74c3c;color:#fff;border-radius:8px;padding:1px 5px;font-weight:700;min-width:16px;text-align:center;}
+.sp-board{display:none;flex:1;overflow-y:auto;padding:10px;flex-direction:column;gap:6px;}
+
+@media(max-width:768px){
+  .kanban-wrap{display:none !important;}
+  .st-tabs{display:block;}
+  .sp-board{display:flex;}
+}
 </style>
 </head>
 <body>
@@ -311,7 +333,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 
 <div class="tab-bar">
   <button class="tab-btn active" onclick="showTab(&#39;task&#39;)" id="tab-task">
-    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="">2</span>
+    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="display:none">0</span>
   </button>
   <button class="tab-btn" onclick="showTab(&#39;dev&#39;)" id="tab-dev">
     <span class="ti">🛠</span><span>開発</span><span class="badge" id="dev-badge" style="display:none">0</span>
@@ -333,97 +355,45 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <button class="sb tel" onclick="openCaptureType(&#39;問い合わせ&#39;)"><span class="si">📞</span><span class="sn">問い合わせ</span></button>
     </div>
   </div>
+
+  <!-- スマホ用ステータスタブ -->
+  <div class="st-tabs">
+    <div class="st-tab-list">
+      <button class="st-tab t-todo active" onclick="switchSpTab(&#39;todo&#39;,this)">
+        <span class="st-dot"></span><span>未対応</span><span class="st-cnt" id="sp-cnt-todo">0</span>
+      </button>
+      <button class="st-tab t-doing" onclick="switchSpTab(&#39;doing&#39;,this)">
+        <span class="st-dot"></span><span>対応中</span><span class="st-cnt" id="sp-cnt-doing">0</span>
+      </button>
+      <button class="st-tab t-maker" onclick="switchSpTab(&#39;maker&#39;,this)">
+        <span class="st-dot"></span><span>メーカー</span><span class="st-cnt" id="sp-cnt-maker">0</span>
+      </button>
+      <button class="st-tab t-customer" onclick="switchSpTab(&#39;customer&#39;,this)">
+        <span class="st-dot"></span><span>お客様</span><span class="st-cnt" id="sp-cnt-customer">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- スマホ用縦ボード -->
+  <div class="sp-board" id="sp-board"></div>
+
+  <!-- PC用カンバン -->
   <div class="kanban-wrap">
     <div class="kanban-col kcol-todo" id="col-todo">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">2</span></div>
-      <div class="kbody" id="body-todo"><div class="tcard" id="tc_mne9qqhi9o8o" draggable="true" onclick="openTaskDet(&#39;mne9qqhi9o8o&#39;)" data-id="mne9qqhi9o8o" ondragstart="onDragStart(event,&#39;mne9qqhi9o8o&#39;)" ondragend="onDragEnd(event)">
-    <div class="tr1">
-      <span class="tbadge">✉️</span>
-      <div class="tct">さくら苑へ見積書を送付</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhi9o8o&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div class="tr2">
-      <span class="ctag ctag-mail">メール</span>
-      <span class="ccust">さくら苑</span>
-      <span class="cdue td">本日</span>
-    </div>
-    <div class="spb"><div class="spbw"><div class="spbf pt" style="width:67%"></div></div><span class="spbc">2/3</span></div>
-    <div class="status-move"><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi9o8o&#39;,&#39;todo&#39;)" style="">未対応</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi9o8o&#39;,&#39;doing&#39;)" style="background:#e8f2fb;color:#1d5fa8;border-color:#1d5fa8;">対応中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi9o8o&#39;,&#39;maker&#39;)" style="background:#fdf4e0;color:#b07010;border-color:#b07010;">メーカー確認中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi9o8o&#39;,&#39;customer&#39;)" style="background:#e4f5ed;color:#1a7a4a;border-color:#1a7a4a;">お客様確認中</button></div>
-  </div><div class="tcard" id="tc_mne9qqhixyu1" draggable="true" onclick="openTaskDet(&#39;mne9qqhixyu1&#39;)" data-id="mne9qqhixyu1" ondragstart="onDragStart(event,&#39;mne9qqhixyu1&#39;)" ondragend="onDragEnd(event)">
-    <div class="tr1">
-      <span class="tbadge">💡</span>
-      <div class="tct">PVCグローブ価格をメーカーに確認</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhixyu1&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div class="tr2">
-      <span class="ctag ctag-self">自分発</span>
-      <span class="ccust">信越化学</span>
-      
-    </div>
-    
-    <div class="status-move"><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhixyu1&#39;,&#39;todo&#39;)" style="">未対応</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhixyu1&#39;,&#39;doing&#39;)" style="background:#e8f2fb;color:#1d5fa8;border-color:#1d5fa8;">対応中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhixyu1&#39;,&#39;maker&#39;)" style="background:#fdf4e0;color:#b07010;border-color:#b07010;">メーカー確認中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhixyu1&#39;,&#39;customer&#39;)" style="background:#e4f5ed;color:#1a7a4a;border-color:#1a7a4a;">お客様確認中</button></div>
-  </div></div>
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">0</span></div>
+      <div class="kbody" id="body-todo"></div>
     </div>
     <div class="kanban-col kcol-doing" id="col-doing">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">対応中</div></div></div><span class="kcnt" id="cnt-doing">1</span></div>
-      <div class="kbody" id="body-doing"><div class="tcard" id="tc_mne9qqhii2pu" draggable="true" onclick="openTaskDet(&#39;mne9qqhii2pu&#39;)" data-id="mne9qqhii2pu" ondragstart="onDragStart(event,&#39;mne9qqhii2pu&#39;)" ondragend="onDragEnd(event)">
-    <div class="tr1">
-      <span class="tbadge">📞</span>
-      <div class="tct">〇〇老健への折り返し電話</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhii2pu&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div class="tr2">
-      <span class="ctag ctag-tel">電話</span>
-      <span class="ccust">〇〇老健</span>
-      <span class="cdue td">本日</span>
-    </div>
-    
-    <div class="status-move"><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhii2pu&#39;,&#39;todo&#39;)" style="background:#fff1f0;color:#c0392b;border-color:#c0392b;">未対応</button><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhii2pu&#39;,&#39;doing&#39;)" style="">対応中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhii2pu&#39;,&#39;maker&#39;)" style="background:#fdf4e0;color:#b07010;border-color:#b07010;">メーカー確認中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhii2pu&#39;,&#39;customer&#39;)" style="background:#e4f5ed;color:#1a7a4a;border-color:#1a7a4a;">お客様確認中</button></div>
-  </div></div>
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">対応中</div></div></div><span class="kcnt" id="cnt-doing">0</span></div>
+      <div class="kbody" id="body-doing"></div>
     </div>
     <div class="kanban-col kcol-maker" id="col-maker">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">メーカー<br>確認中</div></div></div><span class="kcnt" id="cnt-maker">1</span></div>
-      <div class="kbody" id="body-maker"><div class="tcard" id="tc_mne9qqhij3bg" draggable="true" onclick="openTaskDet(&#39;mne9qqhij3bg&#39;)" data-id="mne9qqhij3bg" ondragstart="onDragStart(event,&#39;mne9qqhij3bg&#39;)" ondragend="onDragEnd(event)">
-    <div class="tr1">
-      <span class="tbadge">📋</span>
-      <div class="tct">週報を渡邉さんに提出</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhij3bg&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div class="tr2">
-      <span class="ctag ctag-ins">社内指示</span>
-      <span class="ccust">社内</span>
-      <span class="cdue">4/1</span>
-    </div>
-    
-    <div class="status-move"><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhij3bg&#39;,&#39;todo&#39;)" style="background:#fff1f0;color:#c0392b;border-color:#c0392b;">未対応</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhij3bg&#39;,&#39;doing&#39;)" style="background:#e8f2fb;color:#1d5fa8;border-color:#1d5fa8;">対応中</button><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhij3bg&#39;,&#39;maker&#39;)" style="">メーカー確認中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhij3bg&#39;,&#39;customer&#39;)" style="background:#e4f5ed;color:#1a7a4a;border-color:#1a7a4a;">お客様確認中</button></div>
-  </div></div>
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">メーカー<br>確認中</div></div></div><span class="kcnt" id="cnt-maker">0</span></div>
+      <div class="kbody" id="body-maker"></div>
     </div>
     <div class="kanban-col kcol-customer" id="col-customer">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">お客様<br>確認中</div></div></div><span class="kcnt" id="cnt-customer">1</span></div>
-      <div class="kbody" id="body-customer"><div class="tcard" id="tc_mne9qqhi6t8o" draggable="true" onclick="openTaskDet(&#39;mne9qqhi6t8o&#39;)" data-id="mne9qqhi6t8o" ondragstart="onDragStart(event,&#39;mne9qqhi6t8o&#39;)" ondragend="onDragEnd(event)">
-    <div class="tr1">
-      <span class="tbadge">🚗</span>
-      <div class="tct">△△特養 補助金申請書類の確認待ち</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mne9qqhi6t8o&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div class="tr2">
-      <span class="ctag ctag-visit">商談/訪問</span>
-      <span class="ccust">△△特養</span>
-      <span class="cdue">4/3</span>
-    </div>
-    
-    <div class="status-move"><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi6t8o&#39;,&#39;todo&#39;)" style="background:#fff1f0;color:#c0392b;border-color:#c0392b;">未対応</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi6t8o&#39;,&#39;doing&#39;)" style="background:#e8f2fb;color:#1d5fa8;border-color:#1d5fa8;">対応中</button><button class="smv" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi6t8o&#39;,&#39;maker&#39;)" style="background:#fdf4e0;color:#b07010;border-color:#b07010;">メーカー確認中</button><button class="smv active-st" disabled="" onclick="event.stopPropagation();moveStatus(&#39;mne9qqhi6t8o&#39;,&#39;customer&#39;)" style="">お客様確認中</button></div>
-  </div></div>
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">お客様<br>確認中</div></div></div><span class="kcnt" id="cnt-customer">0</span></div>
+      <div class="kbody" id="body-customer"></div>
     </div>
   </div>
 </div>
@@ -450,35 +420,14 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   <div class="sched-page">
     <div class="week-nav">
       <button class="nav-btn" onclick="moveWeek(-1)">◀</button>
-      <span class="week-label" id="weekLabel">2026年3月</span>
+      <span class="week-label" id="weekLabel"></span>
       <div style="display:flex;gap:6px;">
         <button class="nav-btn" onclick="moveWeek(0)">今週</button>
         <button class="nav-btn" onclick="moveWeek(1)">▶</button>
       </div>
     </div>
-    <div class="week-grid" id="weekGrid"><div class="wday" onclick="selectDay(&#39;2026-03-30&#39;)" style="">
-      <div class="wday-name">月</div><div class="wday-num">30</div>
-      <div class="wday-events"></div>
-    </div><div class="wday today" onclick="selectDay(&#39;2026-03-31&#39;)" style="">
-      <div class="wday-circle">31</div>
-      <div class="wday-events"><div class="wday-evt" style="background:#fff1f0;color:#c0392b;">🔴 さくら苑へ見積書を送付</div></div>
-    </div><div class="wday" onclick="selectDay(&#39;2026-04-01&#39;)" style="">
-      <div class="wday-name">水</div><div class="wday-num">1</div>
-      <div class="wday-events"></div>
-    </div><div class="wday" onclick="selectDay(&#39;2026-04-02&#39;)" style="">
-      <div class="wday-name">木</div><div class="wday-num">2</div>
-      <div class="wday-events"></div>
-    </div><div class="wday" onclick="selectDay(&#39;2026-04-03&#39;)" style="">
-      <div class="wday-name">金</div><div class="wday-num">3</div>
-      <div class="wday-events"></div>
-    </div><div class="wday" onclick="selectDay(&#39;2026-04-04&#39;)" style="">
-      <div class="wday-name">土</div><div class="wday-num">4</div>
-      <div class="wday-events"></div>
-    </div><div class="wday" onclick="selectDay(&#39;2026-04-05&#39;)" style="">
-      <div class="wday-name">日</div><div class="wday-num">5</div>
-      <div class="wday-events"></div>
-    </div></div>
-    <div class="day-detail" id="dayDetail"><div class="day-detail-title">2026年3月31日（火）</div><div class="apo-list"><div style="font-size:12px;color:var(--text3);margin-bottom:10px;">予定なし</div></div><button class="add-apo-btn" onclick="openApo(&#39;2026-03-31&#39;)">＋ アポ・予定を追加</button><div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:6px;">本日のタスク</div><div class="todo-day-list"><div class="todo-item"><span class="todo-txt">✉️ さくら苑へ見積書を送付</span><span class="todo-st" style="background:#fff1f0;color:#c0392b;">未対応</span></div><div class="todo-item"><span class="todo-txt">📞 〇〇老健への折り返し電話</span><span class="todo-st" style="background:#e8f2fb;color:#1d5fa8;">対応中</span></div></div></div>
+    <div class="week-grid" id="weekGrid"></div>
+    <div class="day-detail" id="dayDetail"></div>
   </div>
 </div>
 
@@ -690,9 +639,94 @@ function isDevTask(t){return t.cust==='開発'||DEV_KW.some(k=>t.title.includes(
 function getSalesTasks(){return tasks.filter(t=>!isDevTask(t));}
 function getDevTasks(){return tasks.filter(t=>isDevTask(t));}
 
-const SHOW_LIMIT=5;
-const expandedCols={todo:false,doing:false,maker:false,customer:false};
-const expandedDone={todo:false,doing:false,maker:false,customer:false};
+/* スマホ用タブ */
+let curSpTab='todo';
+
+function switchSpTab(st,btn){
+  curSpTab=st;
+  document.querySelectorAll('.st-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSpBoard();
+}
+
+function renderSpBoard(){
+  const sales=getSalesTasks();
+  const items=sales.filter(t=>t.st===curSpTab||(!t.st&&curSpTab==='todo'));
+  const active=items.filter(t=>!t.done);
+  const done=items.filter(t=>t.done);
+  const isExp=expandedCols[curSpTab];
+  const isDoneOpen=expandedDone[curSpTab];
+  const shown=isExp?active:active.slice(0,SHOW_LIMIT);
+  const st=STATUSES[curSpTab];
+
+  let html='';
+  if(!active.length&&!done.length){
+    html=`<div class="kempty">タスクなし</div>`;
+  } else {
+    html+=shown.map(t=>taskCardHtml(t)).join('');
+    if(active.length>SHOW_LIMIT&&!isExp){
+      html+=`<button class="more-btn" onclick="expandCol('${curSpTab}')">＋ あと${active.length-SHOW_LIMIT}件を表示</button>`;
+    } else if(isExp&&active.length>SHOW_LIMIT){
+      html+=`<button class="more-btn" onclick="collapseCol('${curSpTab}')">▲ 折りたたむ</button>`;
+    }
+    if(done.length){
+      html+=`<button class="done-toggle" onclick="toggleDoneSection('${curSpTab}')"><span>✓ 完了済み ${done.length}件</span><span>${isDoneOpen?'▲':'▼'}</span></button>`;
+      if(isDoneOpen) html+=`<div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">${done.map(t=>taskCardHtml(t,false)).join('')}</div>`;
+    }
+  }
+  document.getElementById('sp-board').innerHTML=html;
+}
+
+function renderTasks(){
+  const sales=getSalesTasks();
+  const col={todo:[],doing:[],maker:[],customer:[]};
+  sales.forEach(t=>{const k=t.st&&col[t.st]!==undefined?t.st:'todo';col[k].push(t);});
+
+  Object.keys(col).forEach(k=>{
+    const all=col[k];
+    const active=all.filter(t=>!t.done);
+    const done=all.filter(t=>t.done);
+    const isExpanded=expandedCols[k];
+    const isDoneOpen=expandedDone[k];
+
+    // PC用カウント
+    const cntEl=document.getElementById('cnt-'+k);
+    if(cntEl)cntEl.textContent=active.length;
+
+    // スマホ用カウント
+    const spCntEl=document.getElementById('sp-cnt-'+k);
+    if(spCntEl)spCntEl.textContent=active.length;
+
+    // PC用ボード
+    const b=document.getElementById('body-'+k);
+    if(b){
+      let html='';
+      if(!active.length&&!done.length){
+        html=`<div class="kempty">なし</div>`;
+      } else {
+        const shown=isExpanded?active:active.slice(0,SHOW_LIMIT);
+        html+=shown.map(t=>taskCardHtml(t)).join('');
+        if(active.length>SHOW_LIMIT&&!isExpanded){
+          html+=`<button class="more-btn" onclick="expandCol('${k}')">＋ あと${active.length-SHOW_LIMIT}件を表示</button>`;
+        } else if(isExpanded&&active.length>SHOW_LIMIT){
+          html+=`<button class="more-btn" onclick="collapseCol('${k}')">▲ 折りたたむ</button>`;
+        }
+        if(done.length){
+          html+=`<button class="done-toggle" onclick="toggleDoneSection('${k}')"><span>✓ 完了済み ${done.length}件</span><span>${isDoneOpen?'▲':'▼'}</span></button>
+          <div class="done-section${isDoneOpen?' open':''}">${done.map(t=>taskCardHtml(t,false)).join('')}</div>`;
+        }
+      }
+      b.innerHTML=html;
+    }
+  });
+
+  // スマホ用ボード更新
+  renderSpBoard();
+
+  const urg=sales.filter(t=>!t.done&&t.st==='todo').length;
+  const badge=document.getElementById('task-badge');badge.textContent=urg;badge.style.display=urg>0?'':'none';
+  setupDropZones();
+}
 
 function dueChip(t){
   if(!t.due)return'';const td=todayStr();
@@ -730,62 +764,8 @@ function taskCardHtml(t,isDragEnabled=true){
   </div>`;
 }
 
-function renderTasks(){
-  const sales=getSalesTasks();
-  const col={todo:[],doing:[],maker:[],customer:[]};
-  sales.forEach(t=>{const k=t.st&&col[t.st]!==undefined?t.st:'todo';col[k].push(t);});
-
-  Object.keys(col).forEach(k=>{
-    const all=col[k];
-    const active=all.filter(t=>!t.done);
-    const done=all.filter(t=>t.done);
-    const isExpanded=expandedCols[k];
-    const isDoneOpen=expandedDone[k];
-
-    document.getElementById('cnt-'+k).textContent=active.length;
-    const b=document.getElementById('body-'+k);
-
-    let html='';
-    if(!active.length&&!done.length){
-      html=`<div class="kempty">なし</div>`;
-    } else {
-      // 未完了：5件まで、残りは＋ボタン
-      const shown=isExpanded?active:active.slice(0,SHOW_LIMIT);
-      html+=shown.map(t=>taskCardHtml(t)).join('');
-      if(active.length>SHOW_LIMIT&&!isExpanded){
-        html+=`<button class="more-btn" onclick="expandCol('${k}')">＋ あと${active.length-SHOW_LIMIT}件を表示</button>`;
-      } else if(isExpanded&&active.length>SHOW_LIMIT){
-        html+=`<button class="more-btn" onclick="collapseCol('${k}')">▲ 折りたたむ</button>`;
-      }
-      // 完了済み
-      if(done.length){
-        html+=`<button class="done-toggle" onclick="toggleDoneSection('${k}')">
-          <span>✓ 完了済み ${done.length}件</span>
-          <span>${isDoneOpen?'▲':'▼'}</span>
-        </button>
-        <div class="done-section${isDoneOpen?' open':''}" id="done-${k}">
-          ${done.map(t=>taskCardHtml(t,false)).join('')}
-        </div>`;
-      }
-    }
-    b.innerHTML=html;
-  });
-
-  const urg=sales.filter(t=>!t.done&&t.st==='todo').length;
-  const badge=document.getElementById('task-badge');badge.textContent=urg;badge.style.display=urg>0?'':'none';
-
-  // ドロップゾーン設定
-  setupDropZones();
-}
-
-function expandCol(k){expandedCols[k]=true;renderTasks();}
-function collapseCol(k){expandedCols[k]=false;renderTasks();}
-function toggleDoneSection(k){expandedDone[k]=!expandedDone[k];renderTasks();}
-
 function toggleTask(id){const t=tasks.find(t=>t.id===id);if(t){t.done=!t.done;save();renderTasks();}}
 function moveStatus(id,st){const t=tasks.find(t=>t.id===id);if(t){t.st=st;save();renderTasks();showToast(`→ ${STATUSES[st].label}`);}}
-
-/* ドラッグ＆ドロップ */
 let dragId=null,longPressTimer=null;
 
 function onDragStart(e,id){
