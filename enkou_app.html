@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0051)file:///C:/Users/nk0712/Downloads/enkou_app_13.html -->
+<!-- saved from url=(0051)file:///C:/Users/nk0712/Downloads/enkou_app_14.html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -327,7 +327,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 <body>
 
 <header>
-  <div><span class="logo">ENKOU</span><span class="logo-sub">営業支援</span></div>
+  <div><span class="logo">ENKOH</span><span class="logo-sub">営業支援</span></div>
   <div><button class="hbtn" onclick="showTab(&#39;settings&#39;)">⚙</button></div>
 </header>
 
@@ -594,7 +594,10 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <div><div style="font-size:13px;font-weight:700;" id="cs_label"></div><div style="font-size:11px;color:var(--text2);">のタスクを登録</div></div>
     </div>
     <label class="flbl">やること</label>
-    <input class="finp" id="cs_title" type="text" placeholder="一言でOK" autocomplete="off">
+    <div style="display:flex;gap:6px;margin-bottom:10px;">
+      <input class="finp" id="cs_title" type="text" placeholder="一言でOK" autocomplete="off" style="margin-bottom:0;flex:1;">
+      <button onclick="startVoiceInput(&#39;cs_title&#39;)" style="background:var(--text);color:#fff;border:none;border-radius:8px;padding:0 14px;font-size:18px;cursor:pointer;flex-shrink:0;" id="mic_btn">🎤</button>
+    </div>
     <label class="flbl">顧客名</label>
     <input class="finp" id="cs_cust" type="text" placeholder="施設名など" autocomplete="off">
     <label class="flbl">ステータス</label>
@@ -1268,6 +1271,33 @@ document.addEventListener('keydown',e=>{
 });
 
 function showToast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1c1a16;color:#fff;padding:8px 18px;border-radius:20px;font-size:12px;font-weight:700;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;';document.body.appendChild(t);}t.textContent=msg;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',2000);}
+
+/* 音声入力 */
+function startVoiceInput(targetId){
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){showToast('お使いのブラウザは音声入力非対応です');return;}
+  const rec=new SpeechRecognition();
+  rec.lang='ja-JP';
+  rec.interimResults=false;
+  rec.maxAlternatives=1;
+  const btn=document.getElementById('mic_btn');
+  if(btn){btn.textContent='🔴';btn.style.background='#e74c3c';}
+  rec.start();
+  rec.onresult=e=>{
+    const text=e.results[0][0].transcript;
+    const inp=document.getElementById(targetId);
+    if(inp){inp.value=text;}
+    if(btn){btn.textContent='🎤';btn.style.background='var(--text)';}
+    showToast('「'+text+'」と入力しました');
+  };
+  rec.onerror=e=>{
+    if(btn){btn.textContent='🎤';btn.style.background='var(--text)';}
+    showToast('音声入力エラー：'+e.error);
+  };
+  rec.onend=()=>{
+    if(btn){btn.textContent='🎤';btn.style.background='var(--text)';}
+  };
+}
 
 /* ════ GITHUB AUTO PUSH ════ */
 let ghToken='',ghUser='',ghRepo='',ghFile='';
