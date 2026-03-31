@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///C:/Users/nk0712/Downloads/enkou_app%20(14).html -->
+<!-- saved from url=(0055)file:///C:/Users/nk0712/Downloads/enkou_app%20(16).html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -400,8 +400,8 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 </header>
 
 <div class="tab-bar">
-  <button class="tab-btn" onclick="showTab(&#39;task&#39;)" id="tab-task">
-    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="display:none">0</span>
+  <button class="tab-btn active" onclick="showTab(&#39;task&#39;)" id="tab-task">
+    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="display: none;">0</span>
   </button>
   <button class="tab-btn" onclick="showTab(&#39;apo&#39;)" id="tab-apo">
     <span class="ti">🚗</span><span>アポ</span>
@@ -412,13 +412,13 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   <button class="tab-btn" onclick="showTab(&#39;mail&#39;)" id="tab-mail">
     <span class="ti">✉️</span><span>メール</span><span class="badge" id="mail-badge" style="display:none">0</span>
   </button>
-  <button class="tab-btn active" onclick="showTab(&#39;memo&#39;)" id="tab-memo">
+  <button class="tab-btn" onclick="showTab(&#39;memo&#39;)" id="tab-memo">
     <span class="ti">📝</span><span>メモ</span>
   </button>
 </div>
 
 <!-- TASK PAGE -->
-<div class="page" id="page-task">
+<div class="page active" id="page-task">
 
   <!-- スマホ用ステータスタブ -->
   <div class="st-tabs">
@@ -441,7 +441,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   <!-- スマホ用縦ボード -->
   <div class="sp-board" id="sp-board"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);font-size:13px;padding:20px;">🎉 お疲れ様です！<br><span style="font-size:11px;margin-top:4px;display:block;opacity:.7">このステータスのタスクはありません</span></div><div style="margin-top:14px;">
         <button class="done-toggle" onclick="toggleDoneSection(&#39;todo&#39;)">
-          <span>✅ 完了済み 1件</span><span>▼</span>
+          <span>✅ 完了済み 2件</span><span>▼</span>
         </button>
         
       </div></div>
@@ -451,8 +451,17 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     <div class="kanban-col kcol-todo" id="col-todo">
       <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">0</span></div>
       <div class="kbody" id="body-todo"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);">🎉 お疲れ様です！</div><div style="margin-top:8px;">
-          <button class="done-toggle" onclick="toggleDoneSection(&#39;todo&#39;)"><span>✅ 完了済み 1件</span><span>▼</span></button>
-          <div class="done-section" style=""><div class="tcard done" id="tc_mneoy7rjnifo" draggable="false" onclick="openTaskDet(&#39;mneoy7rjnifo&#39;)" data-id="mneoy7rjnifo" ondragstart="onDragStart(event,&#39;mneoy7rjnifo&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneoy7rjnifo&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+          <button class="done-toggle" onclick="toggleDoneSection(&#39;todo&#39;)"><span>✅ 完了済み 2件</span><span>▼</span></button>
+          <div class="done-section" style=""><div class="tcard done" id="tc_mneprr6tmwvr" draggable="false" onclick="openTaskDet(&#39;mneprr6tmwvr&#39;)" data-id="mneprr6tmwvr" ondragstart="onDragStart(event,&#39;mneprr6tmwvr&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneprr6tmwvr&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+    <div class="tr1">
+      <div class="tct">問い合わせ回答</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneprr6tmwvr&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    
+    
+  </div><div class="tcard done" id="tc_mneoy7rjnifo" draggable="false" onclick="openTaskDet(&#39;mneoy7rjnifo&#39;)" data-id="mneoy7rjnifo" ondragstart="onDragStart(event,&#39;mneoy7rjnifo&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneoy7rjnifo&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
       <div class="tct">見積</div>
       <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneoy7rjnifo&#39;)">
@@ -640,13 +649,13 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     <button class="add-apo-btn" onclick="openApo(&#39;2026-03-31&#39;)">＋ アポ・予定を追加</button>
     <div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:6px;">本日のタスク</div>
     <div class="todo-day-list"><div class="todo-item"><span class="todo-txt">Anthropic APIキーを取得・設定する</span><span class="todo-st" style="background:#fff1f0;color:#c0392b;">未対応</span></div><div class="todo-item"><span class="todo-txt">GitHub Pagesのスマホアクセスを確認する</span><span class="todo-st" style="background:#fff1f0;color:#c0392b;">未対応</span></div></div>
-    <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:.06em;margin:12px 0 6px;">✅ 完了済み</div><div class="todo-day-list"><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ 見積</span><span style="font-size:10px;color:var(--text3);">こまきのもり</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ ショーワグローブ　分納連絡</span><span style="font-size:10px;color:var(--text3);">福あられ本舗</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ PVCグローブ価格をメーカーに確認</span><span style="font-size:10px;color:var(--text3);">信越化学</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ △△特養 補助金申請書類の確認待ち</span><span style="font-size:10px;color:var(--text3);">△△特養</span></div></div>
+    <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:.06em;margin:12px 0 6px;">✅ 完了済み</div><div class="todo-day-list"><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ 問い合わせ回答</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ 見積</span><span style="font-size:10px;color:var(--text3);">こまきのもり</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ ショーワグローブ　分納連絡</span><span style="font-size:10px;color:var(--text3);">福あられ本舗</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ PVCグローブ価格をメーカーに確認</span><span style="font-size:10px;color:var(--text3);">信越化学</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ △△特養 補助金申請書類の確認待ち</span><span style="font-size:10px;color:var(--text3);">△△特養</span></div></div>
   </div>
   </div>
 </div>
 
 <!-- MEMO PAGE -->
-<div class="page active" id="page-memo">
+<div class="page" id="page-memo">
   <div class="memo-page">
     <div class="memo-toolbar">
       <div style="font-size:13px;font-weight:700;">📝 メモ一覧</div>
@@ -1942,42 +1951,55 @@ async function syncFromSupabase(auto=false){
 
 function initSupabaseRealtime(){
   if(!sbUrl||!sbKey)return;
-  // WebSocket接続
-  const wsUrl=sbUrl.replace('https://','wss://')+'/realtime/v1/websocket?apikey='+sbKey+'&vsn=1.0.0';
-  let ws,pingTimer,reconnectTimer;
+  const projectId=sbUrl.replace('https://','').replace('.supabase.co','');
+  const wsUrl=`wss://${projectId}.supabase.co/realtime/v1/websocket?apikey=${sbKey}&vsn=1.0.0`;
+  let ws,pingTimer;
 
   function connect(){
     try{
       ws=new WebSocket(wsUrl);
       ws.onopen=()=>{
-        // tasksテーブルを購読
-        ws.send(JSON.stringify({topic:'realtime:public:tasks',event:'phx_join',payload:{},ref:'1'}));
-        ws.send(JSON.stringify({topic:'realtime:public:apos',event:'phx_join',payload:{},ref:'2'}));
-        ws.send(JSON.stringify({topic:'realtime:public:memos',event:'phx_join',payload:{},ref:'3'}));
-        // 30秒ごとにping
+        // 各テーブルを購読
+        ['tasks','apos','memos'].forEach((tbl,i)=>{
+          ws.send(JSON.stringify({
+            topic:`realtime:public:${tbl}`,
+            event:'phx_join',
+            payload:{
+              config:{
+                broadcast:{self:false},
+                presence:{key:''},
+                postgres_changes:[
+                  {event:'*',schema:'public',table:tbl}
+                ]
+              }
+            },
+            ref:String(i+1)
+          }));
+        });
+        // ハートビート
         pingTimer=setInterval(()=>{
           if(ws.readyState===WebSocket.OPEN){
             ws.send(JSON.stringify({topic:'phoenix',event:'heartbeat',payload:{},ref:'ping'}));
           }
-        },30000);
+        },20000);
       };
       ws.onmessage=e=>{
         try{
           const msg=JSON.parse(e.data);
-          // INSERT/UPDATE/DELETE が来たら自動取得
-          if(msg.event==='INSERT'||msg.event==='UPDATE'||msg.event==='DELETE'){
+          if(msg.event==='postgres_changes'||
+             (msg.payload&&msg.payload.data&&
+              ['INSERT','UPDATE','DELETE'].includes(msg.payload.data.type))){
             syncFromSupabase(true);
           }
         }catch{}
       };
       ws.onclose=()=>{
         clearInterval(pingTimer);
-        // 3秒後に再接続
-        reconnectTimer=setTimeout(connect,3000);
+        setTimeout(connect,3000);
       };
-      ws.onerror=()=>{ws.close();};
-    }catch(e){
-      // WebSocket非対応の場合は5秒ポーリングにフォールバック
+      ws.onerror=()=>ws.close();
+    }catch{
+      // フォールバック：5秒ポーリング
       setInterval(()=>syncFromSupabase(true),5000);
     }
   }
