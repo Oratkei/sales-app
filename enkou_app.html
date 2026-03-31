@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///C:/Users/nk0712/Downloads/enkou_app%20(11).html -->
+<!-- saved from url=(0055)file:///C:/Users/nk0712/Downloads/enkou_app%20(14).html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -400,8 +400,8 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 </header>
 
 <div class="tab-bar">
-  <button class="tab-btn active" onclick="showTab(&#39;task&#39;)" id="tab-task">
-    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="">1</span>
+  <button class="tab-btn" onclick="showTab(&#39;task&#39;)" id="tab-task">
+    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="display:none">0</span>
   </button>
   <button class="tab-btn" onclick="showTab(&#39;apo&#39;)" id="tab-apo">
     <span class="ti">🚗</span><span>アポ</span>
@@ -412,19 +412,19 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   <button class="tab-btn" onclick="showTab(&#39;mail&#39;)" id="tab-mail">
     <span class="ti">✉️</span><span>メール</span><span class="badge" id="mail-badge" style="display:none">0</span>
   </button>
-  <button class="tab-btn" onclick="showTab(&#39;memo&#39;)" id="tab-memo">
+  <button class="tab-btn active" onclick="showTab(&#39;memo&#39;)" id="tab-memo">
     <span class="ti">📝</span><span>メモ</span>
   </button>
 </div>
 
 <!-- TASK PAGE -->
-<div class="page active" id="page-task">
+<div class="page" id="page-task">
 
   <!-- スマホ用ステータスタブ -->
   <div class="st-tabs">
     <div class="st-tab-list">
       <button class="st-tab t-todo active" onclick="switchSpTab(&#39;todo&#39;,this)">
-        <span class="st-dot"></span><span>未対応</span><span class="st-cnt" id="sp-cnt-todo">1</span>
+        <span class="st-dot"></span><span>未対応</span><span class="st-cnt" id="sp-cnt-todo">0</span>
       </button>
       <button class="st-tab t-doing" onclick="switchSpTab(&#39;doing&#39;,this)">
         <span class="st-dot"></span><span>対応中</span><span class="st-cnt" id="sp-cnt-doing">0</span>
@@ -439,22 +439,20 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   </div>
 
   <!-- スマホ用縦ボード -->
-  <div class="sp-board" id="sp-board"><div class="tcard" id="tc_mneoy7rjnifo" draggable="true" onclick="openTaskDet(&#39;mneoy7rjnifo&#39;)" data-id="mneoy7rjnifo" ondragstart="onDragStart(event,&#39;mneoy7rjnifo&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneoy7rjnifo&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">見積</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneoy7rjnifo&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="font-size:10px;color:var(--text3);margin-top:2px;">こまきのもり</div>
-    
-  </div></div>
+  <div class="sp-board" id="sp-board"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);font-size:13px;padding:20px;">🎉 お疲れ様です！<br><span style="font-size:11px;margin-top:4px;display:block;opacity:.7">このステータスのタスクはありません</span></div><div style="margin-top:14px;">
+        <button class="done-toggle" onclick="toggleDoneSection(&#39;todo&#39;)">
+          <span>✅ 完了済み 1件</span><span>▼</span>
+        </button>
+        
+      </div></div>
 
   <!-- PC用カンバン -->
   <div class="kanban-wrap">
     <div class="kanban-col kcol-todo" id="col-todo">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">1</span></div>
-      <div class="kbody" id="body-todo"><div class="tcard" id="tc_mneoy7rjnifo" draggable="true" onclick="openTaskDet(&#39;mneoy7rjnifo&#39;)" data-id="mneoy7rjnifo" ondragstart="onDragStart(event,&#39;mneoy7rjnifo&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneoy7rjnifo&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">0</span></div>
+      <div class="kbody" id="body-todo"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);">🎉 お疲れ様です！</div><div style="margin-top:8px;">
+          <button class="done-toggle" onclick="toggleDoneSection(&#39;todo&#39;)"><span>✅ 完了済み 1件</span><span>▼</span></button>
+          <div class="done-section" style=""><div class="tcard done" id="tc_mneoy7rjnifo" draggable="false" onclick="openTaskDet(&#39;mneoy7rjnifo&#39;)" data-id="mneoy7rjnifo" ondragstart="onDragStart(event,&#39;mneoy7rjnifo&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneoy7rjnifo&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
       <div class="tct">見積</div>
       <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneoy7rjnifo&#39;)">
@@ -464,6 +462,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     <div style="font-size:10px;color:var(--text3);margin-top:2px;">こまきのもり</div>
     
   </div></div>
+        </div></div>
     </div>
     <div class="kanban-col kcol-doing" id="col-doing">
       <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">対応中</div></div></div><span class="kcnt" id="cnt-doing">0</span></div>
@@ -641,13 +640,13 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     <button class="add-apo-btn" onclick="openApo(&#39;2026-03-31&#39;)">＋ アポ・予定を追加</button>
     <div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:6px;">本日のタスク</div>
     <div class="todo-day-list"><div class="todo-item"><span class="todo-txt">Anthropic APIキーを取得・設定する</span><span class="todo-st" style="background:#fff1f0;color:#c0392b;">未対応</span></div><div class="todo-item"><span class="todo-txt">GitHub Pagesのスマホアクセスを確認する</span><span class="todo-st" style="background:#fff1f0;color:#c0392b;">未対応</span></div></div>
-    <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:.06em;margin:12px 0 6px;">✅ 完了済み</div><div class="todo-day-list"><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ ショーワグローブ　分納連絡</span><span style="font-size:10px;color:var(--text3);">福あられ本舗</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ PVCグローブ価格をメーカーに確認</span><span style="font-size:10px;color:var(--text3);">信越化学</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ △△特養 補助金申請書類の確認待ち</span><span style="font-size:10px;color:var(--text3);">△△特養</span></div></div>
+    <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:.06em;margin:12px 0 6px;">✅ 完了済み</div><div class="todo-day-list"><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ 見積</span><span style="font-size:10px;color:var(--text3);">こまきのもり</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ ショーワグローブ　分納連絡</span><span style="font-size:10px;color:var(--text3);">福あられ本舗</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ PVCグローブ価格をメーカーに確認</span><span style="font-size:10px;color:var(--text3);">信越化学</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ △△特養 補助金申請書類の確認待ち</span><span style="font-size:10px;color:var(--text3);">△△特養</span></div></div>
   </div>
   </div>
 </div>
 
 <!-- MEMO PAGE -->
-<div class="page" id="page-memo">
+<div class="page active" id="page-memo">
   <div class="memo-page">
     <div class="memo-toolbar">
       <div style="font-size:13px;font-weight:700;">📝 メモ一覧</div>
@@ -658,7 +657,21 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <button class="mf-btn" onclick="setMemoFilter(&#39;think&#39;,this)">💭 考え事</button>
       <button class="mf-btn" onclick="setMemoFilter(&#39;tel&#39;,this)">📞 電話メモ</button>
     </div>
-    <div class="memo-list" id="memoPageList"></div>
+    <div class="memo-list" id="memoPageList"><div class="memo-card" onclick="openEditMemo(&#39;mnepjia2w1pv&#39;)">
+      <div style="display:flex;align-items:center;gap:4px;margin-bottom:5px;">
+        <span class="memo-card-cat cat-think">💭 考え事</span>
+        
+      </div>
+      <div class="memo-card-body">やりました
+あざした、</div>
+      <div class="memo-card-date" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>2026/03/31</span>
+        <div style="display:flex;gap:6px;">
+          
+          <button onclick="event.stopPropagation();deleteMemoNote(&#39;mnepjia2w1pv&#39;)" style="font-size:10px;color:var(--text3);border:none;background:none;cursor:pointer;">削除</button>
+        </div>
+      </div>
+    </div></div>
   </div>
 </div>
 
@@ -1861,7 +1874,7 @@ let sbSyncTimer=null;
 function autoSyncToSupabase(){
   if(!sbUrl||!sbKey)return;
   clearTimeout(sbSyncTimer);
-  sbSyncTimer=setTimeout(()=>syncToSupabase(true),1500);
+  sbSyncTimer=setTimeout(()=>syncToSupabase(true),500);
 }
 function loadSupabaseSettings(){
   sbUrl=localStorage.getItem('enkou_sb_url')||'';
@@ -1906,7 +1919,7 @@ async function syncToSupabase(auto=false){
       apoData.length?fetch(`${sbUrl}/rest/v1/apos`,{method:'POST',headers:sbH(),body:JSON.stringify(apoData)}):Promise.resolve(),
       memoData.length?fetch(`${sbUrl}/rest/v1/memos`,{method:'POST',headers:sbH(),body:JSON.stringify(memoData)}):Promise.resolve()
     ]);
-    showToast(auto?'☁ 同期済み':'✓ クラウドに保存しました');
+    if(!auto)showToast('✓ クラウドに保存しました');
   }catch(e){showToast('エラー：'+e.message);}
 }
 async function syncFromSupabase(auto=false){
@@ -1925,6 +1938,50 @@ async function syncFromSupabase(auto=false){
     if(Array.isArray(mData)&&mData.length){memos=mData.map(m=>({id:m.id,body:m.body,cat:m.cat,cust:m.cust,created:m.created,updated:m.updated}));saveMemos();renderMemoPage();}
     if(!auto)showToast(`✓ 取得完了（タスク${tasks.length}・アポ${apos.length}・メモ${memos.length}件）`);
   }catch(e){showToast('エラー：'+e.message);}
+}
+
+function initSupabaseRealtime(){
+  if(!sbUrl||!sbKey)return;
+  // WebSocket接続
+  const wsUrl=sbUrl.replace('https://','wss://')+'/realtime/v1/websocket?apikey='+sbKey+'&vsn=1.0.0';
+  let ws,pingTimer,reconnectTimer;
+
+  function connect(){
+    try{
+      ws=new WebSocket(wsUrl);
+      ws.onopen=()=>{
+        // tasksテーブルを購読
+        ws.send(JSON.stringify({topic:'realtime:public:tasks',event:'phx_join',payload:{},ref:'1'}));
+        ws.send(JSON.stringify({topic:'realtime:public:apos',event:'phx_join',payload:{},ref:'2'}));
+        ws.send(JSON.stringify({topic:'realtime:public:memos',event:'phx_join',payload:{},ref:'3'}));
+        // 30秒ごとにping
+        pingTimer=setInterval(()=>{
+          if(ws.readyState===WebSocket.OPEN){
+            ws.send(JSON.stringify({topic:'phoenix',event:'heartbeat',payload:{},ref:'ping'}));
+          }
+        },30000);
+      };
+      ws.onmessage=e=>{
+        try{
+          const msg=JSON.parse(e.data);
+          // INSERT/UPDATE/DELETE が来たら自動取得
+          if(msg.event==='INSERT'||msg.event==='UPDATE'||msg.event==='DELETE'){
+            syncFromSupabase(true);
+          }
+        }catch{}
+      };
+      ws.onclose=()=>{
+        clearInterval(pingTimer);
+        // 3秒後に再接続
+        reconnectTimer=setTimeout(connect,3000);
+      };
+      ws.onerror=()=>{ws.close();};
+    }catch(e){
+      // WebSocket非対応の場合は5秒ポーリングにフォールバック
+      setInterval(()=>syncFromSupabase(true),5000);
+    }
+  }
+  connect();
 }
 
 /* ════ GITHUB AUTO PUSH ════ */
@@ -2000,11 +2057,11 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
 });
 handleOAuthCallback();
 // 起動時にSupabaseから自動取得
-if(sbUrl&&sbKey){setTimeout(()=>syncFromSupabase(true),800);}
-
-// 定期自動取得（30秒ごと）
-setInterval(()=>{if(sbUrl&&sbKey)syncFromSupabase(true);},30000);
+if(sbUrl&&sbKey){
+  setTimeout(()=>syncFromSupabase(true),800);
+  initSupabaseRealtime();
+}
 </script>
 
 
-<div id="toast" style="position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: rgb(28, 26, 22); color: rgb(255, 255, 255); padding: 8px 18px; border-radius: 20px; font-size: 12px; font-weight: 700; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none;">☁ 同期済み</div></body></html>
+</body></html>
