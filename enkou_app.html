@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)file:///C:/Users/nk0712/Downloads/enkou_app%20(5).html -->
+<!-- saved from url=(0054)file:///C:/Users/nk0712/Downloads/enkou_app%20(8).html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -322,7 +322,26 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .task-preset{padding:10px 4px;border-radius:8px;border:1.5px solid var(--border);background:var(--s2);font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;color:var(--text2);transition:all .15s;text-align:center;}
 .task-preset.selected{background:var(--text);color:#fff;border-color:var(--text);}
 
-/* 月カレンダー */
+/* アポページ */
+.apo-page-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.apo-page-toolbar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.apo-filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:7px 12px;display:flex;gap:6px;flex-shrink:0;}
+.apo-list-wrap{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:8px;}
+.apo-page-card{background:var(--surface);border-radius:10px;padding:12px 14px;box-shadow:var(--sh);border-left:4px solid var(--blue);cursor:pointer;transition:box-shadow .15s;}
+.apo-page-card:hover{box-shadow:var(--sh2);}
+.apo-page-card.visit-type{border-left-color:var(--green);}
+.apo-page-card.tel-type{border-left-color:var(--purple);}
+.apo-page-card.past-type{opacity:.55;}
+.apo-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;}
+.apo-card-date{font-size:12px;font-weight:700;color:var(--text2);}
+.apo-card-time{font-size:11px;color:var(--text3);}
+.apo-card-title{font-size:14px;font-weight:700;margin-bottom:3px;}
+.apo-card-sub{font-size:11px;color:var(--text2);}
+.apo-type-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;}
+.apo-tag-visit{background:var(--greenbg);color:var(--green);}
+.apo-tag-tel{background:var(--purplebg);color:var(--purple);}
+.apo-tag-gcal{background:var(--bluebg);color:var(--blue);}
+.apo-empty{text-align:center;padding:48px 20px;color:var(--text3);font-size:13px;}
 .month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);flex-shrink:0;}
 .month-day-name{background:var(--s2);padding:5px 2px;font-size:9px;font-weight:700;text-align:center;color:var(--text3);}
 .mday{background:var(--surface);min-height:52px;padding:4px;cursor:pointer;position:relative;transition:background .1s;}
@@ -384,6 +403,9 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   <button class="tab-btn active" onclick="showTab(&#39;task&#39;)" id="tab-task">
     <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="">1</span>
   </button>
+  <button class="tab-btn" onclick="showTab(&#39;apo&#39;)" id="tab-apo">
+    <span class="ti">🚗</span><span>アポ</span>
+  </button>
   <button class="tab-btn" onclick="showTab(&#39;sched&#39;)" id="tab-sched">
     <span class="ti">📅</span><span>予定</span>
   </button>
@@ -392,9 +414,6 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   </button>
   <button class="tab-btn" onclick="showTab(&#39;memo&#39;)" id="tab-memo">
     <span class="ti">📝</span><span>メモ</span>
-  </button>
-  <button class="tab-btn" onclick="showTab(&#39;dev&#39;)" id="tab-dev">
-    <span class="ti">🛠</span><span>開発</span><span class="badge" id="dev-badge" style="display:none">0</span>
   </button>
 </div>
 
@@ -505,21 +524,21 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   </div>
 </div>
 
-<!-- DEV PAGE -->
-<div class="page" id="page-dev">
-  <div class="dev-header">
-    <div class="dev-header-top">
-      <div><div class="dev-title">🛠 アプリ開発タスク</div><div class="dev-sub">このトーク内の未完了タスク</div></div>
-      <button class="dev-add-btn" onclick="openDevCapture()">＋ 追加</button>
+<!-- APO PAGE -->
+<div class="page" id="page-apo">
+  <div class="apo-page-wrap">
+    <div class="apo-page-toolbar">
+      <div style="font-size:13px;font-weight:700;">🚗 アポ・訪問管理</div>
+      <button class="dev-add-btn" onclick="openApo(&#39;&#39;)">＋ 追加</button>
     </div>
-    <div class="dev-stats" id="devStats"><div class="dev-stat"><div class="dev-stat-num">0</div><div class="dev-stat-label">合計</div></div><div class="dev-stat"><div class="dev-stat-num done-c">0</div><div class="dev-stat-label">完了</div></div><div class="dev-stat"><div class="dev-stat-num" style="color:#f87171">0</div><div class="dev-stat-label">未着手</div></div><div class="dev-stat"><div class="dev-stat-num" style="color:#fcd34d">0</div><div class="dev-stat-label">作業中</div></div></div>
+    <div class="apo-filter-bar">
+      <button class="mf-btn on" onclick="setApoFilter(&#39;all&#39;,this)">すべて</button>
+      <button class="mf-btn" onclick="setApoFilter(&#39;upcoming&#39;,this)">今後</button>
+      <button class="mf-btn" onclick="setApoFilter(&#39;today&#39;,this)">本日</button>
+      <button class="mf-btn" onclick="setApoFilter(&#39;past&#39;,this)">過去</button>
+    </div>
+    <div class="apo-list-wrap" id="apoPageList"></div>
   </div>
-  <div class="dev-filter-bar">
-    <button class="dev-filter on" data-f="all" onclick="setDevFilter(&#39;all&#39;,this)">すべて</button>
-    <button class="dev-filter" data-f="todo" onclick="setDevFilter(&#39;todo&#39;,this)">未完了</button>
-    <button class="dev-filter" data-f="done" onclick="setDevFilter(&#39;done&#39;,this)">完了済</button>
-  </div>
-  <div class="dev-list" id="devList"><div class="dev-empty">タスクなし<br><br><button style="background:var(--text);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;" onclick="addDevTasks()">🛠 開発タスクを一括登録</button></div></div>
 </div>
 
 <!-- SCHEDULE PAGE（月表示） -->
@@ -623,7 +642,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     </div><div class="mday" onclick="selectDay(&#39;2026-03-30&#39;)">
       <div class="mday-num">30</div>
       <div class="mday-dots"></div>
-    </div><div class="mday today selected" onclick="selectDay(&#39;2026-03-31&#39;)">
+    </div><div class="mday today" onclick="selectDay(&#39;2026-03-31&#39;)">
       <div class="mday-num">31</div>
       <div class="mday-dots"><div class="mday-dot task"></div><div class="mday-dot done"></div></div>
     </div><div class="mday other-month"><div class="mday-num">1</div></div><div class="mday other-month"><div class="mday-num">2</div></div><div class="mday other-month"><div class="mday-num">3</div></div><div class="mday other-month"><div class="mday-num">4</div></div><div class="mday other-month"><div class="mday-num">5</div></div></div>
@@ -650,7 +669,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <button class="mf-btn" onclick="setMemoFilter(&#39;think&#39;,this)">💭 考え事</button>
       <button class="mf-btn" onclick="setMemoFilter(&#39;tel&#39;,this)">📞 電話メモ</button>
     </div>
-    <div class="memo-list" id="memoPageList"><div class="memo-empty">📝 メモがありません<br><br><button class="btn btn-p" style="width:160px;margin-top:8px;" onclick="openNewMemo()">＋ 新規メモ</button></div></div>
+    <div class="memo-list" id="memoPageList"></div>
   </div>
 </div>
 
@@ -666,7 +685,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     </div>
     <button class="mf-btn" onclick="openAddMail()" style="background:var(--text);color:#fff;border-color:var(--text);flex-shrink:0;">＋</button>
   </div>
-  <div class="mail-list" id="mailList"><div class="mail-empty"><p>メールがありません。<br>Gmailで受け取ったメールの要点を<br>手入力で管理できます。</p><button onclick="openAddMail()">＋ メールを追加</button></div></div>
+  <div class="mail-list" id="mailList"></div>
 </div>
 
 <!-- SETTINGS PAGE -->
@@ -682,6 +701,47 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <label class="flbl">Anthropic APIキー</label>
       <input class="finp" id="apiKeyInput" type="password" placeholder="sk-ant-api03-..." style="margin-bottom:8px;">
       <button class="btn btn-p" style="flex:unset;width:100%;padding:10px;" onclick="saveApiKey()">保存する</button>
+    </div>
+
+    <div class="settings-section" style="border:1.5px solid #4285f4;">
+      <div class="settings-title" style="color:#4285f4;">🔗 Google連携（Gmail・カレンダー）</div>
+      <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+        <span id="googleStatus" class="status-ng">未接続</span>
+        <span id="googleUserInfo" style="font-size:11px;color:var(--text2);"></span>
+      </div>
+      <p style="font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px;">
+        Google Cloud ConsoleのOAuthクライアントIDを入力して接続してください。
+      </p>
+      <label class="flbl">OAuthクライアントID</label>
+      <input class="finp" id="googleClientId" type="text" placeholder="xxxxx.apps.googleusercontent.com" style="margin-bottom:8px;">
+      <button class="btn btn-p" style="flex:unset;width:100%;padding:10px;" onclick="saveGoogleClientId()">保存する</button>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <button class="btn" style="flex:1;padding:10px;background:#4285f4;color:#fff;" onclick="googleSignIn()">🔗 Googleでログイン</button>
+        <button class="btn btn-g" style="flex: 1 1 0%; padding: 10px; display: none;" id="googleSignOutBtn" onclick="googleSignOut()">ログアウト</button>
+      </div>
+      <div style="margin-top:8px;display:flex;gap:6px;">
+        <button class="btn" style="flex:1;padding:8px;background:var(--greenbg);color:var(--green);border:1px solid var(--green);font-size:11px;" onclick="syncGmail()">📧 Gmailを取得</button>
+        <button class="btn" style="flex:1;padding:8px;background:var(--bluebg);color:var(--blue);border:1px solid var(--blue);font-size:11px;" onclick="syncCalendar()">📅 カレンダーを取得</button>
+      </div>
+    </div>
+
+    <div class="settings-section" style="border:1.5px solid #3ecf8e;">
+      <div class="settings-title" style="color:#1a7a4a;">☁️ Supabase（端末間データ共有）</div>
+      <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+        <span id="supabaseStatus" class="status-ng">未接続</span>
+      </div>
+      <p style="font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px;">
+        社用スマホ・PC・プライベートスマホでデータを共有できます。
+      </p>
+      <label class="flbl">Supabase Project URL</label>
+      <input class="finp" id="sbUrl" type="text" placeholder="https://xxxxx.supabase.co" style="margin-bottom:8px;">
+      <label class="flbl">Supabase 公開可能キー（anon key）</label>
+      <input class="finp" id="sbKey" type="password" placeholder="sb_publishable_tg-..." style="margin-bottom:8px;">
+      <button class="btn btn-p" style="flex:unset;width:100%;padding:10px;margin-bottom:6px;" onclick="saveSupabaseSettings()">保存・接続テスト</button>
+      <div style="display:flex;gap:6px;">
+        <button class="btn" style="flex:1;padding:8px;background:#e8faf2;color:#1a7a4a;border:1px solid #3ecf8e;font-size:11px;" onclick="syncToSupabase()">⬆ クラウドに保存</button>
+        <button class="btn" style="flex:1;padding:8px;background:#e8f2fb;color:var(--blue);border:1px solid var(--blue);font-size:11px;" onclick="syncFromSupabase()">⬇ クラウドから取得</button>
+      </div>
     </div>
 
     <div class="settings-section" style="border:1.5px solid #333;">
@@ -818,17 +878,17 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     <div style="font-size:14px;font-weight:700;margin-bottom:12px;">📝 メモ</div>
     <label class="flbl">カテゴリー</label>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;">
-      <button class="memo-cat-btn" data-cat="think" onclick="pickMemoCat(&#39;think&#39;,this)">💭 考え事</button>
-      <button class="memo-cat-btn on" data-cat="tel" onclick="pickMemoCat(&#39;tel&#39;,this)">📞 電話メモ</button>
+      <button class="memo-cat-btn on" data-cat="think" onclick="pickMemoCat(&#39;think&#39;,this)">💭 考え事</button>
+      <button class="memo-cat-btn" data-cat="tel" onclick="pickMemoCat(&#39;tel&#39;,this)">📞 電話メモ</button>
     </div>
-    <textarea class="finp" id="memo_body" rows="5" placeholder="メモを入力…" style="resize:none;line-height:1.7;font-size:14px;" data-edit-id=""></textarea>
-    <div id="memo_tel_extra" style="display: block; margin-bottom: 10px;">
+    <textarea class="finp" id="memo_body" rows="5" placeholder="メモを入力…" style="resize:none;line-height:1.7;font-size:14px;"></textarea>
+    <div id="memo_tel_extra" style="display:none;margin-bottom:10px;">
       <label class="flbl">相手の名前・施設名</label>
       <input class="finp" id="memo_tel_cust" type="text" placeholder="例：さくら苑 田中様" autocomplete="off" style="margin-bottom:0;">
     </div>
     <div class="btn-row" style="margin-top:10px;">
       <button class="btn btn-g" onclick="closeOv(&#39;memoOv&#39;)">キャンセル</button>
-      <button class="btn" id="memo_task_btn" style="background: var(--amberbg); color: var(--amber); border: 1px solid var(--amber); flex: 1 1 0%;" onclick="memoToTask()">📋 タスク化</button>
+      <button class="btn" id="memo_task_btn" style="display:none;background:var(--amberbg);color:var(--amber);border:1px solid var(--amber);flex:1;" onclick="memoToTask()">📋 タスク化</button>
       <button class="btn btn-p" onclick="saveMemoNote()">保存 ✓</button>
     </div>
     <div id="memoList" style="margin-top:14px;display:flex;flex-direction:column;gap:8px;"></div>
@@ -847,7 +907,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <span class="fab-label">見積タスク</span>
     </div>
     <div class="fab-item">
-      <button class="fab-item-btn fmemo" onclick="openMemo();toggleFab()">📝</button>
+      <button class="fab-item-btn fmemo" onclick="openNewMemo();toggleFab()">📝</button>
       <span class="fab-label">メモ</span>
     </div>
   </div>
@@ -1049,7 +1109,7 @@ function addDevTasks(){
   const existTitles=new Set(tasks.map(t=>t.title));
   const toAdd=devTasks.filter(t=>!existTitles.has(t.title));
   if(!toAdd.length){showToast('開発タスクはすでに登録済みです');return;}
-  tasks.unshift(...toAdd);save();renderTasks();showTab('dev');
+  tasks.unshift(...toAdd);save();renderTasks();
   showToast(`開発タスクを${toAdd.length}件追加しました`);
 }
 
@@ -1060,8 +1120,58 @@ function showTab(t){
   const tb=document.getElementById('tab-'+t);if(tb)tb.classList.add('active');
   if(t==='sched')renderSched();
   if(t==='mail')renderMailList();
-  if(t==='dev')renderDev();
   if(t==='memo')renderMemoPage();
+  if(t==='apo')renderApoPage();
+}
+
+/* ════ APO PAGE ════ */
+let apoFilter='all';
+function setApoFilter(f,btn){
+  apoFilter=f;
+  document.querySelectorAll('.apo-filter-bar .mf-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderApoPage();
+}
+
+function renderApoPage(){
+  const list=document.getElementById('apoPageList');
+  if(!list)return;
+  const td=todayStr();
+  let filtered=[...apos];
+  if(apoFilter==='today')filtered=apos.filter(a=>a.date===td);
+  else if(apoFilter==='upcoming')filtered=apos.filter(a=>a.date>=td);
+  else if(apoFilter==='past')filtered=apos.filter(a=>a.date<td);
+  filtered.sort((a,b)=>{
+    if(apoFilter==='past')return b.date.localeCompare(a.date);
+    return a.date.localeCompare(b.date)||a.start.localeCompare(b.start);
+  });
+  if(!filtered.length){
+    list.innerHTML=`<div class="apo-empty">📅 アポがありません<br><br><button class="btn btn-p" style="width:160px;margin-top:8px;" onclick="openApo('')">＋ アポを追加</button></div>`;
+    return;
+  }
+  const DOW=['日','月','火','水','木','金','土'];
+  list.innerHTML=filtered.map(a=>{
+    const isPast=a.date<td;
+    const isToday=a.date===td;
+    const typeLabel={visit:'🚗 訪問',tel:'📞 電話',gcal:'📅 予定'}[a.type]||'📅 予定';
+    const typeTag={visit:'apo-tag-visit',tel:'apo-tag-tel',gcal:'apo-tag-gcal'}[a.type]||'apo-tag-gcal';
+    const typeCard={visit:'visit-type',tel:'tel-type',gcal:''}[a.type]||'';
+    const [y,m,d]=a.date.split('-');
+    const dow=DOW[new Date(a.date).getDay()];
+    const dateLabel=isToday?`🔵 本日（${dow}）`:`${+m}/${+d}（${dow}）`;
+    return`<div class="apo-page-card ${typeCard}${isPast?' past-type':''}" onclick="openApoDetail('${a.id}')">
+      <div class="apo-card-top">
+        <span class="apo-card-date">${dateLabel}</span>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="apo-card-time">${a.start?fmtTime(a.start):''}${a.end?`〜${fmtTime(a.end)}`:''}</span>
+          <span class="apo-type-tag ${typeTag}">${typeLabel}</span>
+        </div>
+      </div>
+      <div class="apo-card-title">${esc(a.title)}</div>
+      ${a.place?`<div class="apo-card-sub">📍 ${esc(a.place)}</div>`:''}
+      ${a.memo?`<div class="apo-card-sub">📝 ${esc(a.memo)}</div>`:''}
+    </div>`;
+  }).join('');
 }
 
 /* ════ MEMO PAGE ════ */
@@ -1402,51 +1512,7 @@ function toggleDetTask(){toggleTask(selTaskId);renderTaskDet();}
 function deleteTask(){if(!confirm('削除しますか？'))return;tasks=tasks.filter(t=>t.id!==selTaskId);save();renderTasks();closeOv('taskDetOv');}
 
 /* DEV */
-function renderDev(){
-  const devTasks=getDevTasks();
-  const total=devTasks.length,done=devTasks.filter(t=>t.done).length,urg=devTasks.filter(t=>!t.done&&t.st==='todo').length,plan=devTasks.filter(t=>!t.done&&t.st==='doing').length;
-  document.getElementById('devStats').innerHTML=`<div class="dev-stat"><div class="dev-stat-num">${total}</div><div class="dev-stat-label">合計</div></div><div class="dev-stat"><div class="dev-stat-num done-c">${done}</div><div class="dev-stat-label">完了</div></div><div class="dev-stat"><div class="dev-stat-num" style="color:#f87171">${urg}</div><div class="dev-stat-label">未着手</div></div><div class="dev-stat"><div class="dev-stat-num" style="color:#fcd34d">${plan}</div><div class="dev-stat-label">作業中</div></div>`;
-  const rem=devTasks.filter(t=>!t.done).length;const badge=document.getElementById('dev-badge');badge.textContent=rem;badge.style.display=rem>0?'':'none';
-  let filtered=devTasks;
-  if(devFilter==='todo')filtered=devTasks.filter(t=>!t.done);
-  if(devFilter==='done')filtered=devTasks.filter(t=>t.done);
-  const list=document.getElementById('devList');
-  if(!filtered.length){list.innerHTML=`<div class="dev-empty">タスクなし<br><br><button style="background:var(--text);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;" onclick="addDevTasks()">🛠 開発タスクを一括登録</button></div>`;return;}
-  list.innerHTML=[...filtered.filter(t=>!t.done),...filtered.filter(t=>t.done)].map(devCardHtml).join('');
-}
-function devCardHtml(t){
-  const subs=t.subs||[],dc=subs.filter(s=>s.done).length;
-  const pct=subs.length?Math.round(dc/subs.length*100):0,allDone=subs.length>0&&dc===subs.length;
-  const pCls=t.q===1?'dev-p-now':t.q===2?'dev-p-plan':'dev-p-later';
-  const pLbl=t.q===1?'今すぐ':t.q===2?'計画':'後回し';
-  const td=todayStr();
-  let dueHtml='';if(t.due){const cls=t.due<td?'ov':t.due===td?'td':'';const lbl=t.due<td?`期限切れ`:t.due===td?'本日':fmtDate(t.due);dueHtml=`<span class="dev-due ${cls}">📅 ${lbl}</span>`;}
-  const expanded=expandedDevIds.has(t.id);
-  const subItems=subs.map(sub=>`<div class="dev-sub-item${sub.done?' sdone':''}"><div class="dev-sub-chk" onclick="toggleDevSub('${t.id}','${sub.id}')"><svg class="dev-sub-chki" width="7" height="5" viewBox="0 0 7 5" fill="none"><path d="M1 2.5L2.8 4.5L6 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="dev-sub-txt">${esc(sub.text)}</span></div>`).join('');
-  return`<div class="dev-card${t.done?' dev-done':''}" id="dc_${t.id}">
-    <div class="dev-card-head">
-      <div class="dev-card-chk" onclick="event.stopPropagation();toggleTask('${t.id}');renderDev();">
-        <svg class="dev-chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="dev-card-body">
-        <div class="dev-card-title">${esc(t.title)}</div>
-        <div class="dev-card-meta"><span class="dev-priority ${pCls}">${pLbl}</span>${dueHtml}${subs.length?`<span style="font-size:9px;color:${allDone?'#2ecc71':'var(--text3)'};">${dc}/${subs.length}</span>`:''}</div>
-        ${t.memo?`<div class="dev-memo">${esc(t.memo)}</div>`:''}
-      </div>
-      ${subs.length?`<button class="dev-expand-btn" onclick="toggleDevExpand('${t.id}')">${expanded?'▲':'▼'}</button>`:''}
-    </div>
-    ${subs.length?`<div class="dev-progress"><div class="dev-progress-fill${allDone?'':' partial'}" style="width:${pct}%"></div></div>`:''}
-    ${expanded?`<div class="dev-subs">${subItems}<div class="dev-sub-add"><input id="dsa_${t.id}" type="text" placeholder="サブタスクを追加…"><button onclick="addDevSubTask('${t.id}')">＋</button></div></div>`:''}
-  </div>`;
-}
-function toggleDevExpand(id){if(expandedDevIds.has(id))expandedDevIds.delete(id);else expandedDevIds.add(id);renderDev();}
-function toggleDevSub(tid,sid){const t=tasks.find(t=>t.id===tid);if(!t)return;const s=(t.subs||[]).find(s=>s.id===sid);if(s){s.done=!s.done;save();renderDev();}}
-function addDevSubTask(tid){const inp=document.getElementById('dsa_'+tid);if(!inp)return;const v=inp.value.trim();if(!v)return;const t=tasks.find(t=>t.id===tid);if(!t)return;if(!t.subs)t.subs=[];t.subs.push({id:uid(),text:v,done:false});inp.value='';save();renderDev();expandedDevIds.add(tid);setTimeout(()=>{const ni=document.getElementById('dsa_'+tid);if(ni)ni.focus();},50);}
-function setDevFilter(f,btn){devFilter=f;document.querySelectorAll('.dev-filter').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderDev();}
-function openDevCapture(){openCapture('self');setTimeout(()=>{curSt='todo';document.querySelectorAll('.stsel').forEach(b=>b.classList.toggle('on',b.dataset.st==='todo'));},150);}
-
 /* SCHEDULE */
-/* ════ SCHEDULE（月表示） ════ */
 function moveMonth(dir){if(dir===0)monthOffset=0;else monthOffset+=dir;renderSched();}
 function renderSched(){
   const now=new Date();
@@ -1662,6 +1728,209 @@ function fabVoiceInput(){
   rec.onend=()=>{if(fab){fab.style.background='';fab.textContent='＋';}};
 }
 
+/* ════ GOOGLE連携 ════ */
+let googleClientId='', googleAccessToken='', googleTokenExpiry=0;
+
+function loadGoogleSettings(){
+  googleClientId=localStorage.getItem('enkou_google_client_id')||'';
+  googleAccessToken=localStorage.getItem('enkou_google_token')||'';
+  googleTokenExpiry=parseInt(localStorage.getItem('enkou_google_expiry')||'0');
+  const inp=document.getElementById('googleClientId');
+  if(inp&&googleClientId)inp.value=googleClientId;
+  updateGoogleStatus();
+}
+
+function saveGoogleClientId(){
+  const v=document.getElementById('googleClientId').value.trim();
+  if(!v){showToast('クライアントIDを入力してください');return;}
+  googleClientId=v;
+  localStorage.setItem('enkou_google_client_id',v);
+  showToast('クライアントIDを保存しました');
+}
+
+function updateGoogleStatus(){
+  const st=document.getElementById('googleStatus');
+  const info=document.getElementById('googleUserInfo');
+  const outBtn=document.getElementById('googleSignOutBtn');
+  const isValid=googleAccessToken&&Date.now()<googleTokenExpiry;
+  if(st)st.textContent=isValid?'接続済み ✓':'未接続';
+  if(st)st.className=isValid?'status-ok':'status-ng';
+  if(outBtn)outBtn.style.display=isValid?'':'none';
+  const user=localStorage.getItem('enkou_google_user')||'';
+  if(info)info.textContent=isValid&&user?`(${user})`:'';
+}
+
+function googleSignIn(){
+  if(!googleClientId){showToast('先にクライアントIDを保存してください');return;}
+  const scope=encodeURIComponent('https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/calendar.readonly');
+  const redirectUri=encodeURIComponent(location.href.split('?')[0]);
+  const url=`https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}&prompt=consent`;
+  window.location.href=url;
+}
+
+function googleSignOut(){
+  googleAccessToken='';googleTokenExpiry=0;
+  localStorage.removeItem('enkou_google_token');
+  localStorage.removeItem('enkou_google_expiry');
+  localStorage.removeItem('enkou_google_user');
+  updateGoogleStatus();
+  showToast('Googleからログアウトしました');
+}
+
+function handleOAuthCallback(){
+  const hash=window.location.hash;
+  if(!hash.includes('access_token'))return;
+  const params=new URLSearchParams(hash.slice(1));
+  const token=params.get('access_token');
+  const expiresIn=parseInt(params.get('expires_in')||'3600');
+  if(token){
+    googleAccessToken=token;
+    googleTokenExpiry=Date.now()+expiresIn*1000;
+    localStorage.setItem('enkou_google_token',token);
+    localStorage.setItem('enkou_google_expiry',String(googleTokenExpiry));
+    // ユーザー情報取得
+    fetch('https://www.googleapis.com/oauth2/v3/userinfo',{headers:{Authorization:`Bearer ${token}`}})
+      .then(r=>r.json()).then(u=>{
+        const name=u.email||u.name||'';
+        localStorage.setItem('enkou_google_user',name);
+        updateGoogleStatus();
+        showToast(`✓ Googleに接続しました（${name}）`);
+      });
+    // URLのハッシュをきれいにする
+    history.replaceState(null,'',location.pathname);
+  }
+}
+
+async function syncGmail(){
+  if(!googleAccessToken||Date.now()>googleTokenExpiry){showToast('Googleにログインしてください');return;}
+  showToast('Gmailを取得中…');
+  try{
+    const res=await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=20&q=is:unread',{
+      headers:{Authorization:`Bearer ${googleAccessToken}`}
+    });
+    const data=await res.json();
+    if(!data.messages){showToast('新着メールはありません');return;}
+    let added=0;
+    for(const msg of data.messages.slice(0,10)){
+      const detail=await fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${msg.id}?format=metadata&metadataHeaders=Subject&metadataHeaders=From&metadataHeaders=Date`,{
+        headers:{Authorization:`Bearer ${googleAccessToken}`}
+      });
+      const d=await detail.json();
+      const headers=d.payload?.headers||[];
+      const subject=headers.find(h=>h.name==='Subject')?.value||'(件名なし)';
+      const from=headers.find(h=>h.name==='From')?.value||'';
+      const date=headers.find(h=>h.name==='Date')?.value||'';
+      const exists=mails.some(m=>m.gmailId===msg.id);
+      if(!exists){
+        const cat=classifyMail({subject,snippet:d.snippet||''});
+        mails.unshift({id:uid(),gmailId:msg.id,from,subject,snippet:d.snippet||'',body:'',date_label:fmtGmailDate(date),unread:true,cat,created:Date.now()});
+        added++;
+      }
+    }
+    saveMails();renderMailList();
+    showToast(`📧 ${added}件のメールを取得しました`);
+  }catch(e){showToast('取得エラー：'+e.message);}
+}
+
+async function syncCalendar(){
+  if(!googleAccessToken||Date.now()>googleTokenExpiry){showToast('Googleにログインしてください');return;}
+  showToast('カレンダーを取得中…');
+  try{
+    const now=new Date();
+    const min=now.toISOString();
+    const max=new Date(now.getFullYear(),now.getMonth()+2,0).toISOString();
+    const res=await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=${min}&timeMax=${max}&maxResults=30&singleEvents=true&orderBy=startTime`,{
+      headers:{Authorization:`Bearer ${googleAccessToken}`}
+    });
+    const data=await res.json();
+    if(!data.items?.length){showToast('予定がありません');return;}
+    let added=0;
+    for(const ev of data.items){
+      const date=ev.start?.date||ev.start?.dateTime?.slice(0,10);
+      const start=ev.start?.dateTime?ev.start.dateTime.slice(11,16):'';
+      const end=ev.end?.dateTime?ev.end.dateTime.slice(11,16):'';
+      const exists=apos.some(a=>a.gcalId===ev.id);
+      if(!exists&&date){
+        apos.push({id:uid(),gcalId:ev.id,type:'gcal',date,start,end,title:ev.summary||'(タイトルなし)',place:ev.location||'',memo:ev.description||''});
+        added++;
+      }
+    }
+    save();renderSched();
+    showToast(`📅 ${added}件の予定を取得しました`);
+  }catch(e){showToast('取得エラー：'+e.message);}
+}
+
+function fmtGmailDate(dateStr){
+  if(!dateStr)return'';
+  try{const d=new Date(dateStr);return`${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
+  catch{return'';}
+}
+/* ════ SUPABASE ════ */
+let sbUrl='',sbKey='';
+function loadSupabaseSettings(){
+  sbUrl=localStorage.getItem('enkou_sb_url')||'';
+  sbKey=localStorage.getItem('enkou_sb_key')||'';
+  const urlEl=document.getElementById('sbUrl');const keyEl=document.getElementById('sbKey');
+  if(urlEl&&sbUrl)urlEl.value=sbUrl;if(keyEl&&sbKey)keyEl.value=sbKey;
+  updateSupabaseStatus();
+}
+function updateSupabaseStatus(){
+  const st=document.getElementById('supabaseStatus');if(!st)return;
+  if(sbUrl&&sbKey){st.textContent='設定済み ✓';st.className='status-ok';}
+  else{st.textContent='未接続';st.className='status-ng';}
+}
+async function saveSupabaseSettings(){
+  const url=document.getElementById('sbUrl').value.trim();
+  const key=document.getElementById('sbKey').value.trim();
+  if(!url||!key){showToast('URLとキーを入力してください');return;}
+  sbUrl=url;sbKey=key;
+  localStorage.setItem('enkou_sb_url',url);localStorage.setItem('enkou_sb_key',key);
+  try{
+    const res=await fetch(`${sbUrl}/rest/v1/tasks?limit=1`,{headers:{'apikey':sbKey,'Authorization':`Bearer ${sbKey}`}});
+    if(res.ok){updateSupabaseStatus();showToast('✓ Supabaseに接続しました');}
+    else showToast('接続エラー：'+res.status);
+  }catch(e){showToast('接続エラー：'+e.message);}
+}
+function sbH(){return{'apikey':sbKey,'Authorization':`Bearer ${sbKey}`,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'};}
+async function syncToSupabase(){
+  if(!sbUrl||!sbKey){showToast('Supabase設定を完了してください');return;}
+  showToast('クラウドに保存中…');
+  try{
+    const taskData=tasks.map(t=>({id:t.id,src:t.src||'',title:t.title||'',cust:t.cust||'',due:t.due||'',memo:t.memo||'',st:t.st||'todo',done:t.done||false,completed_at:t.completedAt||'',created:t.created||Date.now(),subs:t.subs||[]}));
+    const apoData=apos.map(a=>({id:a.id,type:a.type||'',date:a.date||'',start_time:a.start||'',end_time:a.end||'',title:a.title||'',place:a.place||'',memo:a.memo||'',gcal_id:a.gcalId||''}));
+    const memoData=memos.map(m=>({id:m.id,body:m.body||'',cat:m.cat||'think',cust:m.cust||'',created:m.created||'',updated:m.updated||''}));
+    // 全削除してupsert
+    await Promise.all([
+      fetch(`${sbUrl}/rest/v1/tasks?id=neq.x`,{method:'DELETE',headers:sbH()}),
+      fetch(`${sbUrl}/rest/v1/apos?id=neq.x`,{method:'DELETE',headers:sbH()}),
+      fetch(`${sbUrl}/rest/v1/memos?id=neq.x`,{method:'DELETE',headers:sbH()})
+    ]);
+    await Promise.all([
+      taskData.length?fetch(`${sbUrl}/rest/v1/tasks`,{method:'POST',headers:sbH(),body:JSON.stringify(taskData)}):Promise.resolve(),
+      apoData.length?fetch(`${sbUrl}/rest/v1/apos`,{method:'POST',headers:sbH(),body:JSON.stringify(apoData)}):Promise.resolve(),
+      memoData.length?fetch(`${sbUrl}/rest/v1/memos`,{method:'POST',headers:sbH(),body:JSON.stringify(memoData)}):Promise.resolve()
+    ]);
+    showToast('✓ クラウドに保存しました');
+  }catch(e){showToast('エラー：'+e.message);}
+}
+async function syncFromSupabase(){
+  if(!sbUrl||!sbKey){showToast('Supabase設定を完了してください');return;}
+  showToast('クラウドから取得中…');
+  try{
+    const h={'apikey':sbKey,'Authorization':`Bearer ${sbKey}`};
+    const [tRes,aRes,mRes]=await Promise.all([
+      fetch(`${sbUrl}/rest/v1/tasks?select=*`,{headers:h}),
+      fetch(`${sbUrl}/rest/v1/apos?select=*`,{headers:h}),
+      fetch(`${sbUrl}/rest/v1/memos?select=*`,{headers:h})
+    ]);
+    const [tData,aData,mData]=await Promise.all([tRes.json(),aRes.json(),mRes.json()]);
+    if(Array.isArray(tData)&&tData.length){tasks=tData.map(t=>({id:t.id,src:t.src,title:t.title,cust:t.cust,due:t.due,memo:t.memo,st:t.st,done:t.done,completedAt:t.completed_at,created:t.created,subs:t.subs||[]}));save();renderTasks();}
+    if(Array.isArray(aData)&&aData.length){apos=aData.map(a=>({id:a.id,type:a.type,date:a.date,start:a.start_time,end:a.end_time,title:a.title,place:a.place,memo:a.memo,gcalId:a.gcal_id}));save();renderSched();if(document.getElementById('page-apo').classList.contains('active'))renderApoPage();}
+    if(Array.isArray(mData)&&mData.length){memos=mData.map(m=>({id:m.id,body:m.body,cat:m.cat,cust:m.cust,created:m.created,updated:m.updated}));saveMemos();renderMemoPage();}
+    showToast(`✓ 取得完了（タスク${tasks.length}・アポ${apos.length}・メモ${memos.length}件）`);
+  }catch(e){showToast('エラー：'+e.message);}
+}
+
 /* ════ GITHUB AUTO PUSH ════ */
 let ghToken='',ghUser='',ghRepo='',ghFile='';
 function loadGhSettings(){
@@ -1721,8 +1990,20 @@ async function pushToGithub(){
   if(btn){btn.disabled=false;btn.textContent='⬆ 今すぐGitHubに反映';}
 }
 
-load();loadMailsFromStorage();loadApiKey();loadGhSettings();loadMemos();initSpTabs();renderTasks();renderSched();showTab('task');
+load();loadMailsFromStorage();loadApiKey();loadGhSettings();loadGoogleSettings();loadSupabaseSettings();loadMemos();initSpTabs();renderTasks();renderSched();
+// 前回のタブを復元
+const lastTab=localStorage.getItem('enkou_last_tab')||'task';
+showTab(lastTab);
+
+// タブ切り替え時に記録
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const tab=btn.id.replace('tab-','');
+    localStorage.setItem('enkou_last_tab',tab);
+  });
+});
+handleOAuthCallback();
 </script>
 
 
-<div id="toast" style="position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: rgb(28, 26, 22); color: rgb(255, 255, 255); padding: 8px 18px; border-radius: 20px; font-size: 12px; font-weight: 700; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none;">メモを入力してください</div></body></html>
+</body></html>
