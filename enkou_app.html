@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0051)file:///C:/Users/nk0712/Downloads/enkou_app_10.html -->
+<!-- saved from url=(0051)file:///C:/Users/nk0712/Downloads/enkou_app_11.html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -805,31 +805,33 @@ function switchSpTab(st,btn){
 }
 
 function renderSpBoard(){
-  const sales=getSalesTasks();
-  const items=sales.filter(t=>t.st===curSpTab||(!t.st&&curSpTab==='todo'));
-  const active=items.filter(t=>!t.done);
-  const done=items.filter(t=>t.done);
-  const isExp=expandedCols[curSpTab];
-  const isDoneOpen=expandedDone[curSpTab];
-  const shown=isExp?active:active.slice(0,SHOW_LIMIT);
-  const st=STATUSES[curSpTab];
-
-  let html='';
-  if(!active.length&&!done.length){
-    html=`<div class="kempty">タスクなし</div>`;
-  } else {
-    html+=shown.map(t=>taskCardHtml(t)).join('');
-    if(active.length>SHOW_LIMIT&&!isExp){
-      html+=`<button class="more-btn" onclick="expandCol('${curSpTab}')">＋ あと${active.length-SHOW_LIMIT}件を表示</button>`;
-    } else if(isExp&&active.length>SHOW_LIMIT){
-      html+=`<button class="more-btn" onclick="collapseCol('${curSpTab}')">▲ 折りたたむ</button>`;
+  try{
+    const board=document.getElementById('sp-board');
+    if(!board)return;
+    const sales=getSalesTasks();
+    const items=sales.filter(t=>(t.st||'todo')===curSpTab);
+    const active=items.filter(t=>!t.done);
+    const done=items.filter(t=>t.done);
+    const isExp=expandedCols[curSpTab];
+    const isDoneOpen=expandedDone[curSpTab];
+    const shown=isExp?active:active.slice(0,SHOW_LIMIT);
+    let html='';
+    if(!active.length&&!done.length){
+      html=`<div class="kempty">タスクなし</div>`;
+    } else {
+      html+=shown.map(t=>taskCardHtml(t)).join('');
+      if(active.length>SHOW_LIMIT&&!isExp){
+        html+=`<button class="more-btn" onclick="expandCol('${curSpTab}')">＋ あと${active.length-SHOW_LIMIT}件を表示</button>`;
+      } else if(isExp&&active.length>SHOW_LIMIT){
+        html+=`<button class="more-btn" onclick="collapseCol('${curSpTab}')">▲ 折りたたむ</button>`;
+      }
+      if(done.length){
+        html+=`<button class="done-toggle" onclick="toggleDoneSection('${curSpTab}')"><span>✓ 完了済み ${done.length}件</span><span>${isDoneOpen?'▲':'▼'}</span></button>`;
+        if(isDoneOpen) html+=`<div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">${done.map(t=>taskCardHtml(t,false)).join('')}</div>`;
+      }
     }
-    if(done.length){
-      html+=`<button class="done-toggle" onclick="toggleDoneSection('${curSpTab}')"><span>✓ 完了済み ${done.length}件</span><span>${isDoneOpen?'▲':'▼'}</span></button>`;
-      if(isDoneOpen) html+=`<div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">${done.map(t=>taskCardHtml(t,false)).join('')}</div>`;
-    }
-  }
-  document.getElementById('sp-board').innerHTML=html;
+    board.innerHTML=html;
+  }catch(e){console.error('renderSpBoard:',e);}
 }
 
 function renderTasks(){
@@ -1036,20 +1038,30 @@ function pickSt(st,btn){curSt=st;document.querySelectorAll('.stsel').forEach(b=>
 function addFormSub(){const i=document.getElementById('sub_inp');const v=i.value.trim();if(!v)return;formSubs.push({id:uid(),text:v,done:false});i.value='';renderFormSubList();i.focus();}
 function renderFormSubList(){document.getElementById('sub_list').innerHTML=formSubs.map((s,i)=>`<div class="sub-fi-item"><span>· ${esc(s.text)}</span><button class="sub-del" onclick="formSubs.splice(${i},1);renderFormSubList()">×</button></div>`).join('');}
 function saveCapture(){
-  const title=document.getElementById('cs_title').value.trim();
-  if(!title){document.getElementById('cs_title').focus();return;}
-  const custEl=document.getElementById('cs_cust');
-  const dueEl=document.getElementById('cs_due');
-  const memoEl=document.getElementById('cs_memo');
-  tasks.unshift({
-    id:uid(),src:curSrc,title,
-    cust:custEl?custEl.value.trim():'',
-    due:dueEl?dueEl.value:'',
-    memo:memoEl?memoEl.value.trim():'',
-    st:curSt,done:false,created:Date.now(),subs:[...formSubs]
-  });
-  save();renderTasks();closeOv('captureOv');
-  showToast('タスクを追加しました');
+  try{
+    const titleEl=document.getElementById('cs_title');
+    if(!titleEl)return;
+    const title=titleEl.value.trim();
+    if(!title){showToast('やることを入力してください');return;}
+    const custEl=document.getElementById('cs_cust');
+    const dueEl=document.getElementById('cs_due');
+    const memoEl=document.getElementById('cs_memo');
+    const newTask={
+      id:uid(),src:curSrc||'self',title,
+      cust:custEl?custEl.value.trim():'',
+      due:dueEl?dueEl.value:'',
+      memo:memoEl?memoEl.value.trim():'',
+      st:curSt||'todo',done:false,created:Date.now(),subs:[...formSubs]
+    };
+    tasks.unshift(newTask);
+    save();
+    closeOv('captureOv');
+    showToast('✓ タスクを追加しました');
+    setTimeout(()=>renderTasks(),100);
+  }catch(e){
+    showToast('エラー：'+e.message);
+    console.error(e);
+  }
 }
 
 function openTaskDet(id){selTaskId=id;renderTaskDet();openOv('taskDetOv');}
