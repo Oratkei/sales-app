@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///C:/Users/nk0712/Downloads/enkou_app%20(20).html -->
-<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- saved from url=(0050)https://oratkei.github.io/sales-app/enkou_app.html -->
+<html lang="ja" data-copytables-uid="u26310106505295"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>遠興 営業支援</title>
@@ -401,7 +401,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 
 <div class="tab-bar">
   <button class="tab-btn active" onclick="showTab(&#39;task&#39;)" id="tab-task">
-    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="display:none">0</span>
+    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="">2</span>
   </button>
   <button class="tab-btn" onclick="showTab(&#39;apo&#39;)" id="tab-apo">
     <span class="ti">🚗</span><span>アポ</span>
@@ -424,135 +424,103 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   <div class="st-tabs">
     <div class="st-tab-list">
       <button class="st-tab t-todo active" onclick="switchSpTab(&#39;todo&#39;,this)">
-        <span class="st-dot"></span><span>未対応</span><span class="st-cnt" id="sp-cnt-todo">0</span>
+        <span class="st-dot"></span><span>未対応</span><span class="st-cnt" id="sp-cnt-todo">2</span>
       </button>
       <button class="st-tab t-doing" onclick="switchSpTab(&#39;doing&#39;,this)">
-        <span class="st-dot"></span><span>対応中</span><span class="st-cnt" id="sp-cnt-doing">0</span>
+        <span class="st-dot"></span><span>対応中</span><span class="st-cnt" id="sp-cnt-doing">1</span>
       </button>
       <button class="st-tab t-maker" onclick="switchSpTab(&#39;maker&#39;,this)">
-        <span class="st-dot"></span><span>メーカー</span><span class="st-cnt" id="sp-cnt-maker">0</span>
+        <span class="st-dot"></span><span>メーカー</span><span class="st-cnt" id="sp-cnt-maker">1</span>
       </button>
       <button class="st-tab t-customer" onclick="switchSpTab(&#39;customer&#39;,this)">
-        <span class="st-dot"></span><span>お客様</span><span class="st-cnt" id="sp-cnt-customer">0</span>
+        <span class="st-dot"></span><span>お客様</span><span class="st-cnt" id="sp-cnt-customer">1</span>
       </button>
     </div>
   </div>
 
   <!-- スマホ用縦ボード -->
-  <div class="sp-board" id="sp-board"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);font-size:13px;padding:20px;">🎉 お疲れ様です！<br><span style="font-size:11px;margin-top:4px;display:block;opacity:.7">このステータスのタスクはありません</span></div><div style="margin-top:14px;">
-        <button class="done-toggle" onclick="toggleDoneSection(&#39;todo&#39;)">
-          <span>✅ 完了済み 6件</span><span>▼</span>
-        </button>
-        
-      </div></div>
+  <div class="sp-board" id="sp-board"><div class="tcard" id="tc_mnzvbib7oxbk" draggable="true" onclick="openTaskDet(&#39;mnzvbib7oxbk&#39;)" data-id="mnzvbib7oxbk" ondragstart="onDragStart(event,&#39;mnzvbib7oxbk&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnzvbib7oxbk&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+    <div class="tr1">
+      <div class="tct">さくら苑へ見積書を送付</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnzvbib7oxbk&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div style="font-size:10px;color:var(--text3);margin-top:2px;">さくら苑</div>
+    <div class="spb"><div class="spbw"><div class="spbf pt" style="width:67%"></div></div><span class="spbc">2/3</span></div>
+  </div><div class="tcard" id="tc_mnzvbib7fx13" draggable="true" onclick="openTaskDet(&#39;mnzvbib7fx13&#39;)" data-id="mnzvbib7fx13" ondragstart="onDragStart(event,&#39;mnzvbib7fx13&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnzvbib7fx13&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+    <div class="tr1">
+      <div class="tct">週報を渡邉さんに提出</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnzvbib7fx13&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div style="font-size:10px;color:var(--text3);margin-top:2px;">社内</div>
+    
+  </div></div>
 
   <!-- PC用カンバン -->
   <div class="kanban-wrap">
     <div class="kanban-col kcol-todo" id="col-todo">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">0</span></div>
-      <div class="kbody" id="body-todo"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);">🎉 お疲れ様です！</div><div style="margin-top:8px;">
-          <button class="done-toggle" onclick="toggleDoneSection(&#39;todo&#39;)"><span>✅ 完了済み 6件</span><span>▼</span></button>
-          <div class="done-section" style=""><div class="tcard done" id="tc_mneq8ow2ciqy" draggable="false" onclick="openTaskDet(&#39;mneq8ow2ciqy&#39;)" data-id="mneq8ow2ciqy" ondragstart="onDragStart(event,&#39;mneq8ow2ciqy&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneq8ow2ciqy&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">2</span></div>
+      <div class="kbody" id="body-todo"><div class="tcard" id="tc_mnzvbib7oxbk" draggable="true" onclick="openTaskDet(&#39;mnzvbib7oxbk&#39;)" data-id="mnzvbib7oxbk" ondragstart="onDragStart(event,&#39;mnzvbib7oxbk&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnzvbib7oxbk&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
-      <div class="tct">明日までにおむつの見積もり</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneq8ow2ciqy&#39;)">
+      <div class="tct">さくら苑へ見積書を送付</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnzvbib7oxbk&#39;)">
         <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
     </div>
-    <div style="font-size:10px;color:var(--text3);margin-top:2px;">さくらえん</div>
-    
-  </div><div class="tcard done" id="tc_mneq5mecrj9r" draggable="false" onclick="openTaskDet(&#39;mneq5mecrj9r&#39;)" data-id="mneq5mecrj9r" ondragstart="onDragStart(event,&#39;mneq5mecrj9r&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneq5mecrj9r&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+    <div style="font-size:10px;color:var(--text3);margin-top:2px;">さくら苑</div>
+    <div class="spb"><div class="spbw"><div class="spbf pt" style="width:67%"></div></div><span class="spbc">2/3</span></div>
+  </div><div class="tcard" id="tc_mnzvbib7fx13" draggable="true" onclick="openTaskDet(&#39;mnzvbib7fx13&#39;)" data-id="mnzvbib7fx13" ondragstart="onDragStart(event,&#39;mnzvbib7fx13&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnzvbib7fx13&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
-      <div class="tct">見積</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneq5mecrj9r&#39;)">
+      <div class="tct">週報を渡邉さんに提出</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnzvbib7fx13&#39;)">
         <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
     </div>
-    <div style="font-size:10px;color:var(--text3);margin-top:2px;">のまき</div>
-    
-  </div><div class="tcard done" id="tc_mneq4c0t640t" draggable="false" onclick="openTaskDet(&#39;mneq4c0t640t&#39;)" data-id="mneq4c0t640t" ondragstart="onDragStart(event,&#39;mneq4c0t640t&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneq4c0t640t&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">え</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneq4c0t640t&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="font-size:10px;color:var(--text3);margin-top:2px;">え</div>
-    
-  </div><div class="tcard done" id="tc_mneq37vdigkv" draggable="false" onclick="openTaskDet(&#39;mneq37vdigkv&#39;)" data-id="mneq37vdigkv" ondragstart="onDragStart(event,&#39;mneq37vdigkv&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneq37vdigkv&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">か</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneq37vdigkv&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    
-    
-  </div><div class="tcard done" id="tc_mneprr6tmwvr" draggable="false" onclick="openTaskDet(&#39;mneprr6tmwvr&#39;)" data-id="mneprr6tmwvr" ondragstart="onDragStart(event,&#39;mneprr6tmwvr&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneprr6tmwvr&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">問い合わせ回答</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneprr6tmwvr&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    
-    
-  </div><div class="tcard done" id="tc_mneoy7rjnifo" draggable="false" onclick="openTaskDet(&#39;mneoy7rjnifo&#39;)" data-id="mneoy7rjnifo" ondragstart="onDragStart(event,&#39;mneoy7rjnifo&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneoy7rjnifo&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">見積</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneoy7rjnifo&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="font-size:10px;color:var(--text3);margin-top:2px;">こまきのもり</div>
+    <div style="font-size:10px;color:var(--text3);margin-top:2px;">社内</div>
     
   </div></div>
-        </div></div>
     </div>
     <div class="kanban-col kcol-doing" id="col-doing">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">対応中</div></div></div><span class="kcnt" id="cnt-doing">0</span></div>
-      <div class="kbody" id="body-doing"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);">🎉 お疲れ様です！</div></div>
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">対応中</div></div></div><span class="kcnt" id="cnt-doing">1</span></div>
+      <div class="kbody" id="body-doing"><div class="tcard" id="tc_mnzvbib7v5id" draggable="true" onclick="openTaskDet(&#39;mnzvbib7v5id&#39;)" data-id="mnzvbib7v5id" ondragstart="onDragStart(event,&#39;mnzvbib7v5id&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnzvbib7v5id&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+    <div class="tr1">
+      <div class="tct">〇〇老健への折り返し電話</div>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnzvbib7v5id&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div style="font-size:10px;color:var(--text3);margin-top:2px;">〇〇老健</div>
+    
+  </div></div>
     </div>
     <div class="kanban-col kcol-maker" id="col-maker">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">メーカー<br>確認中</div></div></div><span class="kcnt" id="cnt-maker">0</span></div>
-      <div class="kbody" id="body-maker"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);">🎉 お疲れ様です！</div><div style="margin-top:8px;">
-          <button class="done-toggle" onclick="toggleDoneSection(&#39;maker&#39;)"><span>✅ 完了済み 2件</span><span>▼</span></button>
-          <div class="done-section" style=""><div class="tcard done" id="tc_mnebd8le5xf0" draggable="false" onclick="openTaskDet(&#39;mnebd8le5xf0&#39;)" data-id="mnebd8le5xf0" ondragstart="onDragStart(event,&#39;mnebd8le5xf0&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnebd8le5xf0&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">メーカー<br>確認中</div></div></div><span class="kcnt" id="cnt-maker">1</span></div>
+      <div class="kbody" id="body-maker"><div class="tcard" id="tc_mnzvbib7w16c" draggable="true" onclick="openTaskDet(&#39;mnzvbib7w16c&#39;)" data-id="mnzvbib7w16c" ondragstart="onDragStart(event,&#39;mnzvbib7w16c&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnzvbib7w16c&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
       <div class="tct">PVCグローブ価格をメーカーに確認</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnebd8le5xf0&#39;)">
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnzvbib7w16c&#39;)">
         <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
     </div>
     <div style="font-size:10px;color:var(--text3);margin-top:2px;">信越化学</div>
     
-  </div><div class="tcard done" id="tc_mneix8qt1c6g" draggable="false" onclick="openTaskDet(&#39;mneix8qt1c6g&#39;)" data-id="mneix8qt1c6g" ondragstart="onDragStart(event,&#39;mneix8qt1c6g&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mneix8qt1c6g&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">ショーワグローブ　分納連絡</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mneix8qt1c6g&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="font-size:10px;color:var(--text3);margin-top:2px;">福あられ本舗</div>
-    
   </div></div>
-        </div></div>
     </div>
     <div class="kanban-col kcol-customer" id="col-customer">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">お客様<br>確認中</div></div></div><span class="kcnt" id="cnt-customer">0</span></div>
-      <div class="kbody" id="body-customer"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);">🎉 お疲れ様です！</div><div style="margin-top:8px;">
-          <button class="done-toggle" onclick="toggleDoneSection(&#39;customer&#39;)"><span>✅ 完了済み 1件</span><span>▼</span></button>
-          <div class="done-section" style=""><div class="tcard done" id="tc_mnebd8lemi40" draggable="false" onclick="openTaskDet(&#39;mnebd8lemi40&#39;)" data-id="mnebd8lemi40" ondragstart="onDragStart(event,&#39;mnebd8lemi40&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnebd8lemi40&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">お客様<br>確認中</div></div></div><span class="kcnt" id="cnt-customer">1</span></div>
+      <div class="kbody" id="body-customer"><div class="tcard" id="tc_mnzvbib7ml99" draggable="true" onclick="openTaskDet(&#39;mnzvbib7ml99&#39;)" data-id="mnzvbib7ml99" ondragstart="onDragStart(event,&#39;mnzvbib7ml99&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnzvbib7ml99&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
       <div class="tct">△△特養 補助金申請書類の確認待ち</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnebd8lemi40&#39;)">
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnzvbib7ml99&#39;)">
         <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
     </div>
     <div style="font-size:10px;color:var(--text3);margin-top:2px;">△△特養</div>
     
   </div></div>
-        </div></div>
     </div>
   </div>
 </div>
@@ -601,113 +569,110 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   <div class="sched-page">
     <div class="week-nav">
       <button class="nav-btn" onclick="moveMonth(-1)">◀</button>
-      <span class="week-label" id="weekLabel">2026年3月</span>
+      <span class="week-label" id="weekLabel">2026年4月</span>
       <div style="display:flex;gap:6px;">
         <button class="nav-btn" onclick="moveMonth(0)">今月</button>
         <button class="nav-btn" onclick="moveMonth(1)">▶</button>
       </div>
     </div>
-    <div class="month-grid" id="monthGrid"><div class="month-day-name">月</div><div class="month-day-name">火</div><div class="month-day-name">水</div><div class="month-day-name">木</div><div class="month-day-name">金</div><div class="month-day-name">土</div><div class="month-day-name">日</div><div class="mday other-month"><div class="mday-num">23</div></div><div class="mday other-month"><div class="mday-num">24</div></div><div class="mday other-month"><div class="mday-num">25</div></div><div class="mday other-month"><div class="mday-num">26</div></div><div class="mday other-month"><div class="mday-num">27</div></div><div class="mday other-month"><div class="mday-num">28</div></div><div class="mday" onclick="selectDay(&#39;2026-03-01&#39;)">
+    <div class="month-grid" id="monthGrid"><div class="month-day-name">月</div><div class="month-day-name">火</div><div class="month-day-name">水</div><div class="month-day-name">木</div><div class="month-day-name">金</div><div class="month-day-name">土</div><div class="month-day-name">日</div><div class="mday other-month"><div class="mday-num">30</div></div><div class="mday other-month"><div class="mday-num">31</div></div><div class="mday" onclick="selectDay(&#39;2026-04-01&#39;)">
       <div class="mday-num">1</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-02&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-02&#39;)">
       <div class="mday-num">2</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-03&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-03&#39;)">
       <div class="mday-num">3</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-04&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-04&#39;)">
       <div class="mday-num">4</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-05&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-05&#39;)">
       <div class="mday-num">5</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-06&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-06&#39;)">
       <div class="mday-num">6</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-07&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-07&#39;)">
       <div class="mday-num">7</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-08&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-08&#39;)">
       <div class="mday-num">8</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-09&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-09&#39;)">
       <div class="mday-num">9</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-10&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-10&#39;)">
       <div class="mday-num">10</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-11&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-11&#39;)">
       <div class="mday-num">11</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-12&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-12&#39;)">
       <div class="mday-num">12</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-13&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-13&#39;)">
       <div class="mday-num">13</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-14&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-14&#39;)">
       <div class="mday-num">14</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-15&#39;)">
+    </div><div class="mday today" onclick="selectDay(&#39;2026-04-15&#39;)">
       <div class="mday-num">15</div>
-      <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-16&#39;)">
+      <div class="mday-dots"><div class="mday-dot task"></div></div>
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-16&#39;)">
       <div class="mday-num">16</div>
-      <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-17&#39;)">
+      <div class="mday-dots"><div class="mday-dot task"></div></div>
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-17&#39;)">
       <div class="mday-num">17</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-18&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-18&#39;)">
       <div class="mday-num">18</div>
-      <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-19&#39;)">
+      <div class="mday-dots"><div class="mday-dot task"></div></div>
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-19&#39;)">
       <div class="mday-num">19</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-20&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-20&#39;)">
       <div class="mday-num">20</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-21&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-21&#39;)">
       <div class="mday-num">21</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-22&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-22&#39;)">
       <div class="mday-num">22</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-23&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-23&#39;)">
       <div class="mday-num">23</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-24&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-24&#39;)">
       <div class="mday-num">24</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-25&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-25&#39;)">
       <div class="mday-num">25</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-26&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-26&#39;)">
       <div class="mday-num">26</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-27&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-27&#39;)">
       <div class="mday-num">27</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-28&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-28&#39;)">
       <div class="mday-num">28</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-29&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-29&#39;)">
       <div class="mday-num">29</div>
       <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-03-30&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-30&#39;)">
       <div class="mday-num">30</div>
       <div class="mday-dots"></div>
-    </div><div class="mday today selected" onclick="selectDay(&#39;2026-03-31&#39;)">
-      <div class="mday-num">31</div>
-      <div class="mday-dots"><div class="mday-dot task"></div><div class="mday-dot done"></div></div>
-    </div><div class="mday other-month"><div class="mday-num">1</div></div><div class="mday other-month"><div class="mday-num">2</div></div><div class="mday other-month"><div class="mday-num">3</div></div><div class="mday other-month"><div class="mday-num">4</div></div><div class="mday other-month"><div class="mday-num">5</div></div></div>
+    </div><div class="mday other-month"><div class="mday-num">1</div></div><div class="mday other-month"><div class="mday-num">2</div></div><div class="mday other-month"><div class="mday-num">3</div></div></div>
     <div class="day-detail" id="dayDetail">
-    <div class="day-detail-title">2026年3月31日（火）</div>
+    <div class="day-detail-title">2026年4月15日（水）</div>
     <div class="apo-list"><div style="font-size:12px;color:var(--text3);margin-bottom:10px;">予定なし</div></div>
-    <button class="add-apo-btn" onclick="openApo(&#39;2026-03-31&#39;)">＋ アポ・予定を追加</button>
+    <button class="add-apo-btn" onclick="openApo(&#39;2026-04-15&#39;)">＋ アポ・予定を追加</button>
     <div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:6px;">本日のタスク</div>
-    <div class="todo-day-list"><div class="todo-item"><span class="todo-txt">GitHub Pagesのスマホアクセスを確認する</span><span class="todo-st" style="background:#fff1f0;color:#c0392b;">未対応</span></div><div class="todo-item"><span class="todo-txt">Anthropic APIキーを取得・設定する</span><span class="todo-st" style="background:#fff1f0;color:#c0392b;">未対応</span></div></div>
-    <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:.06em;margin:12px 0 6px;">✅ 完了済み</div><div class="todo-day-list"><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ 明日までにおむつの見積もり</span><span style="font-size:10px;color:var(--text3);">さくらえん</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ 見積</span><span style="font-size:10px;color:var(--text3);">のまき</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ え</span><span style="font-size:10px;color:var(--text3);">え</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ か</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ 問い合わせ回答</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ 見積</span><span style="font-size:10px;color:var(--text3);">こまきのもり</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ PVCグローブ価格をメーカーに確認</span><span style="font-size:10px;color:var(--text3);">信越化学</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ △△特養 補助金申請書類の確認待ち</span><span style="font-size:10px;color:var(--text3);">△△特養</span></div><div class="todo-item" style="opacity:.6;"><span class="todo-txt" style="text-decoration:line-through;">✅ ショーワグローブ　分納連絡</span><span style="font-size:10px;color:var(--text3);">福あられ本舗</span></div></div>
+    <div class="todo-day-list"><div class="todo-item"><span class="todo-txt">さくら苑へ見積書を送付</span><span class="todo-st" style="background:#fff1f0;color:#c0392b;">未対応</span></div><div class="todo-item"><span class="todo-txt">〇〇老健への折り返し電話</span><span class="todo-st" style="background:#e8f2fb;color:#1d5fa8;">対応中</span></div></div>
+    
   </div>
   </div>
 </div>
@@ -792,7 +757,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     <div class="settings-section" style="border:1.5px solid #3ecf8e;">
       <div class="settings-title" style="color:#1a7a4a;">☁️ Supabase（端末間データ共有）</div>
       <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-        <span id="supabaseStatus" class="status-ok">設定済み ✓</span>
+        <span id="supabaseStatus" class="status-ng">未接続</span>
       </div>
       <p style="font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px;">
         社用スマホ・PC・プライベートスマホでデータを共有できます。
