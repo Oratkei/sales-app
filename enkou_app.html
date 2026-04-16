@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)file:///C:/Users/nk0712/Downloads/enkou_app_dev_4.html -->
+<!-- saved from url=(0055)file:///C:/Users/nk0712/Downloads/enkou_app_dev_19.html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -249,6 +249,10 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .overlay{display:none;position:fixed;inset:0;background:rgba(20,18,14,.55);z-index:300;align-items:flex-end;justify-content:center;}
 .overlay.open{display:flex;}
 .sheet{background:var(--surface);border-radius:18px 18px 0 0;width:100%;max-width:520px;padding:18px 18px env(safe-area-inset-bottom,20px);animation:up .2s ease;max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+/* キャプチャー・詳細・編集系はすべて中央表示 */
+#captureOv,#taskDetOv,#apoOv,#memoOv,#dealOv,#dealDetOv,#custOv,#goalOv,#budgetOv,#tbOv,#memoAssignOv{align-items:center;}
+#captureOv .sheet,#taskDetOv .sheet,#apoOv .sheet,#memoOv .sheet,#dealOv .sheet,#dealDetOv .sheet,#custOv .sheet,#goalOv .sheet,#budgetOv .sheet,#tbOv .sheet,#memoAssignOv .sheet{border-radius:16px;max-width:480px;max-height:92vh;animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0;transform:scale(.96);}to{opacity:1;transform:scale(1);}}
 @keyframes up{from{transform:translateY(28px);opacity:0}to{transform:translateY(0);opacity:1}}
 .handle{width:30px;height:3px;background:var(--border2);border-radius:2px;margin:0 auto 14px;}
 .stitle{font-size:15px;font-weight:700;margin-bottom:14px;}
@@ -409,7 +413,9 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .memo-card:hover{box-shadow:var(--sh2);}
 .memo-card-body{font-size:13px;line-height:1.6;color:var(--text);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .memo-card-date{font-size:10px;color:var(--text3);margin-top:6px;}
-.memo-empty{text-align:center;padding:48px 20px;color:var(--text3);font-size:13px;}
+.assign-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 8px;border-radius:10px;border:1.5px solid var(--border);background:var(--s2);cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:all .15s;}
+.assign-btn:hover,.assign-btn:active{background:var(--text);border-color:var(--text);}
+.assign-btn:hover span,.assign-btn:active span{color:#fff!important;}
 .memo-cat-btn{padding:9px 8px;border-radius:8px;border:1.5px solid var(--border);background:var(--s2);font-size:12px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;color:var(--text2);transition:all .15s;text-align:center;}
 .memo-cat-btn.on{border-color:var(--text);background:var(--text);color:#fff;}
 .memo-card-cat{font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;margin-right:4px;}
@@ -430,7 +436,70 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 .st-cnt{font-size:9px;background:#e74c3c;color:#fff;border-radius:8px;padding:1px 5px;font-weight:700;min-width:16px;text-align:center;}
 .sp-board{display:none;flex:1;overflow-y:auto;padding:10px;flex-direction:column;gap:6px;}
 
-/* ── スライド切替 ── */
+/* ── 今すぐモード ── */
+.focus-now-bar{background:linear-gradient(135deg,#1c1a16,#2d2a22);padding:10px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0;cursor:pointer;transition:opacity .15s;}
+.focus-now-bar:hover{opacity:.9;}
+.focus-now-btn{background:var(--gold);color:#1c1a16;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;white-space:nowrap;flex-shrink:0;}
+.focus-now-preview{flex:1;min-width:0;}
+.focus-now-label{font-size:9px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:.08em;margin-bottom:2px;}
+.focus-now-title{font-size:12px;color:#fff;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* 集中モード全画面 */
+.focus-overlay{position:fixed;inset:0;background:#1c1a16;z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;}
+.focus-overlay.open{display:flex;}
+.focus-task-title{font-size:20px;font-weight:700;color:#fff;text-align:center;margin-bottom:8px;line-height:1.4;}
+.focus-task-cust{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:40px;}
+.focus-timer{font-size:80px;font-family:'Bebas Neue',monospace;letter-spacing:.05em;color:var(--gold);line-height:1;margin-bottom:16px;transition:color .3s;}
+.focus-timer.warning{color:#e74c3c;}
+.focus-timer.break{color:#2ecc71;}
+.focus-mode-label{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:40px;letter-spacing:.1em;}
+.focus-actions{display:flex;gap:12px;}
+.focus-btn{padding:14px 28px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;}
+.focus-btn-done{background:#2ecc71;color:#fff;}
+.focus-btn-pause{background:rgba(255,255,255,.12);color:#fff;}
+.focus-btn-stop{background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);}
+.focus-progress{width:100%;max-width:320px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:40px;}
+.focus-progress-fill{height:100%;border-radius:2px;background:var(--gold);transition:width .5s;}
+.focus-pomo-dots{display:flex;gap:8px;margin-bottom:16px;}
+.pomo-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);}
+.pomo-dot.done{background:var(--gold);}
+
+/* 完了アニメーション */
+@keyframes celebrate{0%{transform:scale(1);}50%{transform:scale(1.15);}100%{transform:scale(1);}}
+.celebrate{animation:celebrate .4s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp .3s ease;}
+.timebox-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.tb-timer-display{font-size:28px;font-weight:700;font-family:'Bebas Neue',monospace;letter-spacing:.05em;color:var(--text);min-width:80px;}
+.tb-timer-display.running{color:var(--blue);}
+.tb-timer-display.break{color:var(--green);}
+.tb-timer-display.warning{color:var(--red);}
+.tb-task-name{font-size:11px;color:var(--text2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tb-btn{padding:6px 12px;border-radius:6px;border:none;font-size:11px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;}
+.tb-btn-start{background:var(--blue);color:#fff;}
+.tb-btn-pause{background:var(--amber);color:#fff;}
+.tb-btn-stop{background:var(--s2);color:var(--text2);border:1px solid var(--border);}
+/* タイムボックス設定オーバーレイ */
+.tb-preset-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+.tb-preset-btn{padding:12px 6px;border-radius:8px;border:1.5px solid var(--border);background:var(--s2);font-size:13px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;color:var(--text2);text-align:center;transition:all .15s;}
+.tb-preset-btn.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+.tb-preset-btn:hover{background:var(--text);color:#fff;border-color:var(--text);}
+/* 1日スケジュールビュー */
+.dayplan-page{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.dayplan-header{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.dayplan-grid{flex:1;overflow-y:auto;position:relative;padding:8px 12px;}
+.hour-row{display:flex;gap:8px;margin-bottom:2px;min-height:52px;}
+.hour-label{width:40px;font-size:10px;color:var(--text3);padding-top:4px;flex-shrink:0;text-align:right;}
+.hour-slots{flex:1;display:flex;flex-direction:column;gap:2px;border-left:2px solid var(--border);padding-left:8px;}
+.tb-block{border-radius:6px;padding:6px 10px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:box-shadow .15s;}
+.tb-block:hover{box-shadow:var(--sh2);}
+.tb-block-title{font-size:11px;font-weight:700;flex:1;}
+.tb-block-time{font-size:10px;opacity:.7;}
+.tb-block-start-btn{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;border:none;cursor:pointer;background:rgba(255,255,255,.3);color:inherit;}
+.slot-empty{border:1.5px dashed var(--border);border-radius:6px;padding:8px;font-size:10px;color:var(--text3);text-align:center;cursor:pointer;}
+.slot-empty:hover{background:var(--s2);}
+.now-line{height:2px;background:#e74c3c;position:relative;margin:0 0 2px 48px;}
+.now-line::before{content:'';width:8px;height:8px;border-radius:50%;background:#e74c3c;position:absolute;left:-4px;top:-3px;}
 .page-container{display:flex;flex:1;overflow:hidden;position:relative;}
 .page{min-width:100%;transition:transform .3s cubic-bezier(.4,0,.2,1);}
 @media(max-width:768px){
@@ -523,39 +592,61 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 </header>
 
 <div class="tab-bar">
-  <button class="tab-btn" onclick="showTab(&#39;task&#39;)" id="tab-task">
-    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="">3</span>
+  <button class="tab-btn active" onclick="showTab(&#39;task&#39;)" id="tab-task">
+    <span class="ti">📋</span><span>タスク</span><span class="badge" id="task-badge" style="display:none">0</span>
   </button>
-  <button class="tab-btn" onclick="showTab(&#39;apo&#39;)" id="tab-apo">
-    <span class="ti">🚗</span><span>アポ</span>
-  </button>
-  <button class="tab-btn active" onclick="showTab(&#39;deal&#39;)" id="tab-deal">
+  <button class="tab-btn" onclick="showTab(&#39;deal&#39;)" id="tab-deal">
     <span class="ti">🏢</span><span>案件</span>
-  </button>
-  <button class="tab-btn" onclick="showTab(&#39;sched&#39;)" id="tab-sched">
-    <span class="ti">📅</span><span>予定</span>
   </button>
   <button class="tab-btn" onclick="showTab(&#39;memo&#39;)" id="tab-memo">
     <span class="ti">📝</span><span>メモ</span>
   </button>
-  <button class="tab-btn pc-only" onclick="showTab(&#39;mgmt&#39;)" id="tab-mgmt">
+  <button class="tab-btn pc-only" onclick="showComingSoon(&#39;管理ダッシュボード&#39;)" id="tab-mgmt" style="opacity:.6;">
     <span class="ti">📊</span><span>管理</span>
+    <span style="font-size:7px;color:var(--amber);font-weight:700;background:var(--amberbg);padding:1px 4px;border-radius:4px;">準備中</span>
+  </button>
+  <button class="tab-btn" onclick="showComingSoon(&#39;1日計画&#39;)" id="tab-dayplan" style="opacity:.6;">
+    <span class="ti">⏱</span><span>計画</span>
+    <span style="font-size:7px;color:var(--amber);font-weight:700;background:var(--amberbg);padding:1px 4px;border-radius:4px;">準備中</span>
+  </button>
+  <button class="tab-btn" onclick="showComingSoon(&#39;アポ管理&#39;)" id="tab-apo" style="opacity:.6;">
+    <span class="ti">🚗</span><span>アポ</span>
+    <span style="font-size:7px;color:var(--amber);font-weight:700;background:var(--amberbg);padding:1px 4px;border-radius:4px;">準備中</span>
+  </button>
+  <button class="tab-btn" onclick="showComingSoon(&#39;予定管理&#39;)" id="tab-sched" style="opacity:.6;">
+    <span class="ti">📅</span><span>予定</span>
+    <span style="font-size:7px;color:var(--amber);font-weight:700;background:var(--amberbg);padding:1px 4px;border-radius:4px;">準備中</span>
   </button>
 </div>
 
 <!-- TASK PAGE -->
-<div class="page" id="page-task">
+<div class="page active" id="page-task">
 
-  <!-- PC用クイックアクションバー -->
-  <div class="pc-quick-bar">
-    <button class="pc-quick-btn primary" onclick="openCapture(&#39;self&#39;)">＋ タスク追加 <span class="pc-shortcut">N</span></button>
-    <button class="pc-quick-btn" onclick="openCaptureType(&#39;見積&#39;)">📋 見積タスク</button>
-    <button class="pc-quick-btn" onclick="setTaskView(&#39;status&#39;,document.getElementById(&#39;view-status-btn&#39;))">ステータス別</button>
-    <button class="pc-quick-btn" onclick="setTaskView(&#39;cust&#39;,document.getElementById(&#39;view-cust-btn&#39;))">得意先別</button>
+  <!-- 今すぐ始めるバー -->
+  <div class="focus-now-bar" onclick="startFocusMode()">
+    <div class="focus-now-preview">
+      <div class="focus-now-label">🎯 今すぐ始める</div>
+      <div class="focus-now-title" id="focusNowTitle">なごみ　武田様　BCP商品提案</div>
+    </div>
+    <button onclick="event.stopPropagation();openFocusSelect()" style="background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:&#39;Noto Sans JP&#39;,sans-serif;flex-shrink:0;">選択</button>
+    <button class="focus-now-btn">▶ 開始</button>
   </div>
 
-  <!-- 表示切替バー -->
-  <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;gap:6px;flex-shrink:0;">
+  <!-- タイムボックスバー -->
+  <div class="timebox-bar" id="timeboxBar">
+    <div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;">
+      <div class="tb-timer-display" id="tbDisplay">00:00</div>
+      <div class="tb-task-name" id="tbTaskName">タスクを選択してください</div>
+    </div>
+    <button class="tb-btn tb-btn-start" id="tbStartBtn" onclick="tbStart()">▶ 開始</button>
+    <button class="tb-btn tb-btn-pause" id="tbPauseBtn" onclick="tbPause()" style="display:none;">⏸ 一時停止</button>
+    <button class="tb-btn tb-btn-stop" id="tbStopBtn" onclick="tbStop()" style="display:none;">⏹ 終了</button>
+    <button class="tb-btn" style="background:var(--s2);color:var(--text2);border:1px solid var(--border);" onclick="showTab(&#39;dayplan&#39;)">📅 1日計画</button>
+  </div>
+
+  <!-- PC用クイックアクションバー（表示切替も統合） -->
+  <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;">
+    <button class="pc-quick-btn primary" onclick="openCapture(&#39;self&#39;)">＋ タスク追加 <span class="pc-shortcut">N</span></button>
     <button class="mf-btn on" id="view-status-btn" onclick="setTaskView(&#39;status&#39;,this)">ステータス別</button>
     <button class="mf-btn" id="view-cust-btn" onclick="setTaskView(&#39;cust&#39;,this)">得意先別</button>
   </div>
@@ -564,13 +655,13 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   <div class="st-tabs" id="st-tabs-wrap">
     <div class="st-tab-list">
       <button class="st-tab t-todo active" onclick="switchSpTab(&#39;todo&#39;,this)">
-        <span class="st-dot"></span><span>未対応</span><span class="st-cnt" id="sp-cnt-todo">3</span>
+        <span class="st-dot"></span><span>未対応</span><span class="st-cnt" id="sp-cnt-todo">0</span>
       </button>
       <button class="st-tab t-doing" onclick="switchSpTab(&#39;doing&#39;,this)">
         <span class="st-dot"></span><span>対応中</span><span class="st-cnt" id="sp-cnt-doing">1</span>
       </button>
       <button class="st-tab t-maker" onclick="switchSpTab(&#39;maker&#39;,this)">
-        <span class="st-dot"></span><span>メーカー</span><span class="st-cnt" id="sp-cnt-maker">3</span>
+        <span class="st-dot"></span><span>メーカー</span><span class="st-cnt" id="sp-cnt-maker">4</span>
       </button>
       <button class="st-tab t-customer" onclick="switchSpTab(&#39;customer&#39;,this)">
         <span class="st-dot"></span><span>お客様</span><span class="st-cnt" id="sp-cnt-customer">0</span>
@@ -579,73 +670,20 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   </div>
 
   <!-- スマホ用縦ボード -->
-  <div class="sp-board" id="sp-board"><div class="tcard" id="tc_mnij94c97au6" draggable="true" onclick="openTaskDet(&#39;mnij94c97au6&#39;)" data-id="mnij94c97au6" ondragstart="onDragStart(event,&#39;mnij94c97au6&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnij94c97au6&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">見積　白米　おかゆ</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnij94c97au6&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;"><span style="font-size:10px;color:var(--text3);">あつたファミリア</span><span style="font-size:9px;font-weight:700;color:#e74c3c;background:#fff1f0;padding:1px 5px;border-radius:4px;">⚠️ 4/7</span></div>
-    <div class="spb"><div class="spbw"><div class="spbf pt" style="width:0%"></div></div><span class="spbc">0/2</span></div>
-  </div><div class="tcard" id="tc_mnij24jyx6y5" draggable="true" onclick="openTaskDet(&#39;mnij24jyx6y5&#39;)" data-id="mnij24jyx6y5" ondragstart="onDragStart(event,&#39;mnij24jyx6y5&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnij24jyx6y5&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">ISANA　電話</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnij24jyx6y5&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;"><span style="font-size:10px;color:var(--text3);">手袋</span><span style="font-size:9px;font-weight:700;color:#e74c3c;background:#fff1f0;padding:1px 5px;border-radius:4px;">⚠️ 4/3</span></div>
-    <div class="spb"><div class="spbw"><div class="spbf pt" style="width:20%"></div></div><span class="spbc">1/5</span></div>
-  </div><div class="tcard" id="tc_mnflypyvikr0" draggable="true" onclick="openTaskDet(&#39;mnflypyvikr0&#39;)" data-id="mnflypyvikr0" ondragstart="onDragStart(event,&#39;mnflypyvikr0&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnflypyvikr0&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">その他</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnflypyvikr0&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;"><span style="font-size:10px;color:var(--text3);">あおい皮膚科クリニック</span><span style="font-size:9px;font-weight:700;color:#e74c3c;background:#fff1f0;padding:1px 5px;border-radius:4px;">⚠️ 4/1</span></div>
-    
-  </div></div>
+  <div class="sp-board" id="sp-board"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);font-size:13px;padding:20px;">🎉 お疲れ様です！<br><span style="font-size:11px;margin-top:4px;display:block;opacity:.7">このステータスのタスクはありません</span></div></div>
 
   <!-- PC用カンバン -->
   <div class="kanban-wrap">
     <div class="kanban-col kcol-todo" id="col-todo">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">3</span></div>
-      <div class="kbody" id="body-todo"><div class="tcard" id="tc_mnij94c97au6" draggable="true" onclick="openTaskDet(&#39;mnij94c97au6&#39;)" data-id="mnij94c97au6" ondragstart="onDragStart(event,&#39;mnij94c97au6&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnij94c97au6&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">見積　白米　おかゆ</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnij94c97au6&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;"><span style="font-size:10px;color:var(--text3);">あつたファミリア</span><span style="font-size:9px;font-weight:700;color:#e74c3c;background:#fff1f0;padding:1px 5px;border-radius:4px;">⚠️ 4/7</span></div>
-    <div class="spb"><div class="spbw"><div class="spbf pt" style="width:0%"></div></div><span class="spbc">0/2</span></div>
-  </div><div class="tcard" id="tc_mnij24jyx6y5" draggable="true" onclick="openTaskDet(&#39;mnij24jyx6y5&#39;)" data-id="mnij24jyx6y5" ondragstart="onDragStart(event,&#39;mnij24jyx6y5&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnij24jyx6y5&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">ISANA　電話</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnij24jyx6y5&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;"><span style="font-size:10px;color:var(--text3);">手袋</span><span style="font-size:9px;font-weight:700;color:#e74c3c;background:#fff1f0;padding:1px 5px;border-radius:4px;">⚠️ 4/3</span></div>
-    <div class="spb"><div class="spbw"><div class="spbf pt" style="width:20%"></div></div><span class="spbc">1/5</span></div>
-  </div><div class="tcard" id="tc_mnflypyvikr0" draggable="true" onclick="openTaskDet(&#39;mnflypyvikr0&#39;)" data-id="mnflypyvikr0" ondragstart="onDragStart(event,&#39;mnflypyvikr0&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnflypyvikr0&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
-    <div class="tr1">
-      <div class="tct">その他</div>
-      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnflypyvikr0&#39;)">
-        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;"><span style="font-size:10px;color:var(--text3);">あおい皮膚科クリニック</span><span style="font-size:9px;font-weight:700;color:#e74c3c;background:#fff1f0;padding:1px 5px;border-radius:4px;">⚠️ 4/1</span></div>
-    
-  </div></div>
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">未対応</div></div></div><span class="kcnt" id="cnt-todo">0</span></div>
+      <div class="kbody" id="body-todo"><div class="kempty" style="background:var(--greenbg);border-color:var(--green);color:var(--green);">🎉 お疲れ様です！</div></div>
     </div>
     <div class="kanban-col kcol-doing" id="col-doing">
       <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">対応中</div></div></div><span class="kcnt" id="cnt-doing">1</span></div>
       <div class="kbody" id="body-doing"><div class="tcard" id="tc_mnh9bvzrrojr" draggable="true" onclick="openTaskDet(&#39;mnh9bvzrrojr&#39;)" data-id="mnh9bvzrrojr" ondragstart="onDragStart(event,&#39;mnh9bvzrrojr&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnh9bvzrrojr&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
       <div class="tct">18J</div>
+      <button onclick="event.stopPropagation();openFocusModeForTask(&#39;mnh9bvzrrojr&#39;)" style="font-size:10px;padding:2px 6px;border-radius:4px;border:none;background:var(--bluebg);color:var(--blue);cursor:pointer;flex-shrink:0;">⏱</button>
       <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnh9bvzrrojr&#39;)">
         <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
@@ -655,19 +693,31 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   </div></div>
     </div>
     <div class="kanban-col kcol-maker" id="col-maker">
-      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">メーカー<br>確認中</div></div></div><span class="kcnt" id="cnt-maker">3</span></div>
+      <div class="khead"><div class="khead-left"><span class="kdot"></span><div><div class="kname">メーカー<br>確認中</div></div></div><span class="kcnt" id="cnt-maker">4</span></div>
       <div class="kbody" id="body-maker"><div class="tcard" id="tc_mnikwl5ss5r3" draggable="true" onclick="openTaskDet(&#39;mnikwl5ss5r3&#39;)" data-id="mnikwl5ss5r3" ondragstart="onDragStart(event,&#39;mnikwl5ss5r3&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnikwl5ss5r3&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
       <div class="tct">なごみ　武田様　BCP商品提案</div>
+      <button onclick="event.stopPropagation();openFocusModeForTask(&#39;mnikwl5ss5r3&#39;)" style="font-size:10px;padding:2px 6px;border-radius:4px;border:none;background:var(--bluebg);color:var(--blue);cursor:pointer;flex-shrink:0;">⏱</button>
       <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnikwl5ss5r3&#39;)">
         <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;"><span></span><span style="font-size:9px;font-weight:700;color:#e74c3c;background:#fff1f0;padding:1px 5px;border-radius:4px;">⚠️ 4/3</span></div>
     <div class="spb"><div class="spbw"><div class="spbf pt" style="width:0%"></div></div><span class="spbc">0/2</span></div>
+  </div><div class="tcard" id="tc_mnij94c97au6" draggable="true" onclick="openTaskDet(&#39;mnij94c97au6&#39;)" data-id="mnij94c97au6" ondragstart="onDragStart(event,&#39;mnij94c97au6&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mnij94c97au6&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
+    <div class="tr1">
+      <div class="tct">見積　白米　おかゆ</div>
+      <button onclick="event.stopPropagation();openFocusModeForTask(&#39;mnij94c97au6&#39;)" style="font-size:10px;padding:2px 6px;border-radius:4px;border:none;background:var(--bluebg);color:var(--blue);cursor:pointer;flex-shrink:0;">⏱</button>
+      <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mnij94c97au6&#39;)">
+        <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;"><span style="font-size:10px;color:var(--text3);">あつたファミリア</span><span style="font-size:9px;font-weight:700;color:#e74c3c;background:#fff1f0;padding:1px 5px;border-radius:4px;">⚠️ 4/7</span></div>
+    <div class="spb"><div class="spbw"><div class="spbf pt" style="width:0%"></div></div><span class="spbc">0/2</span></div>
   </div><div class="tcard" id="tc_mni9qt6dj35a" draggable="true" onclick="openTaskDet(&#39;mni9qt6dj35a&#39;)" data-id="mni9qt6dj35a" ondragstart="onDragStart(event,&#39;mni9qt6dj35a&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mni9qt6dj35a&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
       <div class="tct">見積</div>
+      <button onclick="event.stopPropagation();openFocusModeForTask(&#39;mni9qt6dj35a&#39;)" style="font-size:10px;padding:2px 6px;border-radius:4px;border:none;background:var(--bluebg);color:var(--blue);cursor:pointer;flex-shrink:0;">⏱</button>
       <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mni9qt6dj35a&#39;)">
         <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
@@ -677,6 +727,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   </div><div class="tcard" id="tc_mner20jvedpi" draggable="true" onclick="openTaskDet(&#39;mner20jvedpi&#39;)" data-id="mner20jvedpi" ondragstart="onDragStart(event,&#39;mner20jvedpi&#39;)" ondragend="onDragEnd(event)" ontouchstart="touchStartCard(event,&#39;mner20jvedpi&#39;)" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
       <div class="tct">見積</div>
+      <button onclick="event.stopPropagation();openFocusModeForTask(&#39;mner20jvedpi&#39;)" style="font-size:10px;padding:2px 6px;border-radius:4px;border:none;background:var(--bluebg);color:var(--blue);cursor:pointer;flex-shrink:0;">⏱</button>
       <div class="tchk" onclick="event.stopPropagation();toggleTask(&#39;mner20jvedpi&#39;)">
         <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
       </div>
@@ -696,7 +747,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 </div>
 
 <!-- DEAL PAGE -->
-<div class="page active" id="page-deal">
+<div class="page" id="page-deal">
   <div class="deal-page-wrap">
     <!-- ビュー切替 -->
     <div class="deal-toolbar">
@@ -707,9 +758,9 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <button class="dev-add-btn" onclick="openDealAdd()">＋ 案件</button>
     </div>
     <!-- フェーズフィルター -->
-    <div class="deal-phase-filter" id="dealPhaseFilter"><button class="mf-btn on" onclick="setDealPhaseFilter(&#39;all&#39;,this)">すべて</button><button class="mf-btn" onclick="setDealPhaseFilter(&#39;0&#39;,this)">アプローチ</button><button class="mf-btn" onclick="setDealPhaseFilter(&#39;1&#39;,this)">提案</button><button class="mf-btn" onclick="setDealPhaseFilter(&#39;2&#39;,this)">見積</button><button class="mf-btn" onclick="setDealPhaseFilter(&#39;3&#39;,this)">フォロー</button><button class="mf-btn" onclick="setDealPhaseFilter(&#39;4&#39;,this)">交渉</button><button class="mf-btn" onclick="setDealPhaseFilter(&#39;5&#39;,this)">契約</button></div>
+    <div class="deal-phase-filter" id="dealPhaseFilter"></div>
     <!-- 一覧ビュー -->
-    <div id="deal-list-view" style="flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:10px;"><div class="deal-empty">🏢 案件がありません<br><br><button class="btn btn-p" style="width:160px;margin-top:8px;" onclick="openDealAdd()">＋ 案件を追加</button></div></div>
+    <div id="deal-list-view" style="flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:10px;"></div>
     <!-- パイプラインビュー -->
     <div id="deal-pipe-view" style="display:none;flex:1;overflow-x:auto;padding:10px;display:flex;gap:10px;"></div>
   </div>
@@ -725,7 +776,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     <label class="flbl">顧客名</label>
     <input class="finp" id="deal_cust" type="text" placeholder="例：医療法人清水会" autocomplete="off">
     <label class="flbl">フェーズ</label>
-    <select class="finp" id="deal_phase"><option value="0">アプローチ</option><option value="1">提案</option><option value="2">見積</option><option value="3">フォロー</option><option value="4">交渉</option><option value="5">契約</option></select>
+    <select class="finp" id="deal_phase"></select>
     <label class="flbl">目標完了日</label>
     <input class="finp" id="deal_due" type="date">
     <label class="flbl">メモ</label>
@@ -746,6 +797,51 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
 <!-- 案件詳細オーバーレイ -->
 <div class="overlay" id="dealDetOv">
   <div class="sheet" id="dealDetSheet"></div>
+</div>
+
+<!-- DAYPLAN PAGE -->
+<div class="page" id="page-dayplan">
+  <div class="dayplan-page">
+    <div class="dayplan-header">
+      <div>
+        <div style="font-size:13px;font-weight:700;">📅 1日タイムボックス計画</div>
+        <div style="font-size:11px;color:var(--text3);" id="dayplanDate"></div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <button class="dev-add-btn" onclick="autoFillDayplan()">⚡ 自動配置</button>
+        <button class="dev-add-btn" onclick="clearDayplan()" style="background:var(--redbg);color:var(--red);">クリア</button>
+      </div>
+    </div>
+    <div class="dayplan-grid" id="dayplanGrid"></div>
+  </div>
+</div>
+
+<!-- タイムボックス設定オーバーレイ -->
+<div class="overlay" id="tbOv">
+  <div class="sheet" style="padding-bottom:max(44px,env(safe-area-inset-bottom));">
+    <div class="handle"></div>
+    <div style="font-size:14px;font-weight:700;margin-bottom:6px;">⏱ タイムボックスを設定</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:14px;" id="tbOvTaskName"></div>
+    <label class="flbl">時間を選択</label>
+    <div class="tb-preset-grid">
+      <button class="tb-preset-btn" onclick="selectTbTime(15,this)">15分</button>
+      <button class="tb-preset-btn on" onclick="selectTbTime(25,this)">25分</button>
+      <button class="tb-preset-btn" onclick="selectTbTime(30,this)">30分</button>
+      <button class="tb-preset-btn" onclick="selectTbTime(45,this)">45分</button>
+      <button class="tb-preset-btn" onclick="selectTbTime(60,this)">60分</button>
+      <button class="tb-preset-btn" onclick="selectTbTime(90,this)">90分</button>
+    </div>
+    <label class="flbl">または自分で入力（分）</label>
+    <input class="finp" id="tbCustomMin" type="number" placeholder="例：20" min="1" max="240" style="margin-bottom:12px;">
+    <label class="flbl" style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+      <input type="checkbox" id="tbPomodoro" style="width:16px;height:16px;">
+      <span>ポモドーロ（25分作業→5分休憩）を繰り返す</span>
+    </label>
+    <div class="btn-row" style="margin-top:14px;">
+      <button class="btn btn-g" onclick="closeOv(&#39;tbOv&#39;)">キャンセル</button>
+      <button class="btn btn-p" onclick="tbConfirmStart()">▶ 開始</button>
+    </div>
+  </div>
 </div>
 
 <!-- APO PAGE -->
@@ -786,7 +882,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     </div>
     <div class="month-grid" id="monthGrid"><div class="month-day-name">月</div><div class="month-day-name">火</div><div class="month-day-name">水</div><div class="month-day-name">木</div><div class="month-day-name">金</div><div class="month-day-name">土</div><div class="month-day-name">日</div><div class="mday other-month"><div class="mday-num">30</div></div><div class="mday other-month"><div class="mday-num">31</div></div><div class="mday" onclick="selectDay(&#39;2026-04-01&#39;)">
       <div class="mday-num">1</div>
-      <div class="mday-dots"><div class="mday-dot task"></div><div class="mday-dot done"></div></div>
+      <div class="mday-dots"><div class="mday-dot done"></div></div>
     </div><div class="mday" onclick="selectDay(&#39;2026-04-02&#39;)">
       <div class="mday-num">2</div>
       <div class="mday-dots"><div class="mday-dot apo"></div><div class="mday-dot task"></div><div class="mday-dot done"></div></div>
@@ -826,10 +922,10 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
     </div><div class="mday" onclick="selectDay(&#39;2026-04-14&#39;)">
       <div class="mday-num">14</div>
       <div class="mday-dots"><div class="mday-dot task"></div></div>
-    </div><div class="mday today selected" onclick="selectDay(&#39;2026-04-15&#39;)">
+    </div><div class="mday" onclick="selectDay(&#39;2026-04-15&#39;)">
       <div class="mday-num">15</div>
-      <div class="mday-dots"></div>
-    </div><div class="mday" onclick="selectDay(&#39;2026-04-16&#39;)">
+      <div class="mday-dots"><div class="mday-dot done"></div></div>
+    </div><div class="mday today selected" onclick="selectDay(&#39;2026-04-16&#39;)">
       <div class="mday-num">16</div>
       <div class="mday-dots"></div>
     </div><div class="mday" onclick="selectDay(&#39;2026-04-17&#39;)">
@@ -876,9 +972,9 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <div class="mday-dots"></div>
     </div><div class="mday other-month"><div class="mday-num">1</div></div><div class="mday other-month"><div class="mday-num">2</div></div><div class="mday other-month"><div class="mday-num">3</div></div></div>
     <div class="day-detail" id="dayDetail">
-    <div class="day-detail-title">2026年4月15日（水）</div>
+    <div class="day-detail-title">2026年4月16日（木）</div>
     <div class="apo-list"><div style="font-size:12px;color:var(--text3);margin-bottom:10px;">予定なし</div></div>
-    <button class="add-apo-btn" onclick="openApo(&#39;2026-04-15&#39;)">＋ アポ・予定を追加</button>
+    <button class="add-apo-btn" onclick="openApo(&#39;2026-04-16&#39;)">＋ アポ・予定を追加</button>
     <div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.06em;margin-bottom:6px;">本日のタスク</div>
     <div class="todo-day-list"><div style="font-size:12px;color:var(--text3);">期限タスクなし</div></div>
     
@@ -1024,6 +1120,38 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
   </div>
 </div>
 
+<!-- メモ振り分けオーバーレイ -->
+<div class="overlay" id="memoAssignOv">
+  <div class="sheet" style="padding-bottom:max(44px,env(safe-area-inset-bottom));">
+    <div class="handle"></div>
+    <div style="font-size:14px;font-weight:700;margin-bottom:6px;">振り分け</div>
+    <div id="memoAssignBody" style="font-size:12px;color:var(--text2);background:var(--s2);border-radius:8px;padding:10px 12px;margin-bottom:14px;line-height:1.6;max-height:80px;overflow:hidden;"></div>
+    <div style="font-size:11px;font-weight:700;color:var(--text3);margin-bottom:8px;">どこに登録しますか？</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <button class="assign-btn" onclick="assignMemoToTask()">
+        <span style="font-size:20px;">📋</span>
+        <span style="font-size:12px;font-weight:700;">タスク</span>
+        <span style="font-size:10px;color:var(--text3);">やることとして登録</span>
+      </button>
+      <button class="assign-btn" onclick="assignMemoToApo()">
+        <span style="font-size:20px;">🚗</span>
+        <span style="font-size:12px;font-weight:700;">アポ</span>
+        <span style="font-size:10px;color:var(--text3);">訪問・電話予定として</span>
+      </button>
+      <button class="assign-btn" onclick="assignMemoDeal()">
+        <span style="font-size:20px;">🏢</span>
+        <span style="font-size:12px;font-weight:700;">案件</span>
+        <span style="font-size:10px;color:var(--text3);">長期案件として管理</span>
+      </button>
+      <button class="assign-btn" onclick="closeOv(&#39;memoAssignOv&#39;)">
+        <span style="font-size:20px;">📝</span>
+        <span style="font-size:12px;font-weight:700;">そのまま</span>
+        <span style="font-size:10px;color:var(--text3);">メモのまま保持</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- SETTINGS PAGE -->
 <div class="page" id="page-settings" style="overflow-y:auto;">
   <div class="settings-page">
@@ -1106,6 +1234,7 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <div class="settings-title">データ管理</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
         <button class="btn btn-g" onclick="exportData()">データをエクスポート</button>
+        <button class="btn" style="background:var(--bluebg);color:var(--blue);border:1px solid var(--blue);" onclick="loadSampleData()">📦 サンプルデータを追加</button>
         <button class="btn btn-d" onclick="clearData()">全データ削除（初期化）</button>
       </div>
     </div>
@@ -1222,13 +1351,23 @@ header{background:var(--text);color:#fff;height:48px;display:flex;align-items:ce
       <button class="memo-cat-btn on" data-cat="think" onclick="pickMemoCat(&#39;think&#39;,this)">💭 考え事</button>
       <button class="memo-cat-btn" data-cat="tel" onclick="pickMemoCat(&#39;tel&#39;,this)">📞 電話メモ</button>
     </div>
-    <textarea class="finp" id="memo_body" rows="6" placeholder="メモを入力…" style="resize:none;line-height:1.7;font-size:14px;"></textarea>
-    <div class="btn-row" style="margin-top:10px;">
+    <textarea class="finp" id="memo_body" rows="5" placeholder="例）
+得意先名：さくら苑
+やること：グローブ見積提出
+期限：4/20
+担当：田中様" style="resize:none;line-height:1.7;font-size:13px;"></textarea>
+    <div style="font-size:10px;color:var(--text3);margin:6px 0 8px;line-height:1.6;">
+      💡 <b>得意先名・やること・期限</b> を書くとAIがタスクに自動変換します
+    </div>
+    <div id="memo_ai_result" style="display:none;margin-bottom:10px;background:var(--bluebg);border:1px solid var(--blue);border-radius:8px;padding:10px 12px;font-size:12px;"></div>
+    <div class="btn-row" style="margin-top:4px;">
       <button class="btn btn-g" onclick="closeOv(&#39;memoOv&#39;)">キャンセル</button>
-      <button class="btn btn-p" onclick="saveMemoNote()">保存 ✓</button>
+      <button class="btn" id="memo_ai_btn" style="background:var(--purplebg);color:var(--purple);border:1px solid var(--purple);flex:1;" onclick="autoAnalyzeMemo()">🤖 AI解析→タスク化</button>
+      <button class="btn btn-p" onclick="saveMemoNote()">保存のみ ✓</button>
     </div>
   </div>
 </div>
+
 
 <!-- FABダイヤル -->
 <div class="fab-wrap" id="fabWrap">
@@ -1313,8 +1452,68 @@ function saveMemoNote(){
     memos.unshift({id:uid(),body,cat:curMemoCat,created:new Date().toISOString()});
   }
   saveMemos();renderMemoPage();
-  showToast('メモを保存しました');
+
+  // タスク自動変換チェック
+  const autoTask=parseMemoToTask(body);
+  if(autoTask){
+    tasks.unshift(autoTask);
+    save();renderTasks();
+    showToast('✓ メモを保存 → タスクに自動登録しました');
+  } else {
+    showToast('メモを保存しました');
+  }
   closeOv('memoOv');
+}
+
+function setMemoTemplate(){
+  const el=document.getElementById('memo_body');
+  if(!el)return;
+  el.value=`得意先名：\nやること：\n期限：\nメモ：`;
+  el.focus();
+  el.setSelectionRange(6,6);
+}
+
+function parseMemoToTask(body){
+  // キーワードマッピング
+  const patterns={
+    cust:/^(得意先名?|顧客名?|施設名?|顧客)[：:]\s*(.+)/m,
+    title:/^(やること|タスク|内容|件名|作業)[：:]\s*(.+)/m,
+    due:/^(期限|締切|いつまで|日付|日程)[：:]\s*(.+)/m,
+    memo:/^(メモ|備考|補足|コメント)[：:]\s*(.+)/m,
+  };
+  // やることが書いてある場合のみ自動変換
+  const titleMatch=body.match(patterns.title);
+  if(!titleMatch)return null;
+
+  const custMatch=body.match(patterns.cust);
+  const dueMatch=body.match(patterns.due);
+  const memoMatch=body.match(patterns.memo);
+
+  // 日付パース
+  let due=todayStr();
+  if(dueMatch){
+    const dstr=dueMatch[2].trim();
+    // 4/20 や 4月20日 形式
+    const md=dstr.match(/(\d{1,2})[\/月](\d{1,2})/);
+    if(md){
+      const y=new Date().getFullYear();
+      due=`${y}-${String(+md[1]).padStart(2,'0')}-${String(+md[2]).padStart(2,'0')}`;
+    }
+  }
+
+  return{
+    id:uid(),
+    src:'self',
+    title:titleMatch[2].trim(),
+    cust:custMatch?custMatch[2].trim():'',
+    due,
+    memo:memoMatch?memoMatch[2].trim():'',
+    st:'todo',
+    done:false,
+    created:Date.now(),
+    subs:[],
+    completedAt:''
+  };
 }
 
 function renderMemoList(){}
@@ -1335,9 +1534,12 @@ function renderMemoPage(){
         <span class="memo-card-cat ${ci.cls}">${ci.icon} ${m.cat==='tel'?'電話メモ':'考え事'}</span>
       </div>
       <div class="memo-card-body">${esc(m.body)}</div>
-      <div class="memo-card-date" style="display:flex;justify-content:space-between;align-items:center;">
+      <div class="memo-card-date" style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
         <span>${m.created.slice(0,10).replace(/-/g,'/')}</span>
-        <button onclick="event.stopPropagation();deleteMemoNote('${m.id}')" style="font-size:10px;color:var(--text3);border:none;background:none;cursor:pointer;">削除</button>
+        <div style="display:flex;gap:6px;">
+          <button onclick="event.stopPropagation();openMemoAssign('${m.id}')" style="font-size:10px;font-weight:700;color:var(--blue);background:var(--bluebg);border:none;padding:3px 8px;border-radius:5px;cursor:pointer;">振り分け</button>
+          <button onclick="event.stopPropagation();deleteMemoNote('${m.id}')" style="font-size:10px;color:var(--text3);border:none;background:none;cursor:pointer;">削除</button>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -1378,6 +1580,67 @@ function loadMailsFromStorage(){try{mails=JSON.parse(localStorage.getItem('enkou
 function exportData(){const d=JSON.stringify({tasks,apos,exported:new Date().toISOString()},null,2);const a=document.createElement('a');a.href='data:application/json,'+encodeURIComponent(d);a.download='enkou_backup.json';a.click();}
 function clearData(){if(confirm('全データを削除しますか？')){localStorage.removeItem(SK);load();renderTasks();renderSched();}}
 
+function loadSampleData(){
+  if(!confirm('サンプルデータを追加しますか？（既存データは残ります）'))return;
+  const today=todayStr();
+  const d=(n)=>{const dt=new Date();dt.setDate(dt.getDate()+n);return dt.toISOString().slice(0,10);};
+
+  // タスク
+  const sampleTasks=[
+    {id:uid(),src:'tel',title:'グローブ見積送付',cust:'さくら苑',due:today,st:'todo',done:false,created:Date.now()-9e6,subs:[{id:uid(),text:'ニトリル手袋Mサイズ×200枚',done:false},{id:uid(),text:'ポリ手袋Lサイズ×100枚',done:false}],completedAt:'',memo:'田中担当'},
+    {id:uid(),src:'visit',title:'BCP提案書持参・プレゼン',cust:'医療法人清水会',due:d(2),st:'doing',done:false,created:Date.now()-8e6,subs:[{id:uid(),text:'提案書印刷',done:true},{id:uid(),text:'補助金資料準備',done:false}],completedAt:'',memo:'院長同席予定'},
+    {id:uid(),src:'mail',title:'緊急食サンプル送付手配',cust:'みどり苑',due:d(1),st:'todo',done:false,created:Date.now()-7e6,subs:[],completedAt:'',memo:'25年保存のSurvivalFoods'},
+    {id:uid(),src:'tel',title:'価格改定の事前連絡',cust:'ひまわり園',due:d(3),st:'todo',done:false,created:Date.now()-6e6,subs:[],completedAt:'',memo:'ニトリル手袋+8%'},
+    {id:uid(),src:'ins',title:'月次報告書作成',cust:'',due:d(5),st:'todo',done:false,created:Date.now()-5e6,subs:[{id:uid(),text:'売上集計',done:false},{id:uid(),text:'訪問件数まとめ',done:false},{id:uid(),text:'課題点記載',done:false}],completedAt:'',memo:''},
+    {id:uid(),src:'visit',title:'包材サンプル持参・比較提案',cust:'大和病院',due:d(4),st:'maker',done:false,created:Date.now()-4e6,subs:[],completedAt:'',memo:'購買部・山田様'},
+    {id:uid(),src:'tel',title:'発注確認TEL',cust:'なごみ苑',due:today,st:'customer',done:false,created:Date.now()-3e6,subs:[],completedAt:'',memo:'先週の見積の返事待ち'},
+    {id:uid(),src:'self',title:'競合他社の価格調査',cust:'',due:d(7),st:'todo',done:false,created:Date.now()-2e6,subs:[],completedAt:'',memo:'グローブ主要3社'},
+    {id:uid(),src:'tel',title:'定期訪問アポ取り',cust:'桜花苑',due:d(2),st:'todo',done:false,created:Date.now()-1e6,subs:[],completedAt:'',memo:''},
+    {id:uid(),src:'visit',title:'ケアシーツ新製品デモ',cust:'つくし苑',due:d(1),st:'doing',done:false,created:Date.now()-5e5,subs:[{id:uid(),text:'デモ品準備',done:true},{id:uid(),text:'比較資料印刷',done:false}],completedAt:'',memo:'副施設長立会い'},
+    // 完了済み
+    {id:uid(),src:'tel',title:'注文書受領確認',cust:'さくら苑',due:today,st:'todo',done:true,created:Date.now()-2e7,subs:[],completedAt:new Date().toISOString(),memo:''},
+    {id:uid(),src:'mail',title:'カタログ送付',cust:'ふじ苑',due:d(-1),st:'todo',done:true,created:Date.now()-1.5e7,subs:[],completedAt:new Date(Date.now()-3e6).toISOString(),memo:''},
+  ];
+
+  // アポ
+  const sampleApos=[
+    {id:uid(),type:'visit',date:today,start:'10:00',end:'11:00',title:'さくら苑 定期訪問',place:'名古屋市千種区',memo:'グローブ見積・BCP資料持参',gcalId:''},
+    {id:uid(),type:'tel',date:today,start:'14:00',end:'14:30',title:'みどり苑 田中様 フォローTEL',place:'',memo:'サンプル送付後の反応確認',gcalId:''},
+    {id:uid(),type:'visit',date:d(1),start:'13:00',end:'14:30',title:'医療法人清水会 BCP提案',place:'名古屋市中区',memo:'院長・事務長同席',gcalId:''},
+    {id:uid(),type:'tel',date:d(1),start:'09:30',end:'10:00',title:'なごみ苑 発注確認TEL',place:'',memo:'先週見積の返事',gcalId:''},
+    {id:uid(),type:'visit',date:d(3),start:'11:00',end:'12:00',title:'大和病院 包材提案',place:'名古屋市北区',memo:'購買部山田様',gcalId:''},
+    {id:uid(),type:'tel',date:d(4),start:'15:00',end:'15:30',title:'桜花苑 アポ確認TEL',place:'',memo:'来週訪問の件',gcalId:''},
+    {id:uid(),type:'visit',date:d(5),start:'14:00',end:'15:00',title:'つくし苑 ケアシーツデモ',place:'春日井市',memo:'副施設長立会い',gcalId:''},
+  ];
+
+  // メモ
+  const sampleMemos=[
+    {id:uid(),body:'得意先名：さくら苑\nやること：ニトリル手袋の価格改定連絡\n期限：'+d(3)+'\nメモ：田中担当、+8%値上げ予定',cat:'tel',created:new Date(Date.now()-1e6).toISOString()},
+    {id:uid(),body:'清水会の院長から補助金についての質問があった。令和7年度の補正予算で100%補助の制度あり。次回訪問時に詳細を説明する。',cat:'think',created:new Date(Date.now()-5e6).toISOString()},
+    {id:uid(),body:'競合他社がグローブの価格を下げているとの情報。みどり苑の購買担当から聞いた。要調査。',cat:'think',created:new Date(Date.now()-8e6).toISOString()},
+    {id:uid(),body:'大和病院の山田様：包材は現在A社から仕入れ。価格より品質重視。サンプル持参を快諾。来週アポ確定。',cat:'tel',created:new Date(Date.now()-1.2e7).toISOString()},
+  ];
+
+  // 案件
+  loadDeals();
+  const sampleDeals=[
+    {id:uid(),name:'医療法人清水会 BCP導入・緊急備蓄',cust:'医療法人清水会',phase:2,due:d(60),memo:'補助金100%適用可能。院長の関心高い。',milestones:[{text:'初回訪問・ヒアリング',done:true},{text:'BCP提案書送付',done:true},{text:'補助金申請サポート',done:false},{text:'見積提出',done:false},{text:'契約・初回納品',done:false}],created:new Date().toISOString()},
+    {id:uid(),name:'大和病院 包材一括契約',cust:'大和病院',phase:1,due:d(90),memo:'購買部山田様がキーパーソン。現在A社と取引中。',milestones:[{text:'購買部アポ取得',done:true},{text:'サンプル持参デモ',done:false},{text:'見積提出',done:false},{text:'価格交渉',done:false},{text:'契約締結',done:false}],created:new Date().toISOString()},
+    {id:uid(),name:'さくら苑 年間契約更新',cust:'さくら苑',phase:3,due:d(30),memo:'毎年更新。今年は価格改定もあり条件交渉が必要。',milestones:[{text:'現状ヒアリング',done:true},{text:'新価格提示',done:true},{text:'条件交渉',done:false},{text:'契約書締結',done:false}],created:new Date().toISOString()},
+    {id:uid(),name:'豊田市エリア新規開拓',cust:'複数施設',phase:0,due:d(120),memo:'豊田市内の介護施設10件をターゲット。リスト作成から。',milestones:[{text:'ターゲットリスト作成',done:false},{text:'初回TELアポ',done:false},{text:'訪問・ヒアリング',done:false},{text:'提案・見積',done:false},{text:'契約',done:false}],created:new Date().toISOString()},
+  ];
+
+  tasks=[...sampleTasks,...tasks];
+  apos=[...sampleApos,...apos];
+  memos=[...sampleMemos,...memos];
+  deals=[...sampleDeals,...deals];
+
+  save();saveMemos();saveDeals();
+  renderTasks();renderSched();renderMemoPage();
+  updateFocusNowBar();
+  showToast('✓ サンプルデータを追加しました');
+}
+
 function initSampleData(){
   const td=todayStr();
   tasks=[
@@ -1407,6 +1670,10 @@ function addDevTasks(){
   showToast(`開発タスクを${toAdd.length}件追加しました`);
 }
 
+function showComingSoon(name){
+  showToast(`🚧 ${name}は現在アップデート準備中です`);
+}
+
 function showTab(t){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -1419,21 +1686,518 @@ function showTab(t){
   if(t==='mgmt')renderMgmt();
   if(t==='deal'){initDealPage();renderDealPage();}
   if(t==='settings'){renderPhaseSettings();}
+  if(t==='dayplan')renderDayplan();
   localStorage.setItem('enkou_last_tab',t);
 }
 
-/* ════ 案件管理 ════ */
+/* ════ メモAI自動解析 ════ */
+async function autoAnalyzeMemo(){
+  const body=document.getElementById('memo_body').value.trim();
+  if(!body){showToast('メモを入力してください');return;}
+  if(!anthropicApiKey){showToast('設定タブでAnthropicAPIキーを設定してください');return;}
+
+  const btn=document.getElementById('memo_ai_btn');
+  const resultEl=document.getElementById('memo_ai_result');
+  btn.textContent='🤖 解析中…';btn.disabled=true;
+  resultEl.style.display='none';
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':anthropicApiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({
+        model:'claude-haiku-4-5-20251001',
+        max_tokens:500,
+        messages:[{role:'user',content:`以下のメモから営業タスク情報を抽出してください。JSON形式のみで返してください。
+
+メモ：
+${body}
+
+以下のJSON形式で返してください（不明な項目はnullにしてください）：
+{
+  "title": "やること（簡潔に）",
+  "cust": "得意先名",
+  "due": "期限（YYYY-MM-DD形式、不明ならnull）",
+  "memo": "補足情報",
+  "type": "task または apo または deal（最も適切なもの1つ）"
+}
+
+JSONのみ返してください。説明不要。`}]
+      })
+    });
+    const data=await res.json();
+    const text=data.content?.[0]?.text||'';
+    let parsed;
+    try{
+      const clean=text.replace(/```json|```/g,'').trim();
+      parsed=JSON.parse(clean);
+    }catch{
+      showToast('解析に失敗しました。もう一度お試しください');
+      btn.textContent='🤖 AI解析→タスク化';btn.disabled=false;
+      return;
+    }
+
+    // 結果プレビュー表示
+    const dueStr=parsed.due?`📅 ${fmtDate(parsed.due)}`:'期限未設定';
+    const typeLabel={task:'📋 タスク',apo:'🚗 アポ',deal:'🏢 案件'}[parsed.type]||'📋 タスク';
+    resultEl.style.display='block';
+    resultEl.innerHTML=`
+      <div style="font-weight:700;color:var(--blue);margin-bottom:6px;">🤖 AI解析結果</div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div><b>種別：</b>${typeLabel}</div>
+        <div><b>やること：</b>${esc(parsed.title||'—')}</div>
+        <div><b>得意先：</b>${esc(parsed.cust||'—')}</div>
+        <div><b>期限：</b>${dueStr}</div>
+        ${parsed.memo?`<div><b>補足：</b>${esc(parsed.memo)}</div>`:''}
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px;">
+        <button class="btn btn-p" style="flex:1;padding:8px;" onclick="confirmAiTask(${JSON.stringify(parsed).replace(/'/g,"&#39;")})">✓ この内容で登録</button>
+        <button class="btn btn-g" style="flex:1;padding:8px;" onclick="document.getElementById('memo_ai_result').style.display='none'">修正する</button>
+      </div>`;
+  }catch(e){
+    showToast('APIエラー：'+e.message);
+  }finally{
+    btn.textContent='🤖 AI解析→タスク化';btn.disabled=false;
+  }
+}
+
+function confirmAiTask(parsed){
+  // メモも先に保存
+  saveMemoNote();
+  const type=parsed.type||'task';
+  if(type==='task'){
+    tasks.unshift({id:uid(),src:'tel',title:parsed.title||'',cust:parsed.cust||'',due:parsed.due||todayStr(),memo:parsed.memo||'',st:'todo',done:false,created:Date.now(),subs:[],completedAt:''});
+    save();renderTasks();
+    showToast('📋 タスクに登録しました');
+  } else if(type==='apo'){
+    apos.push({id:uid(),type:'visit',date:parsed.due||todayStr(),start:'',end:'',title:parsed.title||'',place:parsed.cust||'',memo:parsed.memo||''});
+    save();renderSched();
+    showToast('🚗 アポに登録しました');
+  } else if(type==='deal'){
+    loadDeals();
+    deals.unshift({id:uid(),name:parsed.title||'',cust:parsed.cust||'',phase:0,due:parsed.due||'',memo:parsed.memo||'',milestones:[],created:new Date().toISOString()});
+    saveDeals();
+    showToast('🏢 案件に登録しました');
+  }
+  closeOv('memoOv');
+}
+let assigningMemoId='';
+
+function openMemoAssign(id){
+  const m=memos.find(m=>m.id===id);if(!m)return;
+  assigningMemoId=id;
+  document.getElementById('memoAssignBody').textContent=m.body;
+  openOv('memoAssignOv');
+}
+
+function assignMemoToTask(){
+  const m=memos.find(m=>m.id===assigningMemoId);if(!m)return;
+  closeOv('memoAssignOv');
+  // キャプチャーフォームにメモ内容をセット
+  setTimeout(()=>{
+    openCapture('self');
+    setTimeout(()=>{
+      const titleEl=document.getElementById('cs_title');
+      if(titleEl)titleEl.value=m.body.slice(0,50);
+      const memoEl=document.getElementById('cs_memo');
+      if(memoEl&&m.body.length>50)memoEl.value=m.body;
+    },200);
+  },200);
+  showToast('タスク入力フォームに転記しました');
+}
+
+function assignMemoToApo(){
+  const m=memos.find(m=>m.id===assigningMemoId);if(!m)return;
+  closeOv('memoAssignOv');
+  setTimeout(()=>{
+    openApo('');
+    setTimeout(()=>{
+      const titleEl=document.getElementById('apo_title');
+      if(titleEl)titleEl.value=m.body.slice(0,50);
+      const memoEl=document.getElementById('apo_memo');
+      if(memoEl&&m.body.length>50)memoEl.value=m.body;
+    },200);
+  },200);
+  showToast('アポ入力フォームに転記しました');
+}
+
+function assignMemoDeal(){
+  const m=memos.find(m=>m.id===assigningMemoId);if(!m)return;
+  closeOv('memoAssignOv');
+  setTimeout(()=>{
+    showTab('deal');
+    setTimeout(()=>{
+      openDealAdd();
+      setTimeout(()=>{
+        const nameEl=document.getElementById('deal_name');
+        if(nameEl)nameEl.value=m.body.slice(0,50);
+        const memoEl=document.getElementById('deal_memo');
+        if(memoEl&&m.body.length>50)memoEl.value=m.body;
+      },200);
+    },300);
+  },200);
+  showToast('案件入力フォームに転記しました');
+}
+/* ════ 集中モード（今すぐモード） ════ */
+let focusTaskId='';
+let focusTotalSecs=0;
+let focusRemainSecs=0;
+let focusTimer=null;
+let focusPaused=false;
+let focusIsBreak=false;
+let focusPomoCycle=0;
+let focusPomodoro=false;
+
+let focusSelectFilter='all';
+
+function openFocusSelect(){
+  focusSelectFilter='all';
+  renderFocusSelectList();
+  openOv('focusSelectOv');
+}
+
+function setFocusFilter(f,btn){
+  focusSelectFilter=f;
+  document.querySelectorAll('#focusSelectOv .mf-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderFocusSelectList();
+}
+
+function renderFocusSelectList(){
+  const td=todayStr();
+  let list=getSalesTasks().filter(t=>!t.done);
+  if(focusSelectFilter==='today')list=list.filter(t=>t.due===td);
+  else if(focusSelectFilter==='doing')list=list.filter(t=>t.st==='doing');
+
+  const el=document.getElementById('focusSelectList');
+  if(!list.length){
+    el.innerHTML=`<div style="text-align:center;color:var(--text3);font-size:13px;padding:24px;">該当タスクがありません</div>`;
+    return;
+  }
+  const stInfo={todo:{label:'未対応',color:'#c0392b',bg:'#fff1f0'},doing:{label:'対応中',color:'#1d5fa8',bg:'#e8f2fb'},maker:{label:'メーカー確認',color:'#b07010',bg:'#fdf4e0'},customer:{label:'お客様確認',color:'#1a7a4a',bg:'#e4f5ed'}};
+  el.innerHTML=list.map(t=>{
+    const si=stInfo[t.st||'todo'];
+    const isToday=t.due===td;
+    const isOver=t.due&&t.due<td;
+    return`<div onclick="selectFocusTask('${t.id}')" style="background:var(--surface);border-radius:10px;padding:12px 14px;box-shadow:var(--sh);cursor:pointer;border-left:4px solid ${si.color};display:flex;align-items:center;gap:10px;">
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:13px;font-weight:600;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(t.title)}</div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          ${t.cust?`<span style="font-size:10px;color:var(--text3);">🏥 ${esc(t.cust)}</span>`:''}
+          ${t.due?`<span style="font-size:10px;font-weight:700;color:${isOver?'#e74c3c':isToday?'#1d5fa8':'var(--text3)'};">📅 ${isToday?'本日':fmtDate(t.due)}</span>`:''}
+          <span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;background:${si.bg};color:${si.color};">${si.label}</span>
+        </div>
+      </div>
+      <button style="background:var(--text);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;">▶ 開始</button>
+    </div>`;
+  }).join('');
+}
+
+function selectFocusTask(taskId){
+  closeOv('focusSelectOv');
+  focusPomodoro=false;focusPomoCycle=0;
+  openFocusMode(taskId,25,false);
+}
+
+function updateFocusNowBar(){
+  const el=document.getElementById('focusNowTitle');
+  if(!el)return;
+  const priority=getSalesTasks().filter(t=>!t.done).sort((a,b)=>{
+    const td=todayStr();
+    const aScore=(a.due&&a.due<=td?0:1)*10+(a.st==='todo'?0:1);
+    const bScore=(b.due&&b.due<=td?0:1)*10+(b.st==='todo'?0:1);
+    return aScore-bScore;
+  })[0];
+  el.textContent=priority?priority.title:'すべてのタスク完了！🎉';
+}
+
+function startFocusMode(){
+  const priority=getSalesTasks().filter(t=>!t.done).sort((a,b)=>{
+    const td=todayStr();
+    const aScore=(a.due&&a.due<=td?0:1)*10+(a.st==='todo'?0:1);
+    const bScore=(b.due&&b.due<=td?0:1)*10+(b.st==='todo'?0:1);
+    return aScore-bScore;
+  })[0];
+  if(!priority){showToast('🎉 未完了のタスクはありません！');return;}
+  openFocusMode(priority.id,25,false);
+}
+
+function openFocusMode(taskId,min,isBreak){
+  const t=tasks.find(t=>t.id===taskId);if(!t&&!isBreak)return;
+  focusTaskId=taskId;
+  focusIsBreak=isBreak;
+  focusTotalSecs=min*60;
+  focusRemainSecs=min*60;
+  focusPaused=false;
+
+  // UI更新
+  document.getElementById('focusTitle').textContent=isBreak?'☕ 休憩タイム':t.title;
+  document.getElementById('focusCust').textContent=isBreak?'お疲れ様です。少し休みましょう':(t.cust?`🏥 ${t.cust}`:'');
+  document.getElementById('focusModeLabel').textContent=isBreak?'BREAK TIME':'FOCUS TIME';
+  document.getElementById('focusPauseBtn').textContent='⏸ 一時停止';
+
+  // ポモドーロドット
+  if(focusPomodoro){
+    const dots=document.getElementById('pomoDots');
+    dots.style.display='flex';
+    dots.innerHTML=Array.from({length:4},(_,i)=>`<div class="pomo-dot${i<focusPomoCycle?' done':''}"></div>`).join('');
+  }
+
+  updateFocusTimerUI();
+  document.getElementById('focusOverlay').classList.add('open');
+
+  clearInterval(focusTimer);
+  focusTimer=setInterval(()=>{
+    if(focusPaused)return;
+    focusRemainSecs--;
+    updateFocusTimerUI();
+    if(focusRemainSecs<=0)focusTimerEnd();
+  },1000);
+}
+
+function updateFocusTimerUI(){
+  const m=Math.floor(focusRemainSecs/60);
+  const s=focusRemainSecs%60;
+  const timerEl=document.getElementById('focusTimer');
+  timerEl.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  timerEl.className='focus-timer'+(focusIsBreak?' break':focusRemainSecs<=60?' warning':'');
+  const pct=focusTotalSecs>0?Math.round((focusRemainSecs/focusTotalSecs)*100):0;
+  document.getElementById('focusProgress').style.width=pct+'%';
+}
+
+function focusTimerEnd(){
+  clearInterval(focusTimer);
+  if('Notification' in window&&Notification.permission==='granted'){
+    new Notification(focusIsBreak?'☕ 休憩終了！':'⏱ 集中タイム終了！',{
+      body:focusIsBreak?'次の集中タイムを始めましょう':'お疲れ様でした！'
+    });
+  }
+  if(focusPomodoro&&!focusIsBreak){
+    focusPomoCycle++;
+    if(focusPomoCycle>=4){
+      focusPomoCycle=0;
+      showToast('🎉 4ポモドーロ完了！長めの休憩をとりましょう');
+      openFocusMode(focusTaskId,15,true);
+    } else {
+      showToast(`✓ ${focusPomoCycle}ポモドーロ完了！5分休憩`);
+      openFocusMode(focusTaskId,5,true);
+    }
+  } else if(focusPomodoro&&focusIsBreak){
+    openFocusMode(focusTaskId,25,false);
+  } else {
+    // 通常終了 → 完了を促す
+    document.getElementById('focusTimer').textContent='✓';
+    document.getElementById('focusModeLabel').textContent='お疲れ様でした！';
+    clearInterval(focusTimer);
+  }
+}
+
+function focusDone(){
+  clearInterval(focusTimer);
+  const t=tasks.find(t=>t.id===focusTaskId);
+  if(t&&!t.done){
+    t.done=true;t.completedAt=new Date().toISOString();
+    save();renderTasks();
+  }
+  // 完了アニメーション
+  const overlay=document.getElementById('focusOverlay');
+  overlay.style.background='#1a7a4a';
+  document.getElementById('focusTitle').textContent='🎉 完了！';
+  document.getElementById('focusCust').textContent='お疲れ様でした！';
+  document.getElementById('focusTimer').textContent='✓';
+  document.getElementById('focusTimer').classList.add('celebrate');
+  document.getElementById('focusModeLabel').textContent='タスク完了';
+  setTimeout(()=>{
+    overlay.style.background='';
+    focusClose();
+    updateFocusNowBar();
+    showToast('🎉 タスク完了！');
+  },1500);
+}
+
+function focusPauseToggle(){
+  focusPaused=!focusPaused;
+  document.getElementById('focusPauseBtn').textContent=focusPaused?'▶ 再開':'⏸ 一時停止';
+}
+
+function focusClose(){
+  clearInterval(focusTimer);
+  document.getElementById('focusOverlay').classList.remove('open');
+  document.getElementById('focusOverlay').style.background='';
+}
+
+// タスクカードからも直接開けるように
+function openFocusModeForTask(taskId){
+  focusPomodoro=false;focusPomoCycle=0;
+  openFocusMode(taskId,25,false);
+}
+let tbState='idle';
+let tbTaskId='';
+let tbTotalSecs=0;
+let tbRemainSecs=0;
+let tbTimer=null;
+let tbPomodoro=false;
+let tbPomoCycle=0;
+let tbSelectedMin=25;
+let dayplan=[];
+
+function loadDayplan(){try{dayplan=JSON.parse(localStorage.getItem('enkou_dayplan')||'[]');}catch{dayplan=[];}}
+function saveDayplan(){localStorage.setItem('enkou_dayplan',JSON.stringify(dayplan));}
+
+function openTimebox(taskId){
+  const t=tasks.find(t=>t.id===taskId);if(!t)return;
+  tbTaskId=taskId;tbSelectedMin=25;
+  document.getElementById('tbOvTaskName').textContent=t.title;
+  document.querySelectorAll('.tb-preset-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tb-preset-btn')[1]?.classList.add('on');
+  document.getElementById('tbCustomMin').value='';
+  document.getElementById('tbPomodoro').checked=false;
+  openOv('tbOv');
+}
+
+function selectTbTime(min,btn){
+  tbSelectedMin=min;
+  document.querySelectorAll('.tb-preset-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('tbCustomMin').value='';
+}
+
+function tbConfirmStart(){
+  const custom=parseInt(document.getElementById('tbCustomMin').value)||0;
+  const min=custom>0?custom:tbSelectedMin;
+  tbPomodoro=document.getElementById('tbPomodoro').checked;
+  tbPomoCycle=0;
+  closeOv('tbOv');
+  tbBegin(tbTaskId,min,false);
+}
+
+function tbBegin(taskId,min,isBreak){
+  const t=tasks.find(t=>t.id===taskId);
+  tbState=isBreak?'break':'running';
+  tbTaskId=taskId;
+  tbTotalSecs=min*60;tbRemainSecs=min*60;
+  clearInterval(tbTimer);
+  updateTbBar(t,isBreak);
+  tbTimer=setInterval(()=>{
+    tbRemainSecs--;
+    if(tbRemainSecs<=0)tbTimerDone(isBreak);
+    else updateTbBar(t,isBreak);
+  },1000);
+}
+
+function updateTbBar(t,isBreak){
+  const disp=document.getElementById('tbDisplay');
+  const name=document.getElementById('tbTaskName');
+  const m=Math.floor(tbRemainSecs/60),s=tbRemainSecs%60;
+  disp.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  disp.className='tb-timer-display'+(isBreak?' break':tbRemainSecs<=60?' warning':' running');
+  name.textContent=isBreak?`☕ 休憩中`:(t?t.title:'実行中');
+  document.getElementById('tbStartBtn').style.display='none';
+  document.getElementById('tbPauseBtn').style.display='';
+  document.getElementById('tbStopBtn').style.display='';
+}
+
+function tbTimerDone(wasBreak){
+  clearInterval(tbTimer);
+  if('Notification' in window&&Notification.permission==='granted'){
+    new Notification(wasBreak?'☕ 休憩終了！':'⏱ タイムボックス完了！',{body:wasBreak?'作業を再開しましょう':'お疲れ様です！'});
+  }
+  if(tbPomodoro&&!wasBreak){tbPomoCycle++;showToast(`✓ ${tbPomoCycle}ポモドーロ！休憩5分`);tbBegin(tbTaskId,5,true);}
+  else if(tbPomodoro&&wasBreak){showToast('休憩終了！次を開始');tbBegin(tbTaskId,25,false);}
+  else{showToast('⏱ タイムボックス終了！');tbReset();}
+}
+
+function tbStart(){
+  if(tbState==='idle'){const first=getSalesTasks().find(t=>!t.done);if(first)openTimebox(first.id);else showToast('タスクがありません');}
+}
+function tbPause(){
+  if(tbState==='running'||tbState==='break'){
+    clearInterval(tbTimer);tbState='paused';
+    const btn=document.getElementById('tbPauseBtn');
+    btn.textContent='▶ 再開';btn.onclick=tbResume;
+  }
+}
+function tbResume(){
+  tbState='running';
+  const t=tasks.find(t=>t.id===tbTaskId);
+  const btn=document.getElementById('tbPauseBtn');
+  btn.textContent='⏸ 一時停止';btn.onclick=tbPause;
+  tbTimer=setInterval(()=>{tbRemainSecs--;if(tbRemainSecs<=0)tbTimerDone(false);else updateTbBar(t,false);},1000);
+}
+function tbStop(){if(!confirm('タイムボックスを終了しますか？'))return;tbReset();}
+function tbReset(){
+  clearInterval(tbTimer);tbState='idle';tbTaskId='';tbRemainSecs=0;
+  document.getElementById('tbDisplay').textContent='00:00';
+  document.getElementById('tbDisplay').className='tb-timer-display';
+  document.getElementById('tbTaskName').textContent='タスクを選択してください';
+  document.getElementById('tbStartBtn').style.display='';
+  document.getElementById('tbPauseBtn').style.display='none';
+  document.getElementById('tbStopBtn').style.display='none';
+}
+if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();
+
+/* ════ 1日タイムボックス計画 ════ */
+function renderDayplan(){
+  loadDayplan();
+  const now=new Date();const today=todayStr();
+  const el=document.getElementById('dayplanGrid');if(!el)return;
+  const dateEl=document.getElementById('dayplanDate');
+  if(dateEl)dateEl.textContent=`${now.getMonth()+1}月${now.getDate()}日（${'日月火水木金土'[now.getDay()]}）`;
+  const COLORS=['#e8f2fb','#e4f5ed','#fdf4e0','#f0e8fb','#fff1f0','#f5f2ed'];
+  const TCOLS=['#1d5fa8','#1a7a4a','#b07010','#6b3fb5','#c0392b','#6b6760'];
+  const HOURS=Array.from({length:12},(_,i)=>i+8);
+  let html='';
+  HOURS.forEach(h=>{
+    const isNow=now.getHours()===h;
+    const blocks=dayplan.filter(b=>b.hour===h);
+    const slotsHtml=blocks.length
+      ?blocks.map((b,bi)=>{const t=tasks.find(t=>t.id===b.taskId);if(!t)return'';const ci=bi%6;return`<div class="tb-block" style="background:${COLORS[ci]};color:${TCOLS[ci]};"><div class="tb-block-title">${esc(t.title)}</div><span class="tb-block-time">${b.duration}分</span><button class="tb-block-start-btn" onclick="event.stopPropagation();openTimebox('${t.id}')">▶</button><button onclick="event.stopPropagation();removeDayplanBlock('${b.id}')" style="font-size:10px;background:rgba(0,0,0,.1);border:none;border-radius:4px;padding:2px 5px;cursor:pointer;color:inherit;">×</button></div>`;}).join('')
+      :`<div class="slot-empty" onclick="openAddDayplanSlot(${h})">＋ ${h}:00 にタスクを配置</div>`;
+    html+=`<div class="hour-row"><div class="hour-label">${h}:00</div><div class="hour-slots">${isNow?'<div class="now-line"></div>':''}${slotsHtml}</div></div>`;
+  });
+  el.innerHTML=html;
+}
+
+function openAddDayplanSlot(hour){
+  const avail=getSalesTasks().filter(t=>!t.done);
+  if(!avail.length){showToast('未完了タスクがありません');return;}
+  const taskList=avail.slice(0,10).map((t,i)=>`${i+1}. ${t.title}`).join('\n');
+  const sel=prompt(`${hour}:00 に配置するタスク番号：\n${taskList}`);
+  if(!sel)return;
+  const idx=parseInt(sel)-1;
+  if(idx<0||idx>=avail.length){showToast('番号が正しくありません');return;}
+  const min=prompt('何分で取り組みますか？','25');
+  dayplan.push({id:uid(),taskId:avail[idx].id,hour,duration:parseInt(min)||25});
+  saveDayplan();renderDayplan();
+}
+
+function removeDayplanBlock(id){dayplan=dayplan.filter(b=>b.id!==id);saveDayplan();renderDayplan();}
+
+function autoFillDayplan(){
+  loadDayplan();
+  const avail=getSalesTasks().filter(t=>!t.done);
+  if(!avail.length){showToast('未完了タスクがありません');return;}
+  const now=new Date();let h=Math.max(now.getHours(),8);
+  avail.slice(0,8).forEach(t=>{
+    if(h>19)return;
+    if(!dayplan.find(b=>b.taskId===t.id)){dayplan.push({id:uid(),taskId:t.id,hour:h,duration:25});h++;if(h===12)h=13;}
+  });
+  saveDayplan();renderDayplan();showToast(`✓ タスクを自動配置しました`);
+}
+function clearDayplan(){if(!confirm('1日計画をクリアしますか？'))return;dayplan=[];saveDayplan();renderDayplan();}
+
 let deals=[];
 let dealPhaseFilter='all';
 let dealViewMode='list';
 let editingDealId='';
 
-const DEFAULT_PHASES=['アプローチ','提案','見積','フォロー','交渉','契約'];
+const DEFAULT_PHASES=['アプローチ','提案','見積','フォロー','交渉','契約','失注'];
 let phases=[];
 
 function loadDeals(){
   try{deals=JSON.parse(localStorage.getItem('enkou_deals')||'[]');}catch{deals=[];}
   try{phases=JSON.parse(localStorage.getItem('enkou_phases')||'null')||[...DEFAULT_PHASES];}catch{phases=[...DEFAULT_PHASES];}
+  if(!phases.includes('失注'))phases.push('失注');
 }
 function saveDeals(){localStorage.setItem('enkou_deals',JSON.stringify(deals));}
 function savePhaseSettings(){
@@ -1460,6 +2224,7 @@ const PHASE_COLORS=[
   {bg:'var(--purplebg)',color:'var(--purple)'},
   {bg:'#fde0de',color:'#c0392b'},
   {bg:'var(--greenbg)',color:'var(--green)'},
+  {bg:'#ececec',color:'#999'},
 ];
 
 function phaseColor(idx){return PHASE_COLORS[idx]||PHASE_COLORS[0];}
@@ -1507,6 +2272,7 @@ function renderDealList(){
   el.innerHTML=filtered.map(d=>{
     const ph=phases[d.phase]||'';
     const pc=phaseColor(d.phase);
+    const isLost=ph==='失注';
     const ms=d.milestones||[];
     const total=ms.length;
     const doneCount=ms.filter(m=>m.done).length;
@@ -1522,7 +2288,7 @@ function renderDealList(){
         <div class="ms-text${isDone?' done':isCur?' current':''}">${esc(m.text)}</div>
       </div>`;
     }).join('');
-    return`<div class="deal-card" onclick="openDealDet('${d.id}')">
+    return`<div class="deal-card" onclick="openDealDet('${d.id}')" style="${isLost?'opacity:.5;filter:grayscale(.7);':''}">
       <div class="deal-head">
         <span class="deal-phase-tag" style="background:${pc.bg};color:${pc.color};">${ph}</span>
         <div class="deal-info">
@@ -1669,7 +2435,7 @@ function closeDealOv(){
 }
 
 /* ════ スワイプ切替（スマホ） ════ */
-const TAB_ORDER=['task','apo','sched','mail','memo'];
+const TAB_ORDER=['task','deal','memo'];
 let swipeStartX=0,swipeStartY=0;
 document.addEventListener('touchstart',e=>{
   swipeStartX=e.touches[0].clientX;
@@ -2015,6 +2781,7 @@ function renderCustView(){
 }
 
 function renderTasks(){
+  updateFocusNowBar();
   const sales=getSalesTasks();
   const col={todo:[],doing:[],maker:[],customer:[]};
   sales.forEach(t=>{const k=t.st&&col[t.st]!==undefined?t.st:'todo';col[k].push(t);});
@@ -2094,6 +2861,7 @@ function taskCardHtml(t,isDragEnabled=true){
     ontouchstart="touchStartCard(event,'${t.id}')" ontouchend="touchEndCard(event)" ontouchmove="touchMoveCard(event)">
     <div class="tr1">
       <div class="tct">${esc(t.title)}</div>
+      <button onclick="event.stopPropagation();openFocusModeForTask('${t.id}')" style="font-size:10px;padding:2px 6px;border-radius:4px;border:none;background:var(--bluebg);color:var(--blue);cursor:pointer;flex-shrink:0;">⏱</button>
       <div class="tchk" onclick="event.stopPropagation();toggleTask('${t.id}')">
         <svg class="chki" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3L3 5.5L7 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
@@ -2958,6 +3726,7 @@ async function pushToGithub(){
 load();loadMailsFromStorage();loadApiKey();loadGhSettings();loadGoogleSettings();loadSupabaseSettings();loadMemos();loadMgmtData();loadDeals();initSpTabs();renderTasks();renderSched();
 // 前回のタブを復元
 showTab(localStorage.getItem('enkou_last_tab')||'task');
+updateFocusNowBar();
 handleOAuthCallback();
 // 起動時にSupabaseから自動取得
 if(sbUrl&&sbKey){
@@ -2988,6 +3757,36 @@ document.addEventListener('keydown',e=>{
   }
 });
 </script>
+<!-- フォーカスタスク選択オーバーレイ -->
+<div class="overlay" id="focusSelectOv">
+  <div class="sheet" style="padding-bottom:max(44px,env(safe-area-inset-bottom));">
+    <div class="handle"></div>
+    <div style="font-size:14px;font-weight:700;margin-bottom:6px;">🎯 どのタスクに集中しますか？</div>
+    <div style="font-size:11px;color:var(--text3);margin-bottom:14px;">タスクを選んでタイマーをスタート</div>
+    <div style="display:flex;gap:6px;margin-bottom:10px;">
+      <button class="mf-btn on" onclick="setFocusFilter(&#39;all&#39;,this)">すべて</button>
+      <button class="mf-btn" onclick="setFocusFilter(&#39;today&#39;,this)">本日期限</button>
+      <button class="mf-btn" onclick="setFocusFilter(&#39;doing&#39;,this)">対応中</button>
+    </div>
+    <div id="focusSelectList" style="display:flex;flex-direction:column;gap:6px;max-height:50vh;overflow-y:auto;"></div>
+  </div>
+</div>
+
+<!-- 集中モード全画面 -->
+<div class="focus-overlay" id="focusOverlay">
+  <div class="pomo-dots-wrap" id="pomoDots" style="display:none;margin-bottom:16px;"></div>
+  <div class="focus-task-title" id="focusTitle">タスク名</div>
+  <div class="focus-task-cust" id="focusCust"></div>
+  <div class="focus-progress"><div class="focus-progress-fill" id="focusProgress" style="width:100%;"></div></div>
+  <div class="focus-timer" id="focusTimer">25:00</div>
+  <div class="focus-mode-label" id="focusModeLabel">集中タイム</div>
+  <div class="focus-actions">
+    <button class="focus-btn focus-btn-done" onclick="focusDone()">✓ 完了</button>
+    <button class="focus-btn focus-btn-pause" id="focusPauseBtn" onclick="focusPauseToggle()">⏸ 一時停止</button>
+    <button class="focus-btn focus-btn-stop" onclick="focusClose()">✕ 終了</button>
+  </div>
+</div>
+
 
 
 </body></html>
